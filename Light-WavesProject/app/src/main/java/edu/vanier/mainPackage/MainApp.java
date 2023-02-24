@@ -1,8 +1,9 @@
-package edu.vanier.template;
+package edu.vanier.mainPackage;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -16,10 +17,10 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        //asdasd
+        
         VBox root = new VBox();
         
-        Scene scene = new Scene(root, 300, 300);
+        Scene scene = new Scene(root, 600, 600);
         
         stage.setScene(scene);        
 
