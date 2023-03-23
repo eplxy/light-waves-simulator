@@ -57,22 +57,55 @@ public class Refraction extends Application{
         BorderPane root = loader.load();
         
         Line incidentRay = new Line();
-        System.out.println(menuController.animationPane.heightProperty());
+        Line refractedRay = new Line();
+        Line normalRay = new Line();
+        Line horizontalRay = new Line();
         
+        double angle1 = 45;
+        double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle1);
+        System.out.println(angle1);
+        System.out.println(angle2);
+        
+        //Incident Ray
         incidentRay.startXProperty().setValue(0);
         incidentRay.startYProperty().bind(menuController.animationPane.heightProperty().divide(2));
         incidentRay.endXProperty().bind(menuController.animationPane.widthProperty().divide(2));
         incidentRay.endYProperty().bind(menuController.animationPane.heightProperty().divide(2));
-        //incidentRay.startXProperty().bind(menuController.animationPane.rotateProperty().add(x));
         
         Rotate rotate = new Rotate();
         rotate.pivotXProperty().bind(incidentRay.endXProperty());
         rotate.pivotYProperty().bind(incidentRay.endYProperty());
-        rotate.setAngle(77);
-       
+        rotate.setAngle(angle1);
         incidentRay.getTransforms().addAll(rotate);
         
-        menuController.animationPane.getChildren().add(incidentRay);
+        //Refracted Ray
+        refractedRay.startXProperty().bind(menuController.animationPane.widthProperty().divide(2));
+        refractedRay.startYProperty().bind(menuController.animationPane.heightProperty().divide(2));
+        refractedRay.endXProperty().bind(menuController.animationPane.widthProperty());
+        refractedRay.endYProperty().bind(menuController.animationPane.heightProperty().divide(2));
+        
+        Rotate rotate2 = new Rotate();
+        rotate2.pivotXProperty().bind(incidentRay.endXProperty());
+        rotate2.pivotYProperty().bind(incidentRay.endYProperty());
+        rotate2.setAngle(90 - angle2);
+        refractedRay.getTransforms().addAll(rotate2);
+        
+        //Horizontal Ray
+        horizontalRay.startXProperty().setValue(0);
+        horizontalRay.startYProperty().bind(menuController.animationPane.heightProperty().divide(2));
+        horizontalRay.endXProperty().bind(menuController.animationPane.widthProperty());
+        horizontalRay.endYProperty().bind(menuController.animationPane.heightProperty().divide(2));
+        horizontalRay.getStrokeDashArray().addAll(3d);
+        
+        //Normal Ray
+        normalRay.startXProperty().bind(menuController.animationPane.widthProperty().divide(2));
+        normalRay.startYProperty().setValue(-20);
+        normalRay.endXProperty().bind(menuController.animationPane.widthProperty().divide(2));
+        normalRay.endYProperty().bind(menuController.animationPane.heightProperty().add(10));
+        normalRay.getStrokeDashArray().addAll(10d);
+        
+        
+        menuController.animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay);
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
