@@ -2,6 +2,7 @@ package edu.vanier.mainPackage.lens;
 
 import java.util.ArrayList;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  *
@@ -10,7 +11,7 @@ import java.util.SortedMap;
 public abstract class Item {
 
     //properties
-    private static SortedMap<Integer, Item> itemList;
+    private static SortedMap<Integer, Item> itemList = new TreeMap<>();
     
     protected int orderNumber;
     protected double absPos, relPos;

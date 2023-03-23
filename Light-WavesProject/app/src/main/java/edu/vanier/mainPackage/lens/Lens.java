@@ -8,23 +8,33 @@ public class Lens extends Item {
 
     //properties
     private double focalLength, refractionIndex;
-    private String type;
+    private String lensType;
     private FocalPoint focalPoint;
 
     //constructor(s)
     public Lens() {
+        this.itemType = 2;
     }
 
-    public Lens(double focalLength, double refractionIndex, String type, FocalPoint focalPoint) {
+    public Lens(double focalLength, double refractionIndex, FocalPoint focalPoint) {
+        this.itemType = 2;
         this.focalLength = focalLength;
         this.refractionIndex = refractionIndex;
-        this.type = type;
         this.focalPoint = focalPoint;
+
+    }
+
+    public String determineType() {
+        if (this.focalLength > 0) {
+            return "convergent";
+        } else if (this.focalLength < 0) {
+            return "divergent";
+        } else {
+            return "flat";
+        }
     }
 
     //methods
-    
-    
     //getters and setters
     public double getFocalLength() {
         return focalLength;
@@ -42,12 +52,13 @@ public class Lens extends Item {
         this.refractionIndex = refractionIndex;
     }
 
-    public String getType() {
-        return type;
+    public String getLensType() {
+        this.setLensType(this.determineType());
+        return lensType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setLensType(String lensType) {
+        this.lensType = lensType;
     }
 
     public FocalPoint getFocalPoint() {
