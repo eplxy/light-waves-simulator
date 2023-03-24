@@ -33,8 +33,8 @@ public class Draggable {
             node.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
             node.setLayoutY(mouseEvent.getSceneY() - mouseAnchorY);
             
-            rotate.setAngle(animationPane.getScaleX()/2);
-            //rotate.setPivotX(animationPane.getScaleX()/2);
+            
+            rotate.setPivotX(animationPane.getScaleX()/2);
             rotate.setPivotY(1);
             node.getTransforms().add(rotate);
         });

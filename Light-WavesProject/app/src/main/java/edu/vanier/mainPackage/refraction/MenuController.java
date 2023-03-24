@@ -58,20 +58,19 @@ public class MenuController {
     private String n2;
     private String angle1;
     
+    
     MenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        
-        
-        
     }
     
     public void initialize(){
-        
+        Ray ray = new Ray();
+        ray.CreateLines(primaryStage, this.animationPane);
         draggableMaker.makeDraggable(rectangle, animationPane);
         
         textAngle.setOnAction(e -> {
             angle1 = textAngle.getText();
-            System.out.println(angle1);
+            ray.updateLines(Double.parseDouble(angle1));
          });
         
         textN1.setOnAction(e -> {
@@ -95,5 +94,15 @@ public class MenuController {
         
         
     }
+
+    public String getAngle1() {
+        return angle1;
+    }
+
+    public void setAngle1(String angle1) {
+        this.angle1 = angle1;
+    }
+    
+    
     
 }
