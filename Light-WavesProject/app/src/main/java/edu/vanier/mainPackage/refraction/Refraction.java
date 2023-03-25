@@ -56,12 +56,9 @@ public class Refraction extends Application{
         loader.setController(menuController);
         BorderPane root = loader.load();
         
-        
-        
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.show();
-        
         
         }
         public static void main(String[] args) {

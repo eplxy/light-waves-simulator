@@ -22,7 +22,6 @@ public class Vector {
     public static double CalculateAngle(double n1, double n2, double Angle1){
         Angle1 = Math.toRadians(Angle1);
         double x = (n1*Math.sin(Angle1))/n2;
-        System.out.println(x);
         double Angle2 = Math.asin(x);
         return Math.toDegrees(Angle2);
     }

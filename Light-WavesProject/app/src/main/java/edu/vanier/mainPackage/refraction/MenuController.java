@@ -84,16 +84,6 @@ public class MenuController {
          });
     } 
     
-    public void createLines(Stage primaryStage){
-        
-        Line incidentRay = new Line();
-        incidentRay.setStartX(0);
-        incidentRay.setStartY(0);
-        incidentRay.setStartX(100);
-        incidentRay.setStartY(200);
-        
-        
-    }
 
     public String getAngle1() {
         return angle1;

@@ -86,26 +86,21 @@ public class Ray {
     
     public void updateLines(double angle){
         
-        
-        angle = angle - angle1;
-        angle1 = angle;
-        
-        Rotate rotate = new Rotate();
-        rotate.pivotXProperty().bind(incidentRay.endXProperty());
-        rotate.pivotYProperty().bind(incidentRay.endYProperty());
-        rotate.setAngle(angle);
-        incidentRay.getTransforms().addAll(rotate);
+        Rotate newRotate = new Rotate();
+        newRotate.pivotXProperty().bind(incidentRay.endXProperty());
+        newRotate.pivotYProperty().bind(incidentRay.endYProperty());
+        incidentRay.getTransforms().setAll(newRotate);
+        newRotate.setAngle(angle);
+        System.out.println(angle);
         
         double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle);
         
-        Rotate rotate2 = new Rotate();
-        rotate2.pivotXProperty().bind(incidentRay.endXProperty());
-        rotate2.pivotYProperty().bind(incidentRay.endYProperty());
-        rotate2.setAngle(angle2);
-        refractedRay.getTransforms().addAll(rotate2);
-        
-        System.out.println(angle);
-        System.out.println(angle2);
+        Rotate newRotate2 = new Rotate();
+        newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
+        newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
+        refractedRay.getTransforms().setAll(newRotate2); 
+        newRotate2.setAngle(90 - angle2);
+        System.out.println("Angle 2: " + angle2);
         
     }
 }
