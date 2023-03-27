@@ -38,7 +38,6 @@ public class Ray {
         normalRay = new Line();
         horizontalRay = new Line();
         
-        
         double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle1);
         System.out.println(angle1);
         System.out.println(angle2);
