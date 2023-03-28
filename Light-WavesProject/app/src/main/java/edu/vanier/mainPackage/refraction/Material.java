@@ -11,12 +11,19 @@ import lombok.Data;
 @Data
 public class Material {
     
-    public HashMap<Double, Color> hashMapMaterials = new HashMap<>();
+    private Color materialColor;
+    private String materialName;
+    private double refractionIndex;
+
+    public Material(Color materialColor, String materialName, double refractionIndex) {
+        this.materialColor = materialColor;
+        this.materialName = materialName;
+        this.refractionIndex = refractionIndex;
+    }
     
-    public HashMap AddingMaterials(){
-        this.hashMapMaterials.put(1.33, Color.BLUE);
-        
-        return this.hashMapMaterials;
+    @Override
+    public String toString(){
+        return materialName;
     }
     
 }

@@ -1,11 +1,13 @@
 package edu.vanier.mainPackage.refraction;
 
+import java.util.ArrayList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import lombok.Getter;
@@ -98,9 +100,14 @@ public class MenuController {
     } 
     
     public void addMaterials(){
-        Material material = new Material();
+        ArrayList<Material> listMaterial = new ArrayList<>();
+       
+        listMaterial.add(new Material(Color.BLUE, "Water", 1.33));
+        listMaterial.add(new Material(Color.MAGENTA, "Red", 1.5));
         
-        this.btnMaterial1.getItems().addAll(material.getHashMapMaterials());
+        for (int i = 0; i < listMaterial.size(); i++) {
+            btnMaterial1.getItems().add(listMaterial.get(i));
+        }
         
     }
 }
