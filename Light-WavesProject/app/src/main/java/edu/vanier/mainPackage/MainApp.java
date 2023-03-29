@@ -1,7 +1,10 @@
 package edu.vanier.mainPackage;
 
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -15,23 +18,27 @@ import javafx.stage.Stage;
  */
 public class MainApp extends Application {
 
-    @Override
-    public void start(Stage stage) throws Exception {
-        
-        VBox root = new VBox();
-        
-        Scene scene = new Scene(root, 600, 600);
-        
-        stage.setScene(scene);        
-
-        stage.setTitle("This is a JavaFX app template...");
-        
-        stage.sizeToScene();
-        
-        stage.show();
+     public static void main(String[] args) {
+        launch(args);
     }
 
-    public static void main(String[] args) {
-        launch(args);
+    public void start(Stage primaryStage) throws IOException {
+        primaryStage.setTitle("Main Menu");
+
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+            MainMenuController menuController = new MainMenuController(primaryStage);
+            loader.setController(menuController);
+
+            BorderPane root = loader.load();
+
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
+
+            primaryStage.show();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }
