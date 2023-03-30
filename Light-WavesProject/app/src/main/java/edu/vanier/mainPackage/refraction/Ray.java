@@ -4,6 +4,11 @@
  */
 package edu.vanier.mainPackage.refraction;
 
+import java.util.ArrayList;
+import javafx.geometry.Insets;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
@@ -101,5 +106,23 @@ public class Ray {
         newRotate2.setAngle(90 - angle2);
         System.out.println("Angle 2: " + angle2);
         
+    }
+    
+    public void materialUpdateLines1(int index, Pane materialPane1, ArrayList<Material> list){
+        
+        BackgroundFill backgroundFill =
+        new BackgroundFill(list.get(index).getMaterialColor(),new CornerRadii(10),new Insets(10));
+
+                Background background =
+                    new Background(backgroundFill);
+
+                materialPane1.setBackground(background);
+                
+        double  angle2 = Vector.CalculateAngle(list.get(index).getRefractionIndex(), Vector.NWATER, angle1);
+        Rotate rotate2 = new Rotate();
+        rotate2.pivotXProperty().bind(incidentRay.endXProperty());
+        rotate2.pivotYProperty().bind(incidentRay.endYProperty());
+        rotate2.setAngle(90 - angle2);
+        refractedRay.getTransforms().setAll(rotate2);
     }
 }
