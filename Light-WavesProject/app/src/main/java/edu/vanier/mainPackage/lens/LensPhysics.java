@@ -14,7 +14,7 @@ public class LensPhysics {
         double f, p;
         
         for (int i = 0; i < Item.getItemList().size(); i++) {
-            if (Item.getItemList().get(i).getItemType()==2){
+            if (Item.getItemList().get(i).getItemType().equals("lens")){
                 lens = (Lens) Item.getItemList().get(i);
                 break;
             }

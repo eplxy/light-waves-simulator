@@ -4,6 +4,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -23,37 +24,39 @@ import javafx.stage.Stage;
  * @author Steven
  */
 public class Driver extends Application {
-
+    
+    
+    
     @Override
     public void start(Stage stage) throws Exception {
 
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/lensMenu.fxml"));
+        LensMenuController lmc = new LensMenuController(stage);
+        loader.setController(lmc);
+        BorderPane root = loader.load();
+
+        //testing source object
+        SourceObject so1 = new SourceObject(30,-100);
+        Lens l1 = new Lens(10, 0);
         
-        Button b1 = new Button("button");
-        TextField t1 = new TextField("abs pos one");
-        TextField t2 = new TextField("abs pos two");
-        TextField t3 = new TextField("focal length");
-        VBox vbox = new VBox(b1, t1, t2, t3);
+        Item.addToList(so1);
+        Item.addToList(l1);
+        Item.addToList(so1.getImage());
         
-        Scene scene = new Scene(vbox, 300, 300);
+        lmc.itemPane.getChildren().addAll(so1.getNode(),l1.getNode(), so1.getImage().getNode());
+        
+        so1.positionFix();
+        l1.positionFix();
+        so1.getImage().updatePosition();
+        
+        
+        
+        Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
         
-        b1.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event){
-                SourceObject so = new SourceObject();
-                so.setAbsPos(Double.parseDouble(t1.getText()));
-                Lens lens = new Lens();
-                lens.setAbsPos(Double.parseDouble(t2.getText()));
-                lens.setFocalLength(Double.parseDouble(t3.getText()));
-                Item.addToList(so);
-                Item.addToList(lens);
-                System.out.println(LensPhysics.computeImagePosition(so));
-                System.out.println(lens.getLensType());
-            }
-        });
     }
 
     public static void main(String[] args) {

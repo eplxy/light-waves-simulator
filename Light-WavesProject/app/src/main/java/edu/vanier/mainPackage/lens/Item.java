@@ -3,6 +3,7 @@ package edu.vanier.mainPackage.lens;
 import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import javafx.scene.Node;
 
 /**
  *
@@ -12,56 +13,54 @@ public abstract class Item {
 
     //properties
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
-    
+
     protected int orderNumber;
     protected double absPos, relPos;
     protected ItemLabel label;
     protected boolean positionLocked;
-    
-    /***
-     * Value represents the type of item based on a legend:
-     * 1 - SourceObject
-     * 2 - Lens
-     * 3 - Image
-     * 4 - Image used as source object
-     */
-    protected int itemType;
-    
-    
+    protected Node node;
+
+    protected String itemType;
+
     //methods
-    public static void addToList(Item item){
+    public static void addToList(Item item) {
         for (int i = item.orderNumber; i < itemList.size(); i++) {
-            itemList.get(i).setOrderNumber(itemList.get(i).orderNumber+1);
+            itemList.get(i).setOrderNumber(itemList.get(i).orderNumber + 1);
         }
-        Item.itemList.put(item.orderNumber,item);
+        Item.itemList.put(item.orderNumber, item);
     }
-    
-    public static void removeFromList(Item item){
-        
+
+    public static void removeFromList(Item item) {
+
     }
-    
-    private static void updateListOrder(){
+
+    private static void updateListOrder() {
         for (int i = 0; i < itemList.size(); i++) {
             for (int j = i; j < itemList.size(); j++) {
-                
+
             }
         }
     }
-    
+
     public void lockPosition() {
     }
     
-    public void move(){
-        
+    public void positionFix() {
+        this.move(absPos);
     }
-    
-    //getters and setters
 
-    public static SortedMap<Integer,Item> getItemList() {
+    public void move(double absPos) {
+        this.absPos = absPos;
+        this.node.setLayoutX(this.getNode().getParent().getParent().getBoundsInLocal().getWidth()/2+this.getAbsPos()-this.getNode().getBoundsInLocal().getWidth()/2);
+    
+    }
+
+    //getters and setters
+    public static SortedMap<Integer, Item> getItemList() {
         return itemList;
     }
 
-    public static void setItemList(SortedMap<Integer,Item> itemList) {
+    public static void setItemList(SortedMap<Integer, Item> itemList) {
         Item.itemList = itemList;
     }
 
@@ -72,7 +71,7 @@ public abstract class Item {
     public void setOrderNumber(int orderNumber) {
         this.orderNumber = orderNumber;
     }
-    
+
     public double getAbsPos() {
         return absPos;
     }
@@ -105,22 +104,25 @@ public abstract class Item {
         this.positionLocked = positionLocked;
     }
 
-    public int getItemType() {
+    public String getItemType() {
         return itemType;
     }
 
-    public void setItemType(int itemType) {
+    public void setItemType(String itemType) {
         this.itemType = itemType;
     }
-    
-    
+
+    public Node getNode() {
+        return node;
+    }
+
+    public void setNode(Node node) {
+        this.node = node;
+    }
 
     @Override
     public String toString() {
         return Integer.toString(this.orderNumber);
     }
-    
-    
-    
-    
+
 }

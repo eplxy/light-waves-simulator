@@ -1,5 +1,9 @@
 package edu.vanier.mainPackage.lens;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.shape.Circle;
+
 /**
  *
  * @author Steven
@@ -12,12 +16,13 @@ public class Lens extends Item {
     private FocalPoint focalPoint;
 
     //constructor(s)
-    public Lens() {
-        this.itemType = 2;
+    public Lens(double FocalLength, double absPos) {
+        this.itemType = "lens";
+        this.node = new ImageView(new Image(getClass().getResource("/images/lens/lens.png").toString()));
     }
 
     public Lens(double focalLength, double refractionIndex, FocalPoint focalPoint) {
-        this.itemType = 2;
+        this.itemType = "lens";
         this.focalLength = focalLength;
         this.refractionIndex = refractionIndex;
         this.focalPoint = focalPoint;
