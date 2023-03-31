@@ -4,6 +4,7 @@
  */
 package DoubleSlit.UI;
 
+import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,7 +31,10 @@ import javafx.stage.Stage;
 public class DoubleSlitMenuController {
 
     Stage primaryStage;
-    Stage stage;
+    
+    private Parameters parameters;
+    
+    
     @FXML
     Slider sliderWavelength;
     @FXML
@@ -88,6 +92,7 @@ public class DoubleSlitMenuController {
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/animation.fxml"));
             AnimationController animationController = new AnimationController(primaryStage);
+            animationController.setParameters(parameters);
             loader.setController(animationController);
             BorderPane root = loader.load();
             paneView.getChildren().clear();
@@ -101,6 +106,7 @@ public class DoubleSlitMenuController {
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/graph.fxml"));
             GraphController graphController = new GraphController(primaryStage);
+            graphController.setParameters(parameters);
             loader.setController(graphController);
             BorderPane root = loader.load();
             paneView.getChildren().clear();
@@ -115,21 +121,7 @@ public class DoubleSlitMenuController {
     }
     
     public void handleEnter(ActionEvent event, Stage primaryStage){
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
-            DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);
-            loader.setController(doubleSlitMenuController);
-            BorderPane root = loader.load();
-            
-            primaryStage.close();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-            primaryStage.show(); 
-          
-        } catch (IOException e) {
-            System.out.println(e);
-        }
+        this.parameters = new Parameters(Double.parseDouble(txtFieldWavelength.getText()), Double.parseDouble(txtFieldWidth.getText()),Double.parseDouble(txtFieldScreen.getText()),Double.parseDouble(txtFieldSpacing.getText()));
     }
 
     

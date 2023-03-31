@@ -4,6 +4,7 @@
  */
 package DoubleSlit.UI;
 
+import DoubleSlit.Simulation.Parameters;
 import javafx.stage.Stage;
 
 /**
@@ -11,10 +12,21 @@ import javafx.stage.Stage;
  * @author sabri
  */
 public class AnimationController {
-    Stage stage;
-    
-    public AnimationController(Stage stage) {
-        this.stage = stage;
+    Stage primaryStage;
+    private Parameters parameters;
+     
+    public AnimationController(Stage primaryStage) {
+        this.primaryStage = primaryStage;
         
     }
+
+    public Parameters getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Parameters parameters) {
+        this.parameters = parameters;
+    }
+    
+    
 }

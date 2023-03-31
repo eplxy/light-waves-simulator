@@ -37,7 +37,7 @@ public class MainMenuController {
         
     }   
     
-   public void handleDoubleSlit(ActionEvent event, Stage primaryStage){
+    public void handleDoubleSlit(ActionEvent event, Stage primaryStage){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
             DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);

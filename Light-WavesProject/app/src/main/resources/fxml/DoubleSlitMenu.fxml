@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="1080.0" prefWidth="1920.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <VBox fx:id="parametersVBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="396.0" prefWidth="199.0" BorderPane.alignment="CENTER">
          <children>
@@ -131,6 +131,6 @@
       </ToolBar>
    </top>
    <center>
-      <Pane fx:id="paneView" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="paneView" prefHeight="1035.0" prefWidth="1715.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

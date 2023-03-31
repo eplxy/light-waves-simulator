@@ -1,38 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <bottom>
       <HBox alignment="CENTER" prefHeight="62.0" prefWidth="875.0" BorderPane.alignment="CENTER">
          <children>
-            <CheckBox fx:id="checkBoxInterference" mnemonicParsing="false" text="Interference">
+            <RadioButton fx:id="radioBtnInterference" mnemonicParsing="false" text="Interference">
+               <font>
+                  <Font size="16.0" />
+               </font>
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="radioBtnDiffraction" mnemonicParsing="false" text="Diffraction">
                <font>
                   <Font size="16.0" />
                </font>
-            </CheckBox>
-            <CheckBox fx:id="checkBoxDiffraction" mnemonicParsing="false" text="Diffraction">
                <HBox.margin>
-                  <Insets right="20.0" />
+                  <Insets right="5.0" />
                </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="radioBtnBoth" mnemonicParsing="false" text="Both">
                <font>
                   <Font size="16.0" />
                </font>
-            </CheckBox>
-            <CheckBox fx:id="checkBoxBoth" mnemonicParsing="false" text="Both">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </CheckBox>
+            </RadioButton>
          </children>
       </HBox>
    </bottom>
+   <center>
+      <LineChart fx:id="graph" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </center>
 </BorderPane>
