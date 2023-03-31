@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import javafx.scene.Node;
+import lombok.Data;
 
 /**
  *
  * @author Steven
  */
+@Data
 public abstract class Item {
 
     //properties

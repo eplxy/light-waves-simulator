@@ -2,11 +2,13 @@ package edu.vanier.mainPackage.lens;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.Data;
 
 /**
  *
  * @author Steven
  */
+@Data
 public class ImageObject extends Item {
 
     //properties
@@ -42,56 +44,5 @@ public class ImageObject extends Item {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }
-
-    //getters and setters
-    public double getSize() {
-        return size;
-    }
-
-    public void setSize(double size) {
-        this.size = size;
-    }
-
-    public double getMagnification() {
-        return magnification;
-    }
-
-    public void setMagnification(double magnification) {
-        this.magnification = magnification;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public boolean isInverted() {
-        return inverted;
-    }
-
-    public void setInverted(boolean inverted) {
-        this.inverted = inverted;
-    }
-
-    public double getDistToFocal() {
-        return distToFocal;
-    }
-
-    public void setDistToFocal(double distToFocal) {
-        this.distToFocal = distToFocal;
-    }
-
-    public Item getSource() {
-        return source;
-    }
-
-    public void setSource(Item source) {
-        this.source = source;
-    }
-    
-    
 
 }
