@@ -53,6 +53,7 @@ public class MainApp extends Application {
             AnchorPane root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            stage.sizeToScene();
             stage.show();
             
             //photoelectron animation
