@@ -4,14 +4,12 @@
  */
 package edu.vanier.mainPackage;
 
-import DoubleSlit.UI.DoubleSlitMenuController;
-import java.io.IOException;
-import javafx.event.ActionEvent;
+import edu.vanier.mainPackage.lens.Driver;
+import edu.vanier.mainPackage.refraction.Refraction;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -24,8 +22,55 @@ public class MainMenuController {
     @FXML
     Button btnDoubleSlit;
     
+    @FXML
+    Button btnRefraction;
+    
+    @FXML
+    Button btnLens;
+    
+    @FXML
+    Button btnDoubleslit;
+    
+    @FXML
+    Button btnPhotoelectric;
+    
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
+        
+        btnDoubleslit.setOnAction((event) -> {
+            
+        });
+        
+        btnLens.setOnAction((event) -> {
+            Driver lensMain = new Driver();
+            try {
+                lensMain.start(primaryStage);
+            } catch (Exception ex) {
+                System.err.println(ex.toString());
+            }
+        });
+        
+        btnRefraction.setOnAction((event) -> {
+            Refraction refractionMain = new Refraction();
+            
+            try {
+                refractionMain.start(primaryStage);
+            } catch (Exception ex) {
+                System.err.println(ex.toString());
+            }
+        });
+        
+        btnPhotoelectric.setOnAction((event) -> {
+            //Must change name of photo electric effect main menu class because confusing naming convention
+            //MainApp -> Photoelectric
+            MainApp photoelectricMain = new MainApp();
+            try{
+                photoelectricMain.start(primaryStage);
+            }catch (Exception ex){
+                System.err.println(ex.toString());
+            }
+            
+        });
         
     }
         
