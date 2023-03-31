@@ -1,0 +1,99 @@
+package edu.vanier.photoelectriceffect.controller;
+
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.animation.TranslateTransition;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+/*
+ * @author maesh
+ */
+public class MainAppController{
+    @FXML
+    Slider sliderIntensity = new Slider();
+    
+    @FXML
+    Slider sliderWavelegth = new Slider();
+    
+    @FXML
+    Slider sliderBatteryVoltage = new Slider();
+  
+    @FXML
+    Button btnSurfaceMaterial = new Button();
+    
+    @FXML
+    Button btnGoBackToMainMenu = new Button();
+    
+    @FXML
+    Button btnPlay = new Button();
+    
+    @FXML
+    Button btnForward = new Button();
+    
+    @FXML
+    private Circle photoelectron1;
+    
+    @FXML
+    Circle photoelectron2 = new Circle();
+    
+    @FXML
+    Circle photoelectron3 = new Circle();
+    
+    @FXML
+    Circle photoelectron4 = new Circle();
+    
+    @FXML
+    Circle photoelectron5 = new Circle();
+    
+    @FXML
+    Circle photoelectron6 = new Circle();
+    
+    @FXML
+    Circle photoelectron7 = new Circle();
+    
+    @FXML
+    Circle photoelectron8 = new Circle();
+    
+    @FXML
+    Circle photoelectron9 = new Circle();
+    
+    private boolean initialized = false;
+    
+    public void initialize(URL location, ResourceBundle resources) {
+        initialized = true;
+    }
+    
+    public void moveCircle() {
+        
+        double x = photoelectron1.getCenterX();
+        double y = photoelectron1.getCenterY();
+        double radius = photoelectron1.getRadius();
+        
+        double newX = x + 5;
+        photoelectron1.setCenterX(newX);
+        
+        if (newX - radius >= 0.001) {
+        photoelectron1.setCenterX(0.001 - radius);
+        }
+        
+        
+        double maxY = photoelectron1.getParent().getBoundsInLocal().getMaxY();
+        if (newX + radius >= photoelectron1.getParent().getBoundsInLocal().getMaxX()) {
+            newX = photoelectron1.getParent().getBoundsInLocal().getMinX() + radius;
+            y += 50; 
+            if (y + radius >= maxY) {
+                y = photoelectron1.getCenterY();
+            }
+        }
+        photoelectron1.setCenterX(newX);
+        photoelectron1.setCenterY(y);
+    }
+}
