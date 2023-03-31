@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -20,8 +20,10 @@
       </HBox>
    </top>
    <center>
-      <Pane fx:id="animationPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="316.0" prefWidth="475.0" BorderPane.alignment="CENTER">
+      <Pane fx:id="animationPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
+            <Pane fx:id="materialPane1" minHeight="165.0" minWidth="465.0" />
+            <Pane fx:id="materialPane2" layoutY="165.0" minHeight="165.0" minWidth="465.0" />
             <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="71.0" layoutY="41.0" rotate="-45.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
          </children>
          <BorderPane.margin>

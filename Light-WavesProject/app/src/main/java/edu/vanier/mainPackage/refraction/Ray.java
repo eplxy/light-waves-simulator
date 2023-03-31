@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.vanier.mainPackage.refraction;
 
 import java.util.ArrayList;
@@ -44,8 +40,6 @@ public class Ray {
         horizontalRay = new Line();
         
         double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle1);
-        System.out.println(angle1);
-        System.out.println(angle2);
         
         //Incident Ray
         incidentRay.startXProperty().setValue(0);
@@ -108,10 +102,27 @@ public class Ray {
         
     }
     
-    public void materialUpdateLines(int index, int index2, Pane materialPane1, ArrayList<Material> list, String angle1){
-        
+    public void materialUpdateLines1(int index, int index2, Pane materialPane1, ArrayList<Material> list, String angle1){
         BackgroundFill backgroundFill =
         new BackgroundFill(list.get(index).getMaterialColor(),new CornerRadii(10),new Insets(10));
+
+                Background background =
+                    new Background(backgroundFill);
+
+                materialPane1.setBackground(background);
+                
+        double angle2 = Vector.CalculateAngle(list.get(index).getRefractionIndex(), list.get(index2).getRefractionIndex(), Double.parseDouble(angle1));
+        Rotate rotate2 = new Rotate();
+        rotate2.pivotXProperty().bind(incidentRay.endXProperty());
+        rotate2.pivotYProperty().bind(incidentRay.endYProperty());
+        rotate2.setAngle(90 - angle2);
+        refractedRay.getTransforms().setAll(rotate2);
+    }
+    
+    public void materialUpdateLines2(int index, int index2, Pane materialPane1, ArrayList<Material> list, String angle1){
+        
+        BackgroundFill backgroundFill =
+        new BackgroundFill(list.get(index2).getMaterialColor(),new CornerRadii(10),new Insets(10));
 
                 Background background =
                     new Background(backgroundFill);

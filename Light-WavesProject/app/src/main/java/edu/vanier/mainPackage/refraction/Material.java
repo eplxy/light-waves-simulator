@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.refraction;
 
-import java.util.HashMap;
 import javafx.scene.paint.Color;
 import lombok.Data;
 
@@ -23,7 +22,7 @@ public class Material {
     
     @Override
     public String toString(){
-        return materialName;
+        return materialName + ", " + refractionIndex;
     }
     
 }

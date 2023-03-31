@@ -6,17 +6,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * @author Matthew Hantar
  */
+@lombok.Data
 public class MenuController {
     
     @FXML
@@ -60,8 +60,6 @@ public class MenuController {
     
     Stage primaryStage;
     Simulation sim;
-
-    
     
     Draggable draggableMaker = new Draggable();
     ArrayList<Material> listMaterial = new ArrayList<>();
@@ -70,10 +68,7 @@ public class MenuController {
     private String n2;
     private int selectedIndex1;
     private int selectedIndex2;
-    
-    @Getter
-    @Setter
-    private String angle1;
+    private String angle1 = "45";
     
     MenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -108,7 +103,7 @@ public class MenuController {
             Object selectedItem = btnMaterial1.getSelectionModel().getSelectedItem();
             System.out.println(angle1);
 
-            ray.materialUpdateLines(selectedIndex1,selectedIndex2, materialPane1, listMaterial, angle1);
+            ray.materialUpdateLines1(selectedIndex1,selectedIndex2, materialPane1, listMaterial, angle1);
             System.out.println("Selection made: [" + selectedIndex1 + "] " + selectedItem);
             System.out.println("   ChoiceBox.getValue(): " + btnMaterial1.getValue());
         });
@@ -118,7 +113,7 @@ public class MenuController {
             Object selectedItem = btnMaterial2.getSelectionModel().getSelectedItem();
 
             System.out.println(angle1);
-            ray.materialUpdateLines(selectedIndex1, selectedIndex2, materialPane2, listMaterial, angle1);
+            ray.materialUpdateLines2(selectedIndex1, selectedIndex2, materialPane2, listMaterial, angle1);
             System.out.println("Selection made: [" + selectedIndex2 + "] " + selectedItem);
             System.out.println("   ChoiceBox.getValue(): " + btnMaterial2.getValue());
         });
