@@ -62,6 +62,14 @@ public class MainMenuController {
         });
         
         btnPhotoelectric.setOnAction((event) -> {
+            //Must change name of photo electric effect main menu class because confusing naming convention
+            //MainApp -> Photoelectric
+            MainApp photoelectricMain = new MainApp();
+            try{
+                photoelectricMain.start(primaryStage);
+            }catch (Exception ex){
+                System.err.println(ex.toString());
+            }
             
         });
         
