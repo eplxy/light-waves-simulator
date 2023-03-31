@@ -3,6 +3,8 @@ plugins {
     id 'application'
     // Load and apply the required JavaFX plugin.
     id 'org.openjfx.javafxplugin' version '0.0.13'
+    
+    id("io.freefair.lombok") version "6.6.3" 
 }
 
 repositories {
@@ -32,7 +34,11 @@ javafx {
 }
 application {    
    // Define the main class for the application.
-   mainClass = 'edu.vanier.mainPackage.lens.Driver'
+
+   // TODO: specify the fully qualified name of the class 
+   //       that contains the main method your would like to run.
+   //mainClass = 'edu.vanier.mainPackage.MainApp'
+   mainClass = 'edu.vanier.mainPackage.refraction.Refraction'
 }
 
 test {
