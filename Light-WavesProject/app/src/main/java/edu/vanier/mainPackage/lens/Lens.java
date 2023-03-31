@@ -3,11 +3,13 @@ package edu.vanier.mainPackage.lens;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
+import lombok.Data;
 
 /**
  *
  * @author Steven
  */
+@Data
 public class Lens extends Item {
 
     //properties
