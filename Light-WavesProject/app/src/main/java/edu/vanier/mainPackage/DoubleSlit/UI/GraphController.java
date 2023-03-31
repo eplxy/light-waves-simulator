@@ -2,10 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
-import DoubleSlit.Simulation.Graph;
-import DoubleSlit.Simulation.Parameters;
+import edu.vanier.mainPackage.DoubleSlit.Graph;
+import edu.vanier.mainPackage.DoubleSlit.Parameters;
 import static java.util.EnumSet.range;
 import static java.util.stream.IntStream.range;
 import static java.util.stream.LongStream.range;

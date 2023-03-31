@@ -4,12 +4,18 @@
  */
 package edu.vanier.mainPackage;
 
+import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
 import edu.vanier.mainPackage.lens.Driver;
 import edu.vanier.mainPackage.refraction.Refraction;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -38,7 +44,7 @@ public class MainMenuController {
         this.primaryStage = primaryStage;
         
         btnDoubleslit.setOnAction((event) -> {
-            
+            handleDoubleSlit(event, primaryStage);
         });
         
         btnLens.setOnAction((event) -> {

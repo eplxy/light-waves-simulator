@@ -2,9 +2,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
-import DoubleSlit.Simulation.Parameters;
+import edu.vanier.mainPackage.DoubleSlit.Parameters;
 import java.io.IOException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
