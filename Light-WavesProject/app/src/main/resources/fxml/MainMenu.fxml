@@ -35,7 +35,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnDoubleslit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Double Slit">
+            <Button fx:id="btnDoubleSlit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Double Slit">
                <font>
                   <Font size="30.0" />
                </font>

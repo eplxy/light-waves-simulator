@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 public class MainMenuController {
     
     Stage primaryStage; 
+    
     @FXML
     Button btnDoubleSlit;
     
@@ -33,20 +34,13 @@ public class MainMenuController {
     
     @FXML
     Button btnLens;
-    
-    @FXML
-    Button btnDoubleslit;
-    
+        
     @FXML
     Button btnPhotoelectric;
     
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
-        
-        btnDoubleslit.setOnAction((event) -> {
-            handleDoubleSlit(event, primaryStage);
-        });
-        
+                
         btnLens.setOnAction((event) -> {
             Driver lensMain = new Driver();
             try {
