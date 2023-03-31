@@ -16,8 +16,9 @@ public class Lens extends Item {
     private FocalPoint focalPoint;
 
     //constructor(s)
-    public Lens(double FocalLength, double absPos) {
+    public Lens(double focalLength, double absPos) {
         this.itemType = "lens";
+        this.focalLength = focalLength;
         this.node = new ImageView(new Image(getClass().getResource("/images/lens/lens.png").toString()));
     }
 
