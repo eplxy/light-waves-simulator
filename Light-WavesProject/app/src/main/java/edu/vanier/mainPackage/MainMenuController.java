@@ -19,6 +19,8 @@ import javafx.stage.Stage;
 public class MainMenuController {
     
     Stage primaryStage; 
+    @FXML
+    Button btnDoubleSlit;
     
     @FXML
     Button btnRefraction;
@@ -34,9 +36,6 @@ public class MainMenuController {
     
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
-    }
-    
-    public void initialize(){
         
         btnDoubleslit.setOnAction((event) -> {
             
@@ -74,4 +73,32 @@ public class MainMenuController {
         });
         
     }
+        
+
+    public void initialize() throws IOException{
+        btnDoubleSlit.setOnAction((event) -> {
+            handleDoubleSlit(event, this.primaryStage);
+        });
+        
+    }   
+    
+    public void handleDoubleSlit(ActionEvent event, Stage primaryStage){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
+            DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);
+            loader.setController(doubleSlitMenuController);
+            BorderPane root = loader.load();
+            
+            primaryStage.close();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.setMaximized(true);
+            primaryStage.show(); 
+          
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+    
+    
 }
