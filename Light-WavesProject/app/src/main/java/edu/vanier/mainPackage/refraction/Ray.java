@@ -88,7 +88,7 @@ public class Ray {
         animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay);
     }
     
-    public void updateLines(double angle){
+    public void updateLines(double angle, double index1, double index2){
         
         Rotate newRotate = new Rotate();
         newRotate.pivotXProperty().bind(incidentRay.endXProperty());
@@ -97,7 +97,7 @@ public class Ray {
         newRotate.setAngle(angle);
         System.out.println(angle);
         
-        double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle);
+        double angle2 = Vector.CalculateAngle(index1, index2, angle);
         
         Rotate newRotate2 = new Rotate();
         newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
@@ -108,7 +108,7 @@ public class Ray {
         
     }
     
-    public void materialUpdateLines1(int index, Pane materialPane1, ArrayList<Material> list){
+    public void materialUpdateLines(int index, int index2, Pane materialPane1, ArrayList<Material> list, String angle1){
         
         BackgroundFill backgroundFill =
         new BackgroundFill(list.get(index).getMaterialColor(),new CornerRadii(10),new Insets(10));
@@ -118,11 +118,12 @@ public class Ray {
 
                 materialPane1.setBackground(background);
                 
-        double  angle2 = Vector.CalculateAngle(list.get(index).getRefractionIndex(), Vector.NWATER, angle1);
+        double angle2 = Vector.CalculateAngle(list.get(index).getRefractionIndex(), list.get(index2).getRefractionIndex(), Double.parseDouble(angle1));
         Rotate rotate2 = new Rotate();
         rotate2.pivotXProperty().bind(incidentRay.endXProperty());
         rotate2.pivotYProperty().bind(incidentRay.endYProperty());
         rotate2.setAngle(90 - angle2);
         refractedRay.getTransforms().setAll(rotate2);
     }
+    
 }

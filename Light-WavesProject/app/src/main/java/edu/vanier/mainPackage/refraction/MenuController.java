@@ -58,15 +58,18 @@ public class MenuController {
     @FXML
     TextField textN2;
     
-    
     Stage primaryStage;
     Simulation sim;
 
+    
+    
     Draggable draggableMaker = new Draggable();
     ArrayList<Material> listMaterial = new ArrayList<>();
     
     private String n1;
     private String n2;
+    private int selectedIndex1;
+    private int selectedIndex2;
     
     @Getter
     @Setter
@@ -85,7 +88,9 @@ public class MenuController {
         
         textAngle.setOnAction(e -> {
             angle1 = textAngle.getText();
-            ray.updateLines(Double.parseDouble(angle1));
+            System.out.println(listMaterial.get(selectedIndex1));
+            System.out.println(listMaterial.get(selectedIndex2));
+            ray.updateLines(Double.parseDouble(angle1), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
          });
         
         textN1.setOnAction(e -> {
@@ -99,12 +104,23 @@ public class MenuController {
          });
         
         btnMaterial1.setOnAction((event) -> {
-            int selectedIndex = btnMaterial1.getSelectionModel().getSelectedIndex();
+            selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
             Object selectedItem = btnMaterial1.getSelectionModel().getSelectedItem();
+            System.out.println(angle1);
 
-            ray.materialUpdateLines1(selectedIndex, materialPane1, listMaterial);
-            System.out.println("Selection made: [" + selectedIndex + "] " + selectedItem);
+            ray.materialUpdateLines(selectedIndex1,selectedIndex2, materialPane1, listMaterial, angle1);
+            System.out.println("Selection made: [" + selectedIndex1 + "] " + selectedItem);
             System.out.println("   ChoiceBox.getValue(): " + btnMaterial1.getValue());
+        });
+        
+        btnMaterial2.setOnAction((event) -> {
+            selectedIndex2 = btnMaterial2.getSelectionModel().getSelectedIndex();
+            Object selectedItem = btnMaterial2.getSelectionModel().getSelectedItem();
+
+            System.out.println(angle1);
+            ray.materialUpdateLines(selectedIndex1, selectedIndex2, materialPane2, listMaterial, angle1);
+            System.out.println("Selection made: [" + selectedIndex2 + "] " + selectedItem);
+            System.out.println("   ChoiceBox.getValue(): " + btnMaterial2.getValue());
         });
         
     } 
@@ -121,6 +137,7 @@ public class MenuController {
         
         for (int i = 0; i < listMaterial.size(); i++) {
             btnMaterial1.getItems().add(listMaterial.get(i));
+            btnMaterial2.getItems().add(listMaterial.get(i));
         }
         
     }
