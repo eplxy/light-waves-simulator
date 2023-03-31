@@ -4,6 +4,7 @@
  */
 package edu.vanier.mainPackage;
 
+import DoubleSlit.UI.DoubleSlitMenuController;
 import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,10 +30,6 @@ public class MainMenuController {
     }
         
 
-   /***
-    * Sets the event handling methods for the menu buttons
-    * @throws IOException 
-    */
     public void initialize() throws IOException{
         btnDoubleSlit.setOnAction((event) -> {
             handleDoubleSlit(event, this.primaryStage);
@@ -43,10 +40,9 @@ public class MainMenuController {
    public void handleDoubleSlit(ActionEvent event, Stage primaryStage){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
-            //edu.vanier.collisionsimulator.ui.CollisionMenuController menuController = new edu.vanier.collisionsimulator.ui.CollisionMenuController(primaryStage);
-            //loader.setController(menuController);
+            DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);
+            loader.setController(doubleSlitMenuController);
             BorderPane root = loader.load();
-            //menuController.initialize(sim);
             
             primaryStage.close();
             Scene scene = new Scene(root);
