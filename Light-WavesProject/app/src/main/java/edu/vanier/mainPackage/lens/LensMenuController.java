@@ -35,11 +35,25 @@ public class LensMenuController {
     HBox itemBox;
     @FXML
     AnchorPane midAnchorPane;
-    @FXML
-    ToggleButton toggleButton;
 
-    
     public LensMenuController(Stage stage) {
         this.primaryStage = stage;
+    }
+
+    public void initialize() {
+
+        ctrlTextField1.setOnAction(e -> {
+            SourceObject so = LensPhysics.sourceSearch();
+            so.move(Double.parseDouble(ctrlTextField1.getText()));
+            so.getImage().update();
+        });
+        
+        ctrlTextField2.setOnAction(e -> {
+            Lens l = LensPhysics.lensSearch();
+            SourceObject so = LensPhysics.sourceSearch();
+            l.setFocalLength(Double.parseDouble(ctrlTextField2.getText()));
+            so.getImage().update();
+        });
+
     }
 }

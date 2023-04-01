@@ -36,8 +36,8 @@ public class Driver extends Application {
         BorderPane root = loader.load();
 
         //testing source object
-        SourceObject so1 = new SourceObject(30,-100);
-        Lens l1 = new Lens(10, 0);
+        SourceObject so1 = new SourceObject(30,-30);
+        Lens l1 = new Lens(5, 0);
         
         Item.addToList(so1);
         Item.addToList(l1);
@@ -47,9 +47,8 @@ public class Driver extends Application {
         
         so1.positionFix();
         l1.positionFix();
-        //so1.getImage().updatePosition();
-        
-        
+
+        so1.getImage().update();        
         
         Scene scene = new Scene(root);
 

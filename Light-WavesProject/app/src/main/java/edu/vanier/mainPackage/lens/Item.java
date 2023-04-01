@@ -16,6 +16,7 @@ public abstract class Item {
     //properties
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
 
+    protected double size;
     protected int orderNumber;
     protected double absPos, relPos;
     protected ItemLabel label;
@@ -25,10 +26,16 @@ public abstract class Item {
     protected String itemType;
 
     //methods
+    
+    
+    
     public static void addToList(Item item) {
-        for (int i = item.orderNumber; i < itemList.size(); i++) {
-            itemList.get(i).setOrderNumber(itemList.get(i).orderNumber + 1);
-        }
+
+        //TODO solve order number issue
+//        for (int i = item.orderNumber; i < itemList.size(); i++) {
+//            itemList.get(i).setOrderNumber(itemList.get(i).orderNumber + 1);
+//        }
+        item.orderNumber = itemList.size() + 1;
         Item.itemList.put(item.orderNumber, item);
     }
 
@@ -46,15 +53,15 @@ public abstract class Item {
 
     public void lockPosition() {
     }
-    
+
     public void positionFix() {
         this.move(absPos);
     }
 
     public void move(double absPos) {
         this.absPos = absPos;
-        this.node.setLayoutX(this.getNode().getParent().getParent().getBoundsInLocal().getWidth()/2+this.getAbsPos()-this.getNode().getBoundsInLocal().getWidth()/2);
-    
+        this.node.setLayoutX((this.getNode().getParent().getParent().getBoundsInLocal().getWidth() / 2 + this.getAbsPos()*20 - this.getNode().getBoundsInLocal().getWidth() / 2));
+
     }
 
     //getters and setters
@@ -127,4 +134,16 @@ public abstract class Item {
         return Integer.toString(this.orderNumber);
     }
 
+    public double getSize() {
+        return size;
+    }
+
+    public void setSize(double size) {
+        this.size = size;
+    }
+    
+    
+
+    
+    
 }
