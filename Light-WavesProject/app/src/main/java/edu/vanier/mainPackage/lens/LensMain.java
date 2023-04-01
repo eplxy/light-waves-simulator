@@ -23,7 +23,7 @@ import javafx.stage.Stage;
  *
  * @author Steven
  */
-public class Driver extends Application {
+public class LensMain extends Application {
     
     
     

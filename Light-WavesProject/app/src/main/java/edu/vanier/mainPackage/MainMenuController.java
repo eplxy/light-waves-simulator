@@ -5,11 +5,9 @@
 package edu.vanier.mainPackage;
 
 import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
-import edu.vanier.mainPackage.lens.Driver;
+import edu.vanier.mainPackage.lens.LensMain;
 import edu.vanier.mainPackage.refraction.Refraction;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,82 +21,80 @@ import javafx.stage.Stage;
  * @author 2148289
  */
 public class MainMenuController {
-    
-    Stage primaryStage; 
-    
+
+    Stage primaryStage;
+
     @FXML
     Button btnDoubleSlit;
-    
+
     @FXML
     Button btnRefraction;
-    
+
     @FXML
     Button btnLens;
-        
+
     @FXML
     Button btnPhotoelectric;
-    
+
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
-                
+
+    }
+
+    public void initialize() throws IOException {
+
         btnLens.setOnAction((event) -> {
-            Driver lensMain = new Driver();
+            LensMain lensMain = new LensMain();
             try {
                 lensMain.start(primaryStage);
             } catch (Exception ex) {
                 System.err.println(ex.toString());
             }
         });
-        
+
         btnRefraction.setOnAction((event) -> {
             Refraction refractionMain = new Refraction();
-            
+
             try {
                 refractionMain.start(primaryStage);
             } catch (Exception ex) {
                 System.err.println(ex.toString());
             }
         });
-        
+
         btnPhotoelectric.setOnAction((event) -> {
             //Must change name of photo electric effect main menu class because confusing naming convention
             //MainApp -> Photoelectric
             MainApp photoelectricMain = new MainApp();
-            try{
+            try {
                 photoelectricMain.start(primaryStage);
-            }catch (Exception ex){
+            } catch (Exception ex) {
                 System.err.println(ex.toString());
             }
-            
-        });
-        
-    }
-        
 
-    public void initialize() throws IOException{
+        });
         btnDoubleSlit.setOnAction((event) -> {
             handleDoubleSlit(event, this.primaryStage);
         });
-        
-    }   
-    
-    public void handleDoubleSlit(ActionEvent event, Stage primaryStage){
+
+    }
+
+    public void handleDoubleSlit(ActionEvent event, Stage primaryStage) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
             DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);
             loader.setController(doubleSlitMenuController);
             BorderPane root = loader.load();
-            
+
             primaryStage.close();
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setMaximized(true);
-            primaryStage.show(); 
-          
+            primaryStage.show();
+
         } catch (IOException e) {
             System.out.println(e);
         }
     }
-    
-    
+
 }
