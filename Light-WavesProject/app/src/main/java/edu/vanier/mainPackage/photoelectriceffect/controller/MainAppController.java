@@ -1,17 +1,11 @@
-package edu.vanier.photoelectriceffect.controller;
+package edu.vanier.mainPackage.photoelectriceffect.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
-import javafx.stage.Stage;
-import javafx.util.Duration;
 
 /*
  * @author maesh
@@ -38,8 +32,8 @@ public class MainAppController{
     @FXML
     Button btnForward = new Button();
     
-    @FXML
-    private Circle photoelectron1;
+    //@FXML
+    private Circle photoelectron1 = new Circle();
     
     @FXML
     Circle photoelectron2 = new Circle();

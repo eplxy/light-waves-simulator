@@ -1,12 +1,9 @@
 package edu.vanier.mainPackage;
 
-import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -32,7 +29,7 @@ public class MainApp extends Application {
         
         Scene scene = new Scene(root);
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UTILITY);
+        //stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.show();
     }

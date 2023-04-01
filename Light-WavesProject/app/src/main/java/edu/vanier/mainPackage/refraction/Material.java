@@ -24,5 +24,33 @@ public class Material {
     public String toString(){
         return materialName + ", " + refractionIndex;
     }
+
+    public Color getMaterialColor() {
+        return materialColor;
+    }
+
+    public void setMaterialColor(Color materialColor) {
+        this.materialColor = materialColor;
+    }
+
+    public String getMaterialName() {
+        return materialName;
+    }
+
+    public void setMaterialName(String materialName) {
+        this.materialName = materialName;
+    }
+
+    public double getRefractionIndex() {
+        return refractionIndex;
+    }
+
+    public void setRefractionIndex(double refractionIndex) {
+        this.refractionIndex = refractionIndex;
+    }
+
+
+    
+    
     
 }
