@@ -6,6 +6,7 @@ import java.util.ArrayList;
  *
  * @author Steven
  */
+
 public class LensPhysics {
 
     public static Lens lensSearch() {

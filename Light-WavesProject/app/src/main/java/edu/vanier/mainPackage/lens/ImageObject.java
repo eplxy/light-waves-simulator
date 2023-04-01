@@ -2,11 +2,13 @@ package edu.vanier.mainPackage.lens;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import lombok.Data;
 
 /**
  *
  * @author Steven
  */
+@Data
 public class ImageObject extends Item {
 
     //properties
@@ -60,45 +62,45 @@ public class ImageObject extends Item {
 
     //getters and setters
 
-    public double getMagnification() {
-        return magnification;
-    }
+    //public double getMagnification() {
+    //    return magnification;
+    //}
 
-    public void setMagnification(double magnification) {
-        this.magnification = magnification;
-    }
+    //public void setMagnification(double magnification) {
+    //    this.magnification = magnification;
+    //}
 
-    public String getType() {
-        return type;
-    }
+    //public String getType() {
+    //    return type;
+    //}
 
-    public void setType(String type) {
-        this.type = type;
-    }
+    //public void setType(String type) {
+    //    this.type = type;
+    //}
 
-    public boolean isInverted() {
-        return inverted;
-    }
+    //public boolean isInverted() {
+    //    return inverted;
+    //}
 
-    public void setInverted(boolean inverted) {
-        this.inverted = inverted;
-    }
+    //public void setInverted(boolean inverted) {
+    //    this.inverted = inverted;
+    //}
 
-    public double getDistToFocal() {
-        return distToFocal;
-    }
+    //public double getDistToFocal() {
+    //    return distToFocal;
+    //}
 
-    public void setDistToFocal(double distToFocal) {
-        this.distToFocal = distToFocal;
-    }
+    //public void setDistToFocal(double distToFocal) {
+    //    this.distToFocal = distToFocal;
+    //}
 
-    public Item getSource() {
-        return source;
-    }
+    //public Item getSource() {
+    //    return source;
+    //}
 
-    public void setSource(Item source) {
-        this.source = source;
-    }
+    //public void setSource(Item source) {
+    //    this.source = source;
+    //}
     
     
 

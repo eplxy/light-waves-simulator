@@ -1,10 +1,14 @@
 package edu.vanier.mainPackage;
 
+import java.io.IOException;
 import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * This is a JavaFX project template to be used for creating GUI applications.
@@ -15,23 +19,23 @@ import javafx.stage.Stage;
  */
 public class MainApp extends Application {
 
+     public static void main(String[] args) {
+        launch(args);
+     }
+     
     @Override
     public void start(Stage stage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+        MainMenuController menuController = new MainMenuController(stage);
+        loader.setController(menuController);
+        BorderPane root = loader.load();
         
-        VBox root = new VBox();
-        
-        Scene scene = new Scene(root, 600, 600);
-        
-        stage.setScene(scene);        
-
-        stage.setTitle("This is a JavaFX app template...");
-        
-        stage.sizeToScene();
-        
+        Scene scene = new Scene(root);
+        stage.setResizable(false);
+        stage.initStyle(StageStyle.UTILITY);
+        stage.setScene(scene);
         stage.show();
     }
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    
 }

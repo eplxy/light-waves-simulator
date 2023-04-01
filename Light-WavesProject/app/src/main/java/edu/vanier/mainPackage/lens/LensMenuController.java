@@ -35,8 +35,6 @@ public class LensMenuController {
     HBox itemBox;
     @FXML
     AnchorPane midAnchorPane;
-    @FXML
-    ToggleButton toggleButton;
 
     public LensMenuController(Stage stage) {
         this.primaryStage = stage;

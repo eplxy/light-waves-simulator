@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="900.0" prefWidth="1600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+   <bottom>
+      <HBox alignment="CENTER" prefHeight="62.0" prefWidth="875.0" BorderPane.alignment="CENTER">
+         <children>
+            <RadioButton fx:id="radioBtnInterference" mnemonicParsing="false" text="Interference">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="radioBtnDiffraction" mnemonicParsing="false" text="Diffraction">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </RadioButton>
+            <RadioButton fx:id="radioBtnBoth" mnemonicParsing="false" text="Both">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </RadioButton>
+         </children>
+      </HBox>
+   </bottom>
+   <center>
+      <LineChart fx:id="graph" BorderPane.alignment="CENTER">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+   </center>
+</BorderPane>

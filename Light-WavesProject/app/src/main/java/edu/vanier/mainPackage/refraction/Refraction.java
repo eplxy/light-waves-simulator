@@ -25,7 +25,6 @@ public class Refraction extends Application{
         
         Scene scene = new Scene(root);
         primaryStage.setResizable(false);
-        primaryStage.initStyle(StageStyle.UTILITY);
         primaryStage.setScene(scene);
         primaryStage.show();
         

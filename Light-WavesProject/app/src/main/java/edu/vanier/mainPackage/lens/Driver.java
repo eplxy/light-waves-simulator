@@ -47,9 +47,8 @@ public class Driver extends Application {
         
         so1.positionFix();
         l1.positionFix();
-        so1.getImage().update();
-        
-        
+
+        so1.getImage().update();        
         
         Scene scene = new Scene(root);
 
