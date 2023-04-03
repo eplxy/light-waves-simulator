@@ -24,6 +24,7 @@ public class Ray {
     Line refractedRay;
     Line normalRay;
     Line horizontalRay;
+    Line totalRefractedRay;
     double angle1 = 45;
     
     public Ray() {
@@ -38,6 +39,7 @@ public class Ray {
         refractedRay = new Line();
         normalRay = new Line();
         horizontalRay = new Line();
+        totalRefractedRay = new Line();
         
         double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle1);
         
@@ -65,6 +67,13 @@ public class Ray {
         rotate2.setAngle(90 - angle2);
         refractedRay.getTransforms().addAll(rotate2);
         
+        //Total internal Reflection
+        totalRefractedRay.startXProperty().bind(animationPane.widthProperty().divide(2));
+        totalRefractedRay.startYProperty().bind(animationPane.heightProperty().divide(2));
+        totalRefractedRay.endXProperty().bind(animationPane.widthProperty());
+        totalRefractedRay.endYProperty().bind(animationPane.heightProperty().divide(2));
+        totalRefractedRay.setVisible(false);
+        
         //Horizontal Ray
         horizontalRay.startXProperty().setValue(0);
         horizontalRay.startYProperty().bind(animationPane.heightProperty().divide(2));
@@ -79,7 +88,7 @@ public class Ray {
         normalRay.endYProperty().bind(animationPane.heightProperty().add(10));
         normalRay.getStrokeDashArray().addAll(10d);
         
-        animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay);
+        animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay, totalRefractedRay);
     }
     
     public void updateLines(double angle, double index1, double index2){
@@ -93,13 +102,29 @@ public class Ray {
         
         double angle2 = Vector.CalculateAngle(index1, index2, angle);
         
-        Rotate newRotate2 = new Rotate();
-        newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
-        newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
-        refractedRay.getTransforms().setAll(newRotate2); 
-        newRotate2.setAngle(90 - angle2);
-        System.out.println("Angle 2: " + angle2);
+        //This happens if it is a total internal reflection
+        if (Double.isNaN(angle2)) {
+            totalRefractedRay.setVisible(true);
+            refractedRay.setVisible(false);
+            Rotate newRotate2 = new Rotate();
+            newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
+            newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
+            totalRefractedRay.getTransforms().setAll(newRotate2); 
+            newRotate2.setAngle(angle - 90);
+            System.out.println("total internal reflection and angle: " + angle);
+        }
         
+        //This happens if it is not a total internal reflection
+        if (!Double.isNaN(angle2)) {
+            totalRefractedRay.setVisible(false);
+            refractedRay.setVisible(true);
+            Rotate newRotate2 = new Rotate();
+            newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
+            newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
+            refractedRay.getTransforms().setAll(newRotate2); 
+            newRotate2.setAngle(90 - angle2);
+            System.out.println("Angle 2: " + angle2); 
+        }
     }
     
     public void materialUpdateLines1(int index, int index2, Pane materialPane1, ArrayList<Material> list, String angle1){
