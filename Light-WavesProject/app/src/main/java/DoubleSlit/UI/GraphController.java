@@ -66,7 +66,7 @@ public class GraphController {
     public void plotInterference(){
         final XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
 	for (double x = -100; x <= 100; x = x + 0.01) {
-		series.getData().add(new XYChart.Data<Double, Double>(x, Graph.diffraction(parameters, x)));
+//		series.getData().add(new XYChart.Data<Double, Double>(x, Graph.diffraction(parameters, x)));
 	}
 	graph.getData().add(series);
     }

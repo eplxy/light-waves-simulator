@@ -1,9 +1,12 @@
 package edu.vanier.mainPackage;
 
+import DoubleSlit.UI.GraphController;
+import DoubleSlit.UI.TestGraphController;
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.chart.LineChart;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -19,39 +22,26 @@ import javafx.stage.StageStyle;
  */
 public class MainApp extends Application {
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
+     }
+     
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
-        MainMenuController menuController = new MainMenuController(stage);
+        //FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/testGraph.fxml"));
+        //MainMenuController menuController = new MainMenuController(stage);
+        LineChart root = loader.load();
+        
+        TestGraphController menuController = new TestGraphController(stage);
         loader.setController(menuController);
-        BorderPane root = loader.load();
+       
         
         Scene scene = new Scene(root);
         stage.setResizable(false);
-        stage.initStyle(StageStyle.UTILITY);
+        //stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.show();
     }
 
-    public void start(Stage primaryStage) throws IOException {
-        primaryStage.setTitle("Main Menu");
-
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
-            MainMenuController menuController = new MainMenuController(primaryStage);
-            loader.setController(menuController);
-
-            BorderPane root = loader.load();
-
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-
-            primaryStage.show();
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
 }
