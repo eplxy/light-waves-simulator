@@ -32,8 +32,8 @@ public class MainAppController{
     @FXML
     Button btnForward = new Button();
     
-    //@FXML
-    private Circle photoelectron1 = new Circle();
+    @FXML
+    Circle photoelectron1 = new Circle();
     
     @FXML
     Circle photoelectron2 = new Circle();
