@@ -11,12 +11,16 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Matthew Hantar
  */
 @lombok.Data
+@Getter
+@Setter
 public class MenuController {
     
     @FXML
@@ -120,15 +124,19 @@ public class MenuController {
         
     } 
     
-    public void addMaterials(){
+     public void addMaterials(){
         
-        listMaterial.add(new Material(Color.BLUE, "Water", 1.33));
         listMaterial.add(new Material(Color.TRANSPARENT, "Air", 1.0));
+        listMaterial.add(new Material(Color.LIGHTSKYBLUE, "Water", 1.33));
         listMaterial.add(new Material(Color.YELLOW, "Kerosene", 1.39));
+        listMaterial.add(new Material(Color.WHITE, "Lens (Human)", 1.406));
         listMaterial.add(new Material(Color.WHEAT, "Benzene", 1.501));
-        listMaterial.add(new Material(Color.LIGHTGOLDENRODYELLOW, "Carbon Disulfide", 1.628));
-        listMaterial.add(new Material(Color.LIGHTBLUE, "Diamond", 2.417));
         listMaterial.add(new Material(Color.GOLDENROD, "Amber", 1.55));
+        listMaterial.add(new Material(Color.CORAL, "Topaz", 1.60));
+        listMaterial.add(new Material(Color.LIGHTGOLDENRODYELLOW, "Carbon Disulfide", 1.628));
+        listMaterial.add(new Material(Color.STEELBLUE, "Sapphire", 1.770));
+        listMaterial.add(new Material(Color.LIGHTBLUE, "Diamond", 2.417));
+        listMaterial.add(new Material(Color.SLATEGREY, "Silicon", 3.42)); 
         
         for (int i = 0; i < listMaterial.size(); i++) {
             btnMaterial1.getItems().add(listMaterial.get(i));
