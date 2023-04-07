@@ -6,6 +6,8 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Arc;
+import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
@@ -29,6 +31,9 @@ public class Ray {
     Line normalRay;
     Line horizontalRay;
     Line totalRefractedRay;
+    Arc arcIncidentRay;
+    Arc arcRefractedRay;
+    Arc arcTotalInternalReflection;
     double angle1 = 45;
     
     public Ray() {
@@ -44,6 +49,9 @@ public class Ray {
         normalRay = new Line();
         horizontalRay = new Line();
         totalRefractedRay = new Line();
+        arcIncidentRay = new Arc();
+        arcRefractedRay = new Arc();
+        arcTotalInternalReflection = new Arc();
         
         double angle2 = Vector.CalculateAngle(Vector.NAIR, Vector.NWATER, angle1);
         
@@ -59,6 +67,15 @@ public class Ray {
         rotate.setAngle(angle1);
         incidentRay.getTransforms().addAll(rotate);
         
+        //arc incident ray
+        arcIncidentRay.centerXProperty().bind(animationPane.widthProperty().divide(2));
+        arcIncidentRay.centerYProperty().bind(animationPane.heightProperty().divide(2));
+        arcIncidentRay.setRadiusX(50); 
+        arcIncidentRay.setRadiusY(50); 
+        arcIncidentRay.setStartAngle(180); 
+        arcIncidentRay.setLength(-45); 
+        arcIncidentRay.setType(ArcType.ROUND);
+        
         //Refracted Ray
         refractedRay.startXProperty().bind(animationPane.widthProperty().divide(2));
         refractedRay.startYProperty().bind(animationPane.heightProperty().divide(2));
@@ -71,12 +88,31 @@ public class Ray {
         rotate2.setAngle(90 - angle2);
         refractedRay.getTransforms().addAll(rotate2);
         
+        //arc refracted ray
+        arcRefractedRay.centerXProperty().bind(animationPane.widthProperty().divide(2));
+        arcRefractedRay.centerYProperty().bind(animationPane.heightProperty().divide(2));
+        arcRefractedRay.setRadiusX(50); 
+        arcRefractedRay.setRadiusY(50); 
+        arcRefractedRay.setStartAngle(0); 
+        arcRefractedRay.setLength(-60); 
+        arcRefractedRay.setType(ArcType.ROUND);
+        
         //Total internal Reflection
         totalRefractedRay.startXProperty().bind(animationPane.widthProperty().divide(2));
         totalRefractedRay.startYProperty().bind(animationPane.heightProperty().divide(2));
         totalRefractedRay.endXProperty().bind(animationPane.widthProperty());
         totalRefractedRay.endYProperty().bind(animationPane.heightProperty().divide(2));
         totalRefractedRay.setVisible(false);
+        
+        //arc total internal reflection
+        arcTotalInternalReflection.centerXProperty().bind(animationPane.widthProperty().divide(2));
+        arcTotalInternalReflection.centerYProperty().bind(animationPane.heightProperty().divide(2));
+        arcTotalInternalReflection.setRadiusX(50); 
+        arcTotalInternalReflection.setRadiusY(50); 
+        arcTotalInternalReflection.setStartAngle(0); 
+        arcTotalInternalReflection.setLength(45); 
+        arcTotalInternalReflection.setType(ArcType.ROUND);
+        arcTotalInternalReflection.setVisible(false);
         
         //Horizontal Ray
         horizontalRay.startXProperty().setValue(0);
@@ -92,7 +128,7 @@ public class Ray {
         normalRay.endYProperty().bind(animationPane.heightProperty().add(10));
         normalRay.getStrokeDashArray().addAll(10d);
         
-        animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay, totalRefractedRay);
+        animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay, totalRefractedRay, arcIncidentRay, arcRefractedRay, arcTotalInternalReflection);
     }
     
     public void updateLines(double angle, double index1, double index2){
@@ -103,6 +139,7 @@ public class Ray {
         incidentRay.getTransforms().setAll(newRotate);
         newRotate.setAngle(angle);
         System.out.println(angle);
+        arcIncidentRay.setLength(-angle);
         
         double angle2 = Vector.CalculateAngle(index1, index2, angle);
         
@@ -158,22 +195,34 @@ public class Ray {
     public void rotateAnglesNormal(double angle2){
             totalRefractedRay.setVisible(false);
             refractedRay.setVisible(true);
+            arcTotalInternalReflection.setVisible(false);
+            arcRefractedRay.setVisible(true);
+            
             Rotate newRotate2 = new Rotate();
             newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
             newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
             newRotate2.setAngle(90 - angle2);
-            System.out.println("Angle 2: " + angle2); 
+            
+            arcRefractedRay.setLength(-(90 - angle2));
+            
+            
+            System.out.println("Angle 2: " + (90 - angle2)); 
             refractedRay.getTransforms().setAll(newRotate2);
     }
     
     public void rotateAnglesInternalReflection(double angle){
             totalRefractedRay.setVisible(true);
             refractedRay.setVisible(false);
+            arcTotalInternalReflection.setVisible(true);
+            arcRefractedRay.setVisible(false);
+            
             Rotate newRotate2 = new Rotate();
             newRotate2.pivotXProperty().bind(incidentRay.endXProperty());
             newRotate2.pivotYProperty().bind(incidentRay.endYProperty());
             totalRefractedRay.getTransforms().setAll(newRotate2); 
             newRotate2.setAngle(angle - 90);
+            arcTotalInternalReflection.setLength(90 - angle);
+            
             System.out.println("total internal reflection and angle: " + angle);
     }
     

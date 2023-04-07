@@ -11,6 +11,7 @@ import lombok.Setter;
  */
 @Getter
 @Setter
+@Data
 public class Material {
     
     private Color materialColor;
