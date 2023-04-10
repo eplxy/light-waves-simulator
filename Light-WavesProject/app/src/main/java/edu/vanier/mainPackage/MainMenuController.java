@@ -6,7 +6,7 @@ package edu.vanier.mainPackage;
 
 import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
 import edu.vanier.mainPackage.lens.LensMain;
-import edu.vanier.mainPackage.photoelectriceffect.ui.PhotoelectricMain;
+import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMain;
 import edu.vanier.mainPackage.refraction.Refraction;
 import java.io.IOException;
 import javafx.event.ActionEvent;
@@ -64,8 +64,6 @@ public class MainMenuController {
         });
 
         btnPhotoelectric.setOnAction((event) -> {
-            //Must change name of photo electric effect main menu class because confusing naming convention
-            //MainApp -> Photoelectric
             PhotoelectricMain photoelectricMain = new PhotoelectricMain();
             try {
                 photoelectricMain.start(primaryStage);
