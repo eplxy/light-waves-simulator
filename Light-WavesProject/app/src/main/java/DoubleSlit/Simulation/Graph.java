@@ -5,6 +5,8 @@
 package DoubleSlit.Simulation;
 
 import java.util.function.Function;
+import javafx.fxml.FXML;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
 
 /**
@@ -12,35 +14,46 @@ import javafx.scene.chart.XYChart;
  * @author 2156586
  */
 public class Graph {
-    public double diffraction(double angle){
-        //double width = parameters.getWidth();
-        //double wavelength = parameters.getWavelength();
-        double width = 2;
-        double wavelength = 450;
-        return Math.pow((Math.sin((Math.PI*width*Math.pow(10, 3)*Math.sin(angle))/(wavelength)))/(Math.PI*width*Math.pow(10, 3)*Math.sin(angle)/wavelength), 2);
+    @FXML
+    public LineChart<Double, Double> graph;
+        protected String selectedGraph;
+
+      public Function<Double, Double> plotDiffraction() {
+        final double width = Parameters.getWidth();
+        final double wavelength = Parameters.getWavelength();
+        return x -> (Math.pow((Math.sin((Math.PI * width * Math.pow(10, 3) * Math.sin(x)) / (wavelength))) / (Math.PI * width * Math.pow(10, 3) * Math.sin(x) / wavelength), 2));
     }
-    private XYChart<Double, Double> graph;
-	private double range;
 
-	public Graph(final XYChart<Double, Double> graph, final double range) {
-		this.graph = graph;
-		this.range = range;
-	}
+    public Function<Double, Double> plotInterference() {
+        final double spacing = Parameters.getSpacing();
+        final double wavelength = Parameters.getWavelength();
+        return x -> (Math.pow((Math.cos((Math.PI * spacing * Math.pow(10, 3) * Math.sin(x)) / (wavelength))), 2));
+    }
 
-	public void plotLine(final Function<Double, Double> function) {
-		final XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
-		for (double x = -range; x <= range; x = x + 0.01) {
-			plotPoint(x, function.apply(x), series);
-		}
-		graph.getData().add(series);
-	}
+    public Function<Double, Double> plotBoth() {
+        return x -> plotDiffraction().apply(x) * plotInterference().apply(x);
+    }
 
-	private void plotPoint(final double x, final double y,
-			final XYChart.Series<Double, Double> series) {
-		series.getData().add(new XYChart.Data<Double, Double>(x, y));
-	}
+    public void plotLine() {
+        final Function<Double, Double> function;
+        if (selectedGraph.equals("Diffraction")){
+            function = plotDiffraction();
+        }else if (selectedGraph.equals("Interference")){
+            function = plotInterference();
+        }else{
+            function = plotBoth();
+        }
+        final XYChart.Series<Double, Double> series = new XYChart.Series<Double, Double>();
+        for (double x = (-Math.PI / 2); x <= Math.PI / 2; x = x + 0.001) {
+            plotPoint(x, function.apply(x), series);
+        }
+        graph.getData().add(series);
 
-	public void clear() {
-		graph.getData().clear();
-	}
+    }
+
+    private void plotPoint(final double x, final double y,
+            final XYChart.Series<Double, Double> series) {
+        series.getData().add(new XYChart.Data<Double, Double>(x, y));
+    }
+
 }

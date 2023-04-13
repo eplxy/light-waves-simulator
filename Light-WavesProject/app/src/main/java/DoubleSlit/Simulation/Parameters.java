@@ -6,54 +6,46 @@ package DoubleSlit.Simulation;
 
 /**
  *
- * @author 2156586
+ * @author sabri
  */
 public class Parameters {
-    private double wavelength;
-    private double width;
-    private double screen;
-    private double spacing;
+    private static double wavelength;
+    private static double width;
+    private static double screen;
+    private static double spacing;
 
-    public Parameters(double wavelength, double width, double screen, double spacing) {
-        this.wavelength = wavelength;
-        this.width = width;
-        this.screen = screen;
-        this.spacing = spacing;
-    }
-    
-    
-
-    public double getWavelength() {
+    public static double getWavelength() {
         return wavelength;
     }
 
-    public void setWavelength(double wavelength) {
-        this.wavelength = wavelength;
+    public static void setWavelength(double wavelength) {
+        Parameters.wavelength = wavelength;
     }
 
-    public double getWidth() {
+    public static double getWidth() {
         return width;
     }
 
-    public void setWidth(double width) {
-        this.width = width;
+    public static void setWidth(double width) {
+        Parameters.width = width;
     }
 
-    public double getScreen() {
+    public static double getScreen() {
         return screen;
     }
 
-    public void setScreen(double screen) {
-        this.screen = screen;
+    public static void setScreen(double screen) {
+        Parameters.screen = screen;
     }
 
-    public double getSpacing() {
+    public static double getSpacing() {
         return spacing;
     }
 
-    public void setSpacing(double spacing) {
-        this.spacing = spacing;
+    public static void setSpacing(double spacing) {
+        Parameters.spacing = spacing;
     }
+    
     
     
 }

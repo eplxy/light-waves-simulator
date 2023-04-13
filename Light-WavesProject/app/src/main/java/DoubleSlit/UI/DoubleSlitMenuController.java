@@ -42,7 +42,7 @@ public class DoubleSlitMenuController {
     @FXML
     Slider sliderScreen;
     @FXML
-    Slider sliderSlitSpacing;
+    Slider sliderSpacing;
     @FXML
     TextField txtFieldWavelength;
     @FXML
@@ -59,6 +59,9 @@ public class DoubleSlitMenuController {
     Pane paneView;
     @FXML
     Button btnEnter;
+    
+    GraphController graphController;
+    String selectedView;
                 
 
     public DoubleSlitMenuController(Stage primaryStage) {
@@ -77,9 +80,51 @@ public class DoubleSlitMenuController {
                 RadioButton rb = (RadioButton) viewTG.getSelectedToggle();
 
                 if (rb != null) {
-                    String s = rb.getText();
-                    changeView(s);
+                    selectedView = rb.getText();
+                    changeView(selectedView);
                 }
+            }
+        });
+        radioBtnAnimation.setSelected(true);
+        //https://www.geeksforgeeks.org/javafx-slider-class/
+        sliderWavelength.valueProperty().addListener(
+             new ChangeListener<Number>() {
+ 
+            public void changed(ObservableValue <? extends Number >
+                      observable, Number oldValue, Number newValue)
+            {
+ 
+                txtFieldWavelength.setText(newValue.toString());
+            }
+        });
+        sliderWidth.valueProperty().addListener(
+             new ChangeListener<Number>() {
+ 
+            public void changed(ObservableValue <? extends Number >
+                      observable, Number oldValue, Number newValue)
+            {
+ 
+                txtFieldWidth.setText(newValue.toString());
+            }
+        });
+        sliderScreen.valueProperty().addListener(
+             new ChangeListener<Number>() {
+ 
+            public void changed(ObservableValue <? extends Number >
+                      observable, Number oldValue, Number newValue)
+            {
+ 
+                txtFieldScreen.setText(newValue.toString());
+            }
+        });
+        sliderSpacing.valueProperty().addListener(
+             new ChangeListener<Number>() {
+ 
+            public void changed(ObservableValue <? extends Number >
+                      observable, Number oldValue, Number newValue)
+            {
+ 
+                txtFieldSpacing.setText(newValue.toString());
             }
         });
         btnEnter.setOnAction((event) -> {
@@ -87,12 +132,11 @@ public class DoubleSlitMenuController {
         });
     }
     
-    public void changeView(String s){
-        if (s.equals("Animation")){
+    public void changeView(String selectedView){
+        if (selectedView.equals("Animation")){
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/animation.fxml"));
-            AnimationController animationController = new AnimationController(primaryStage);
-            animationController.setParameters(parameters);
+            AnimationController animationController = new AnimationController(primaryStage, this.parameters);
             loader.setController(animationController);
             BorderPane root = loader.load();
             paneView.getChildren().clear();
@@ -106,12 +150,11 @@ public class DoubleSlitMenuController {
             try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/graph.fxml"));
             GraphController graphController = new GraphController(primaryStage);
-            graphController.setParameters(parameters);
+            this.graphController = graphController;
             loader.setController(graphController);
             BorderPane root = loader.load();
             paneView.getChildren().clear();
             paneView.getChildren().add(root);
-
 
         } catch (IOException e) {
             System.out.println(e);
@@ -121,8 +164,18 @@ public class DoubleSlitMenuController {
     }
     
     public void handleEnter(ActionEvent event, Stage primaryStage){
-        this.parameters = new Parameters(Double.parseDouble(txtFieldWavelength.getText()), Double.parseDouble(txtFieldWidth.getText()),Double.parseDouble(txtFieldScreen.getText()),Double.parseDouble(txtFieldSpacing.getText()));
+        //this.parameters = new Parameters(Double.parseDouble(txtFieldWavelength.getText()), Double.parseDouble(txtFieldWidth.getText()),Double.parseDouble(txtFieldScreen.getText()),Double.parseDouble(txtFieldSpacing.getText()));
+        Parameters.setWavelength(Double.parseDouble(txtFieldWavelength.getText()));
+        Parameters.setWidth (Double.parseDouble(txtFieldWidth.getText()));
+        Parameters.setScreen(Double.parseDouble(txtFieldScreen.getText()));
+        Parameters.setSpacing( Double.parseDouble(txtFieldSpacing.getText()));
+        System.out.println(Parameters.getSpacing());
+        if (selectedView.equals("Graph")){
+            this.graphController.plotLine();
+          
+        }
     }
 
     
+
 }

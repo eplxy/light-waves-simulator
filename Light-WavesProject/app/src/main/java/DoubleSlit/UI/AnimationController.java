@@ -15,9 +15,9 @@ public class AnimationController {
     Stage primaryStage;
     private Parameters parameters;
      
-    public AnimationController(Stage primaryStage) {
+    public AnimationController(Stage primaryStage, Parameters parameters) {
         this.primaryStage = primaryStage;
-        
+        this.parameters = parameters;
     }
 
     public Parameters getParameters() {
