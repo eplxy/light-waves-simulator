@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Slider?>
@@ -19,16 +20,16 @@
    <bottom>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <Slider layoutX="1200.0" layoutY="68.0" />
-            <Slider layoutX="1200.0" layoutY="142.0" />
-            <Slider layoutX="1200.0" layoutY="220.0" />
-            <Text layoutX="1200.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
-            <Text layoutX="1200.0" layoutY="116.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wavelength" />
-            <Text layoutX="1200.0" layoutY="192.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battery Voltage" />
-            <MenuButton layoutX="1211.0" layoutY="280.0" mnemonicParsing="false" text="Surface Material">
+            <Slider fx:id="sliderWavelength" layoutX="1152.0" layoutY="146.0" max="700.0" min="400.0" />
+            <Slider fx:id="sliderBatteryVoltage" layoutX="1152.0" layoutY="211.0" max="10.0" />
+            <Text layoutX="1152.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
+            <Text layoutX="1152.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wavelength" />
+            <Text layoutX="1152.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battery Voltage" />
+            <MenuButton fx:id="menuMenuButton" layoutX="1182.0" layoutY="260.0" mnemonicParsing="false" text="Metal ">
               <items>
-                <MenuItem mnemonicParsing="false" text="Action 1" />
-                <MenuItem mnemonicParsing="false" text="Action 2" />
+                <MenuItem fx:id="itemMagnesium" mnemonicParsing="false" text="Magnesium" />
+                <MenuItem fx:id="itemAluminium" mnemonicParsing="false" text="Aluminium" />
+                  <MenuItem fx:id="menuCalcium" mnemonicParsing="false" text="Calcium" />
               </items>
             </MenuButton>
             <Button layoutX="407.0" layoutY="722.0" mnemonicParsing="false" text="Play" />
@@ -57,6 +58,13 @@
                   <Line endX="69.992919921875" endY="85.30718994140625" layoutX="278.0" layoutY="471.0" startX="32.992919921875" startY="85.30718994140625" />
                </children>
             </AnchorPane>
+            <Slider fx:id="sliderIntensity" layoutX="1152.0" layoutY="77.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="intensityLabel" layoutX="1309.0" layoutY="70.0" prefHeight="35.0" prefWidth="70.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="wavelengthLabel" layoutX="1309.0" layoutY="128.0" prefHeight="35.0" prefWidth="70.0" />
+            <Label fx:id="batteryVoltageLabel" layoutX="1309.0" layoutY="194.0" prefHeight="35.0" prefWidth="70.0" />
          </children>
       </Pane>
    </bottom>

@@ -2,8 +2,11 @@ package edu.vanier.mainPackage.photoelectriceffect;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
 import javafx.scene.control.Slider;
 import javafx.scene.shape.Circle;
 
@@ -11,17 +14,35 @@ import javafx.scene.shape.Circle;
  * @author maesh
  */
 public class MainAppController{
+    
+    //sliders
     @FXML
-    Slider sliderIntensity = new Slider();
+    private Slider sliderIntensity;
     
     @FXML
-    Slider sliderWavelegth = new Slider();
+    private Slider sliderWavelength;
     
     @FXML
-    Slider sliderBatteryVoltage = new Slider();
-  
+    private Slider sliderBatteryVoltage;
+    
     @FXML
-    Button btnSurfaceMaterial = new Button();
+    public void handleSliderIntensity(){
+        double intensity = sliderIntensity.getValue();
+    }
+    
+    @FXML
+    public void handleSliderWavelength(){
+        double wavelength = sliderWavelength.getValue();
+    }
+    
+    @FXML
+    public void handleSliderBatteryVoltage(){
+        double batteryVoltage = sliderBatteryVoltage.getValue();
+    }
+    
+    //buttons
+    @FXML
+    private MenuButton metalMenuButton;
     
     @FXML
     Button btnGoBackToMainMenu = new Button();
@@ -32,62 +53,39 @@ public class MainAppController{
     @FXML
     Button btnForward = new Button();
     
-    @FXML
-    Circle photoelectron1 = new Circle();
-    
-    @FXML
-    Circle photoelectron2 = new Circle();
-    
-    @FXML
-    Circle photoelectron3 = new Circle();
-    
-    @FXML
-    Circle photoelectron4 = new Circle();
-    
-    @FXML
-    Circle photoelectron5 = new Circle();
-    
-    @FXML
-    Circle photoelectron6 = new Circle();
-    
-    @FXML
-    Circle photoelectron7 = new Circle();
-    
-    @FXML
-    Circle photoelectron8 = new Circle();
-    
-    @FXML
-    Circle photoelectron9 = new Circle();
-    
-    private boolean initialized = false;
-    
-    public void initialize(URL location, ResourceBundle resources) {
-        initialized = true;
+    public void initialize(){
+        sliderIntensity.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Intensity slider value: " + newValue.intValue() + "%");
+        });
+        
+        sliderWavelength.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Wavelength slider value: " + newValue.intValue() + " nm");
+        });
+        
+        sliderBatteryVoltage.valueProperty().addListener((observable, oldValue, newValue) -> {
+            System.out.println("Battery Voltage slider value: " + newValue.intValue() + " V");
+        });
+        
+        sliderIntensity.valueProperty().addListener((observable, oldValue, newValue) -> {
+            intensityLabel.setText((String.format("%.2f", newValue)) + " %");
+        });
+        
+        sliderWavelength.valueProperty().addListener((observable, oldValue, newValue) -> {
+            wavelengthLabel.setText((String.format("%.2f", newValue)) + " nm");
+        });
+        
+        sliderBatteryVoltage.valueProperty().addListener((observable, oldValue, newValue) -> {
+            batteryVoltageLabel.setText((String.format("%.2f", newValue)) + " V");
+        });
     }
     
-    public void moveCircle() {
-        
-        double x = photoelectron1.getCenterX();
-        double y = photoelectron1.getCenterY();
-        double radius = photoelectron1.getRadius();
-        
-        double newX = x + 5;
-        photoelectron1.setCenterX(newX);
-        
-        if (newX - radius >= 0.001) {
-        photoelectron1.setCenterX(0.001 - radius);
-        }
-        
-        
-        double maxY = photoelectron1.getParent().getBoundsInLocal().getMaxY();
-        if (newX + radius >= photoelectron1.getParent().getBoundsInLocal().getMaxX()) {
-            newX = photoelectron1.getParent().getBoundsInLocal().getMinX() + radius;
-            y += 50; 
-            if (y + radius >= maxY) {
-                y = photoelectron1.getCenterY();
-            }
-        }
-        photoelectron1.setCenterX(newX);
-        photoelectron1.setCenterY(y);
-    }
+    //Label
+    @FXML 
+    private Label intensityLabel;
+            
+    @FXML 
+    private Label wavelengthLabel;
+            
+    @FXML 
+    private Label batteryVoltageLabel;
 }

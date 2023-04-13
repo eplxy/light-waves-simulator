@@ -8,13 +8,16 @@ package edu.vanier.mainPackage.photoelectriceffect;
  *
  * @author maesh
  */
-public class Math {
+public class Photon {
     double plankConstant = 6.62607015e-34;
-    int wavelength;
+    double wavelength;
     double workFunction;
     double speedOfLight = 299792458;
     
-    /*public static double maxKineticEnergy(double frequency, double workFunction){
-        double energy = plankConstant * frequency;
-    }*/
+    public double photonEnergy(){
+        double energy;
+        energy = plankConstant * (speedOfLight/wavelength) - workFunction;
+        return energy;
+    }
+    
 }

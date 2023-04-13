@@ -4,6 +4,9 @@
  */
 package edu.vanier.mainPackage.photoelectriceffect;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author maesh
@@ -11,6 +14,17 @@ package edu.vanier.mainPackage.photoelectriceffect;
 public class Metal {
     String metalName;
     double workFunction;
+    private static final Map<String, Double> WORK_FUNCTIONS = new HashMap<>();
+    
+    static{
+        WORK_FUNCTIONS.put("Aluminum", 4.08);
+        WORK_FUNCTIONS.put("Copper", 4.7);
+        WORK_FUNCTIONS.put("Gold", 5.1);
+    }
+    
+    public static double getWorkFunction(String metalName){
+        return WORK_FUNCTIONS.get(metalName);
+    }
 
     public Metal(String metalName, double workFunction) {
         this.metalName = metalName;
