@@ -8,6 +8,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,7 +28,7 @@ public class PhotoelectricMain extends Application {
             loader.setController(controller);
 
             //set and show scene
-            AnchorPane root = loader.load();
+            BorderPane root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.sizeToScene();
