@@ -12,18 +12,22 @@ import java.util.Map;
  * @author maesh
  */
 public class Metal {
-    String metalName;
-    double workFunction;
-    private static final Map<String, Double> WORK_FUNCTIONS = new HashMap<>();
+    private String metalName;
+    private double workFunction;
     
-    static{
-        WORK_FUNCTIONS.put("Aluminum", 4.08);
-        WORK_FUNCTIONS.put("Copper", 4.7);
-        WORK_FUNCTIONS.put("Gold", 5.1);
+    private HashMap<String, Double> metalWorkFunction;
+    
+    public Metal(){
+        metalWorkFunction = new HashMap<>();
+        metalWorkFunction.put("Magnesium", 3.7);
+        metalWorkFunction.put("Aluminium", 4.28);
+        metalWorkFunction.put("Calcium", 3.0);
+        metalWorkFunction.put("Copper", 5.0);
+        metalWorkFunction.put("Gold", 5.1);
     }
     
-    public static double getWorkFunction(String metalName){
-        return WORK_FUNCTIONS.get(metalName);
+    public double getWorkFunction(String metalName){
+        return metalWorkFunction.get(metalName);
     }
 
     public Metal(String metalName, double workFunction) {

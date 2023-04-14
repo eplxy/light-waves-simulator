@@ -15,9 +15,14 @@ public class Photon {
     double speedOfLight = 299792458;
     
     public double photonEnergy(){
-        double energy;
-        energy = plankConstant * (speedOfLight/wavelength) - workFunction;
-        return energy;
+        double energyMin;
+        energyMin = plankConstant * (speedOfLight/wavelength) - workFunction;
+        /*not only does it calculate the energy of the photon, it removed the 
+        * work function so it give the minimum energy required of a photon
+        * to make an electron ejected from the metal plate. Therefore,
+        * energyPhoton > workFunction or eneryMin > 0 [same thing]
+        */
+        return energyMin;
     }
     
 }

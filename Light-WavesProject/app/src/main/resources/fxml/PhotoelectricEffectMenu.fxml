@@ -25,11 +25,13 @@
             <Text layoutX="1152.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
             <Text layoutX="1152.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wavelength" />
             <Text layoutX="1152.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battery Voltage" />
-            <MenuButton fx:id="menuMenuButton" layoutX="1182.0" layoutY="260.0" mnemonicParsing="false" text="Metal ">
+            <MenuButton fx:id="metalMenuButton" layoutX="1237.0" layoutY="262.0" mnemonicParsing="false" text="Metal ">
               <items>
-                <MenuItem fx:id="itemMagnesium" mnemonicParsing="false" text="Magnesium" />
-                <MenuItem fx:id="itemAluminium" mnemonicParsing="false" text="Aluminium" />
-                  <MenuItem fx:id="menuCalcium" mnemonicParsing="false" text="Calcium" />
+                <MenuItem fx:id="magnesiumMenuItem" mnemonicParsing="false" text="Magnesium" />
+                <MenuItem fx:id="aluminiumMenuItem" mnemonicParsing="false" text="Aluminium" />
+                  <MenuItem fx:id="calciumMenuItem" mnemonicParsing="false" text="Calcium" />
+                  <MenuItem fx:id="copperMenuItem" mnemonicParsing="false" text="Copper" />
+                  <MenuItem fx:id="goldMenuItem" mnemonicParsing="false" text="Gold" />
               </items>
             </MenuButton>
             <Button layoutX="407.0" layoutY="722.0" mnemonicParsing="false" text="Play" />
@@ -65,6 +67,8 @@
             <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
             <Label fx:id="wavelengthLabel" layoutX="1309.0" layoutY="128.0" prefHeight="35.0" prefWidth="70.0" />
             <Label fx:id="batteryVoltageLabel" layoutX="1309.0" layoutY="194.0" prefHeight="35.0" prefWidth="70.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1229.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="workFunctionLabel" layoutX="1235.0" layoutY="314.0" prefHeight="35.0" prefWidth="70.0" />
          </children>
       </Pane>
    </bottom>
