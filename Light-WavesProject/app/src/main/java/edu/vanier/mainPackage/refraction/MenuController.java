@@ -119,8 +119,11 @@ public class MenuController {
                 ray.getArcRefractedRay().setVisible(false);
                 
             }
-            
         });
+        
+        btnLight.setOnAction((event) -> {
+             
+        }); 
         
         btnMaterial1.setOnAction((event) -> {
             selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
