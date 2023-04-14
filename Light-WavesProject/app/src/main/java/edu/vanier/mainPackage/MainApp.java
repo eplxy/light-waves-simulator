@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
 
 /**
  * This is a JavaFX project template to be used for creating GUI applications.
@@ -16,7 +15,7 @@ import javafx.stage.StageStyle;
  */
 public class MainApp extends Application {
 
-     public static void main(String[] args) {
+    public static void main(String[] args) {
         launch(args);
      }
      
@@ -25,10 +24,15 @@ public class MainApp extends Application {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainMenu.fxml"));
         MainMenuController menuController = new MainMenuController(stage);
         loader.setController(menuController);
+        
         BorderPane root = loader.load();
         
+        
+       
+       
+        
         Scene scene = new Scene(root);
-        stage.setResizable(false);
+        //stage.setResizable(false);
         //stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.show();
