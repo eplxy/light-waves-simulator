@@ -11,7 +11,7 @@ public class Vector {
     
     public static void main(String[] args) {
         
-        System.out.println(Vector.CalculateAngle(NAIR, NWATER, 45));
+        System.out.println(90 - Vector.CalculateAngle(NAIR, NWATER, 45));
     }
     
     public static double CalculateAngle(double n1, double n2, double Angle1){

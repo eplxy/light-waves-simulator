@@ -101,6 +101,27 @@ public class MenuController {
             System.out.println(n2);
          });
         
+        btnAngles.setOnAction((event) -> {
+            if (ray.getArcIncidentRay().isDisabled() & ray.getArcRefractedRay().isDisabled()) {
+                
+                ray.getArcIncidentRay().setDisable(false);
+                ray.getArcRefractedRay().setDisable(false);
+                
+                ray.getArcIncidentRay().setVisible(true);
+                ray.getArcRefractedRay().setVisible(true);
+            }
+            
+            else if (!(ray.getArcIncidentRay().isDisabled() & ray.getArcRefractedRay().isDisabled())) {
+                ray.getArcIncidentRay().setDisable(true);
+                ray.getArcRefractedRay().setDisable(true);
+                
+                ray.getArcIncidentRay().setVisible(false);
+                ray.getArcRefractedRay().setVisible(false);
+                
+            }
+            
+        });
+        
         btnMaterial1.setOnAction((event) -> {
             selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
             Object selectedItem = btnMaterial1.getSelectionModel().getSelectedItem();
