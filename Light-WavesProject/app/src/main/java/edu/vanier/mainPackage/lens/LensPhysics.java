@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import java.util.ArrayList;
 
 /**
  *
@@ -11,7 +10,7 @@ public class LensPhysics {
 
     public static Lens lensSearch() {
         for (int i = 1; i < Item.getItemList().size(); i++) {
-            if (Item.getItemList().get(i).getItemType().equals("lens")) {
+            if (Item.getItemList().get(i).getItemType().equals(Item.ITEMTYPE_LENS)) {
                 return (Lens) Item.getItemList().get(i);
             }
         }
@@ -20,7 +19,7 @@ public class LensPhysics {
     
     public static SourceObject sourceSearch(){
         for (int i = 1; i < Item.getItemList().size(); i++) {
-            if (Item.getItemList().get(i).getItemType().equals("source")) {
+            if (Item.getItemList().get(i).getItemType().equals(Item.ITEMTYPE_SOURCE)) {
                 return (SourceObject) Item.getItemList().get(i);
             }
         }

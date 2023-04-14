@@ -18,13 +18,14 @@ public class SourceObject extends Item {
 
     //constructor(s)
     public SourceObject(double size, double absPos) {
-        this.itemType = "source";
+        this.itemType = Item.ITEMTYPE_SOURCE;
         this.absPos = absPos;
         this.size = size;
         this.node = new ImageView(new Image(getClass().getResource("/images/lens/candle.png").toString()));
         this.image = new ImageObject(this);
         scaleNodeToSize();
         setDragListeners();
+        this.label = new ItemLabel(this);
     }
 
     //methods
@@ -37,11 +38,9 @@ public class SourceObject extends Item {
         node.setOnMouseDragged((mouseEvent) -> {
             node.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
             this.setAbsPos(((this.node.getLayoutX() + this.node.getBoundsInLocal()
-                    .getWidth() / 2) - this.node.getParent().getParent()
-                            .getBoundsInLocal().getWidth() / 2)/20);
+                    .getWidth() / 2) - 1400 / 2)/30);
+            this.label.updateLabel();
             this.image.update();
-            System.out.println("obj pos " + this.absPos + " img pos " + this.image.absPos);
-            System.out.println("width " + this.node.getParent().getParent().getBoundsInLocal().getWidth());
         });
     }
 

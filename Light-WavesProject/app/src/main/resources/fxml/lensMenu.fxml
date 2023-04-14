@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 
-<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800" prefWidth="1400" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800" prefWidth="1400" style="-fx-background-color: darkgrey;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <center>
       <AnchorPane fx:id="midAnchorPane" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
@@ -16,7 +16,7 @@
                   <StackPane layoutY="275.0" prefHeight="150.0" prefWidth="1400.0">
                      <children>
                         <Line endX="100.0" startX="100.0" startY="40.0" />
-                        <Line fx:id="principalAxis" endX="1400.0" style="-fx-stroke-dash-array: 3;" />
+                        <Line fx:id="principalAxis" endX="1400.0" startX="1.0" style="-fx-stroke-dash-array: 3;" />
                      </children>
                   </StackPane>
                   <Pane fx:id="itemPane" layoutY="250.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="1400.0" />
@@ -26,7 +26,7 @@
       </AnchorPane>
    </center>
    <bottom>
-      <Pane fx:id="controlPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: lightgray;" BorderPane.alignment="CENTER">
+      <Pane fx:id="controlPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="400.0" style="-fx-background-color: #A1A1A1;" BorderPane.alignment="CENTER">
          <children>
             <TextField fx:id="ctrlTextField1" layoutX="14.0" layoutY="2.0" promptText="field 1 - abspos source" />
             <TextField fx:id="ctrlTextField2" layoutX="14.0" layoutY="38.0" promptText="field 2 - focal length" />

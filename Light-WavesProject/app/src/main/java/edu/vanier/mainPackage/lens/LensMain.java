@@ -12,9 +12,7 @@ import javafx.stage.Stage;
  * @author Steven
  */
 public class LensMain extends Application {
-    
-    
-    
+
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -24,26 +22,26 @@ public class LensMain extends Application {
         BorderPane root = loader.load();
 
         //testing source object
-        SourceObject so1 = new SourceObject(30,-30);
+        SourceObject so1 = new SourceObject(30, -10);
         Lens l1 = new Lens(5, 0);
-        
+
         Item.addToList(so1);
         Item.addToList(l1);
         Item.addToList(so1.getImage());
-        
-        lmc.itemPane.getChildren().addAll(so1.getNode(),l1.getNode(), so1.getImage().getNode());
-        
+
+        lmc.itemPane.getChildren().addAll(l1.getNode(), so1.getImage().getNode(), so1.getNode());
+
         so1.positionFix();
         l1.positionFix();
 
-        so1.getImage().update();        
-        
+        so1.getImage().update();
+
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
-        
+
     }
 
     public static void main(String[] args) {

@@ -38,6 +38,8 @@ public class LensMenuController {
 
     public LensMenuController(Stage stage) {
         this.primaryStage = stage;
+        Item.setLmc(this);
+        ItemLabel.setLmc(this);
     }
 
     public void initialize() {
@@ -54,6 +56,17 @@ public class LensMenuController {
             l.setFocalLength(Double.parseDouble(ctrlTextField2.getText()));
             so.getImage().update();
         });
+
+        ctrlTextField3.setOnAction(e -> {
+            SourceObject so = LensPhysics.sourceSearch();
+            so.getNode().setLayoutX(Double.parseDouble(ctrlTextField3.getText()));
+        });
+
+        ctrlTextField4.setOnAction(e -> {
+            SourceObject so = LensPhysics.sourceSearch();
+            so.getImage().getNode().setLayoutX(Double.parseDouble(ctrlTextField4.getText()));
+        });
+        
 
     }
 }
