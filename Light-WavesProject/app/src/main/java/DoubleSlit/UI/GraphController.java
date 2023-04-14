@@ -4,8 +4,6 @@
  */
 package DoubleSlit.UI;
 
-import DoubleSlit.Simulation.Graph;
-import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
 import static java.util.EnumSet.range;
 import java.util.function.Function;
@@ -42,7 +40,7 @@ public class GraphController{
         
     @FXML
     public LineChart<Double, Double> graph;
-        private String selectedGraph;
+        private String selectedGraph = "Diffraction";
 
 
     public GraphController(Stage primaryStage) {
@@ -54,7 +52,7 @@ public class GraphController{
         radioBtnInterference.setToggleGroup(graphTG);
         radioBtnDiffraction.setToggleGroup(graphTG);
         radioBtnBoth.setToggleGroup(graphTG);
-        
+        radioBtnDiffraction.setSelected(true);
         graphTG.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ob,
                     Toggle o, Toggle n) {
@@ -68,7 +66,7 @@ public class GraphController{
                 }
             }
         });
-        //radioBtnDiffraction.setSelected(true);
+        
     }
 
 

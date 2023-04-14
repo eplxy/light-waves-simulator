@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package DoubleSlit.UI;
 
 import DoubleSlit.Simulation.Parameters;
@@ -27,6 +23,4 @@ public class AnimationController {
     public void setParameters(Parameters parameters) {
         this.parameters = parameters;
     }
-    
-    
 }
