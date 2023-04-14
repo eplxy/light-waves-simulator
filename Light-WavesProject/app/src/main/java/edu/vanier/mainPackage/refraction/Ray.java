@@ -221,7 +221,7 @@ public class Ray {
     public void rotateAnglesNormal(double angle2){
             totalRefractedRay.setVisible(false);
             refractedRay.setVisible(true);
-            arcRefractedRay.setVisible(true);
+            
             labelTotalInternalReflection.setVisible(false);
             
             Rotate newRotate2 = new Rotate();
@@ -240,7 +240,7 @@ public class Ray {
         
             totalRefractedRay.setVisible(true);
             refractedRay.setVisible(false);
-            arcRefractedRay.setVisible(true);
+            
             labelTotalInternalReflection.setVisible(true);
             
             
