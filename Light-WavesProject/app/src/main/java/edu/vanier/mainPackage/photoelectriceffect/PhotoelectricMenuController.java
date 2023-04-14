@@ -1,22 +1,21 @@
 package edu.vanier.mainPackage.photoelectriceffect;
 
-import java.net.URL;
 import java.util.HashMap;
-import java.util.ResourceBundle;
-import javafx.event.ActionEvent;
-import javafx.event.EventType;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
-import javafx.scene.shape.Circle;
+
 
 /*
- * @author maesh
+ * @author maesha
  */
-public class MainAppController{
+public class PhotoelectricMenuController{
+    
+    //variables
+    private double minimumEnergy;
     
     //sliders
     @FXML
@@ -27,21 +26,6 @@ public class MainAppController{
     
     @FXML
     private Slider sliderBatteryVoltage;
-    
-    @FXML
-    public void handleSliderIntensity(){
-        double intensity = sliderIntensity.getValue();
-    }
-    
-    @FXML
-    public void handleSliderWavelength(){
-        double wavelength = sliderWavelength.getValue();
-    }
-    
-    @FXML
-    public void handleSliderBatteryVoltage(){
-        double batteryVoltage = sliderBatteryVoltage.getValue();
-    }
     
     //menu buttons
     @FXML
@@ -88,10 +72,13 @@ public class MainAppController{
     @FXML
     private Label workFunctionLabel;
     
+    @FXML
+    private Label minimumEnergyLabel;
+    
     public void initialize(){
         
         sliderIntensity.valueProperty().addListener((observable, oldValue, newValue) -> {
-            System.out.println("Intensity slider value: " + newValue.intValue() + "%");
+            System.out.println("Intensity slider value: " + newValue.intValue() + " %");
         });
         
         sliderWavelength.valueProperty().addListener((observable, oldValue, newValue) -> {
@@ -116,7 +103,7 @@ public class MainAppController{
         
         metalWorkFunctions = new HashMap<>();
         metalWorkFunctions.put("Magnesium", 3.7);
-        metalWorkFunctions.put("Aluminum", 4.28);
+        metalWorkFunctions.put("Aluminium", 4.28);
         metalWorkFunctions.put("Calcium", 3.0);
         metalWorkFunctions.put("Copper", 5.0);
         metalWorkFunctions.put("Gold", 5.1);
@@ -126,10 +113,30 @@ public class MainAppController{
         calciumMenuItem.setOnAction(event -> setWorkFunction("Calcium"));
         copperMenuItem.setOnAction(event -> setWorkFunction("Copper"));
         goldMenuItem.setOnAction(event -> setWorkFunction("Gold"));
+    
     }
     
     private void setWorkFunction(String metal) {
         double workFunction = metalWorkFunctions.get(metal);
         workFunctionLabel.setText(String.format("%.2f eV", workFunction));
+        System.out.println("the Work Function value: " + workFunction + " eV");
+        
+        Photon photon = new Photon();
+        System.out.println("wavelength: " + sliderWavelength.getValue() + " and metal is: " + metal);
+        minimumEnergy = photon.photonMinuimumEnergy(sliderWavelength.getValue(), metal);
+        minimumEnergyLabel.setText(String.format("%.2f J", minimumEnergy));
+
+        System.out.println("Minimum Energy of Photon: " + minimumEnergy);    }
+    
+    @FXML
+    public void calculateMinimumEnergy(){
+        Photon photon = new Photon();
+        minimumEnergy = photon.photonMinuimumEnergy(sliderWavelength.getValue(), metalMenuButton.getText());
+        System.out.println(minimumEnergy);
+    }
+    
+    @FXML
+    public double getMinimumEnergy(){
+        return minimumEnergy;
     }
 }

@@ -4,7 +4,7 @@
  */
 package edu.vanier.mainPackage.photoelectriceffect;
 
-import edu.vanier.mainPackage.photoelectriceffect.MainAppController;
+import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMenuController;
 import java.io.IOException;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -44,7 +44,7 @@ public class Driver extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PhotoelectricEffectMenu.fxml"));
 
             //connect to the controller class
-            MainAppController controller = new MainAppController();
+            PhotoelectricMenuController controller = new PhotoelectricMenuController();
             loader.setController(controller);
 
             //set and show scene
