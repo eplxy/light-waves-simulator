@@ -38,23 +38,7 @@ public class ImageObject extends Item {
     }
 
     public void updatePosition() {
-
-//        double destination = (this.getNode().getParent().getParent()
-//                .getBoundsInParent().getWidth() / 2 + LensPhysics
-//                        .computeImageAbsPos(source) * 20 - this.getNode()
-//                .getBoundsInParent().getWidth() / 2);
-//        double destination = (1400/ 2 + LensPhysics
-//                        .computeImageAbsPos(source) * 20 - this.getNode()
-//                .getBoundsInParent().getWidth() / 2);
-//
-//        if (destination > this.node.getParent().getBoundsInParent().getWidth()-this.node.getBoundsInLocal().getWidth()
-//                || destination < 0 ) {
-//            this.node.setVisible(false);
-//        } else {
-//            this.node.setVisible(true);
-//        }
         this.move(LensPhysics.computeImageAbsPos(source));
-
     }
 
     private void updateSize() {
@@ -76,36 +60,9 @@ public class ImageObject extends Item {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }
-
-    //getters and setters
-    //public double getMagnification() {
-    //    return magnification;
-    //}
-    //public void setMagnification(double magnification) {
-    //    this.magnification = magnification;
-    //}
-    //public String getType() {
-    //    return type;
-    //}
-    //public void setType(String type) {
-    //    this.type = type;
-    //}
-    //public boolean isInverted() {
-    //    return inverted;
-    //}
-    //public void setInverted(boolean inverted) {
-    //    this.inverted = inverted;
-    //}
-    //public double getDistToFocal() {
-    //    return distToFocal;
-    //}
-    //public void setDistToFocal(double distToFocal) {
-    //    this.distToFocal = distToFocal;
-    //}
-    //public Item getSource() {
-    //    return source;
-    //}
-    //public void setSource(Item source) {
-    //    this.source = source;
-    //}
+    
+    @Override
+    public String toString() {
+        return Integer.toString(this.orderNumber) + " " + this.itemType;
+    }
 }

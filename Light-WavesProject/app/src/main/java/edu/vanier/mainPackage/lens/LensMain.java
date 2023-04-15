@@ -17,7 +17,7 @@ public class LensMain extends Application {
     public void start(Stage stage) throws Exception {
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/lensMenu.fxml"));
-        LensMenuController lmc = new LensMenuController(stage);
+        LensMenuController lmc = new LensMenuController(stage, this);
         loader.setController(lmc);
         BorderPane root = loader.load();
 
@@ -36,6 +36,8 @@ public class LensMain extends Application {
 
         so1.getImage().update();
 
+        lmc.itemListViewUpdate();
+        
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
@@ -47,6 +49,7 @@ public class LensMain extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    
 
 }
 

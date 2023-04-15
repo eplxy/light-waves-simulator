@@ -15,9 +15,9 @@ public abstract class Item {
 
     //properties
 
-    public static final String ITEMTYPE_SOURCE = "source";
-    public static final String ITEMTYPE_LENS = "lens";
-    public static final String ITEMTYPE_IMAGE = "image";
+    public static final String ITEMTYPE_SOURCE = "Source";
+    public static final String ITEMTYPE_LENS = "Lens";
+    public static final String ITEMTYPE_IMAGE = "Image";
     
     private static LensMenuController lmc;
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
@@ -136,7 +136,7 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return Integer.toString(this.orderNumber);
+        return Integer.toString(this.orderNumber) + " " + this.itemType;
     }
 
     public double getSize() {

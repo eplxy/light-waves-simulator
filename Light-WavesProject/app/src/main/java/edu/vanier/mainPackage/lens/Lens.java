@@ -9,19 +9,20 @@ import lombok.EqualsAndHashCode;
  *
  * @author Steven
  */
-@Data @EqualsAndHashCode(callSuper=false)
+@Data
+@EqualsAndHashCode(callSuper = false)
 public class Lens extends Item {
 
     //properties
     static double mouseAnchorX;
-    
+
     private double focalLength, refractionIndex;
     private String lensType;
     private FocalPoint focalPoint;
 
     //constructor(s)
     public Lens(double focalLength, double absPos) {
-        this.itemType = "lens";
+        this.itemType = Item.ITEMTYPE_LENS;
         this.focalLength = focalLength;
         this.node = new ImageView(new Image(getClass().getResource("/images/lens/lens.png").toString()));
         setDragListeners();
@@ -56,13 +57,13 @@ public class Lens extends Item {
         node.setOnMouseDragged((mouseEvent) -> {
             node.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
             this.setAbsPos(((this.node.getLayoutX() + this.node.getBoundsInLocal()
-                    .getWidth() / 2) - 1400 / 2)/30);
+                    .getWidth() / 2) - 1400 / 2) / 30);
             this.label.updateLabel();
             LensPhysics.sourceSearch().getImage().update();
-            
+
         });
     }
-    
+
     //getters and setters
     public double getFocalLength() {
         return focalLength;
@@ -97,4 +98,8 @@ public class Lens extends Item {
         this.focalPoint = focalPoint;
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(this.orderNumber) + " " + this.itemType;
+    }
 }
