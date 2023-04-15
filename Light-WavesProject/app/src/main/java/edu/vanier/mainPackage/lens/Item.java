@@ -14,6 +14,12 @@ import lombok.Data;
 public abstract class Item {
 
     //properties
+
+    public static final String ITEMTYPE_SOURCE = "Source";
+    public static final String ITEMTYPE_LENS = "Lens";
+    public static final String ITEMTYPE_IMAGE = "Image";
+    
+    private static LensMenuController lmc;
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
     static Object ITEMTYPE_SOURCE;
     static Object ITEMTYPE_LENS;
@@ -29,9 +35,6 @@ public abstract class Item {
     protected String itemType;
 
     //methods
-    
-    
-    
     public static void addToList(Item item) {
 
         //TODO solve order number issue
@@ -63,8 +66,10 @@ public abstract class Item {
 
     public void move(double absPos) {
         this.absPos = absPos;
-        this.node.setLayoutX((this.getNode().getParent().getParent().getBoundsInLocal().getWidth() / 2 + this.getAbsPos()*20 - this.getNode().getBoundsInLocal().getWidth() / 2));
-
+        //this.node.setLayoutX((this.getNode().getParent().getParent().getBoundsInParent().getWidth() / 2 + this.getAbsPos() * 20 - this.getNode().getBoundsInParent().getWidth() / 2));
+        this.node.setLayoutX((1400/ 2 + this.getAbsPos() * 30 - this.getNode().getBoundsInParent().getWidth() / 2));
+        //this.node.setLayoutX((1400/ 2 + this.getAbsPos() * 20));
+        this.label.updateLabel();
     }
 
     //getters and setters
@@ -134,7 +139,7 @@ public abstract class Item {
 
     @Override
     public String toString() {
-        return Integer.toString(this.orderNumber);
+        return Integer.toString(this.orderNumber) + " " + this.itemType;
     }
 
     public double getSize() {
@@ -144,9 +149,15 @@ public abstract class Item {
     public void setSize(double size) {
         this.size = size;
     }
-    
-    
 
+    public static LensMenuController getLmc() {
+        return lmc;
+    }
+
+    public static void setLmc(LensMenuController lmc) {
+        Item.lmc = lmc;
+    }
     
-    
+   
+
 }

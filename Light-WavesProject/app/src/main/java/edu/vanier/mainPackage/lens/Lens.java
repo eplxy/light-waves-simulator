@@ -2,8 +2,8 @@ package edu.vanier.mainPackage.lens;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
 import lombok.Data;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -11,21 +11,26 @@ import lombok.Setter;
  *
  * @author Steven
  */
+
 @Getter
 @Setter
 
 public class Lens extends Item {
 
     //properties
+    static double mouseAnchorX;
+
     private double focalLength, refractionIndex;
     private String lensType;
     private FocalPoint focalPoint;
 
     //constructor(s)
     public Lens(double focalLength, double absPos) {
-        this.itemType = "lens";
+        this.itemType = Item.ITEMTYPE_LENS;
         this.focalLength = focalLength;
         this.node = new ImageView(new Image(getClass().getResource("/images/lens/lens.png").toString()));
+        setDragListeners();
+        this.label = new ItemLabel(this);
     }
 
     public Lens(double focalLength, double refractionIndex, FocalPoint focalPoint) {
@@ -47,6 +52,22 @@ public class Lens extends Item {
     }
 
     //methods
+    private void setDragListeners() {
+        node.setOnMousePressed((mouseEvent) -> {
+            mouseAnchorX = mouseEvent.getX();
+
+        });
+
+        node.setOnMouseDragged((mouseEvent) -> {
+            node.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
+            this.setAbsPos(((this.node.getLayoutX() + this.node.getBoundsInLocal()
+                    .getWidth() / 2) - 1400 / 2) / 30);
+            this.label.updateLabel();
+            LensPhysics.sourceSearch().getImage().update();
+
+        });
+    }
+
     //getters and setters
     public double getFocalLength() {
         return focalLength;
@@ -81,4 +102,8 @@ public class Lens extends Item {
         this.focalPoint = focalPoint;
     }
 
+    @Override
+    public String toString() {
+        return Integer.toString(this.orderNumber) + " " + this.itemType;
+    }
 }

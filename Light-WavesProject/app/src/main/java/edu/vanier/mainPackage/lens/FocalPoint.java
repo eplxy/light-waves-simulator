@@ -10,4 +10,7 @@ package edu.vanier.mainPackage.lens;
  */
 class FocalPoint {
     
+    
+    
+    
 }
