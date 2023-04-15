@@ -3,14 +3,18 @@ package edu.vanier.mainPackage.lens;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Steven
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+
+@Getter
+@Setter
+
 public class Lens extends Item {
 
     //properties

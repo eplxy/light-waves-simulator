@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox prefHeight="25.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
@@ -22,8 +22,8 @@
    <center>
       <Pane fx:id="animationPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" BorderPane.alignment="CENTER">
          <children>
-            <Pane fx:id="materialPane1" minHeight="165.0" minWidth="465.0" />
-            <Pane fx:id="materialPane2" layoutY="165.0" minHeight="165.0" minWidth="465.0" />
+            <Pane fx:id="materialPane1" minHeight="165.0" minWidth="465.0" prefHeight="375.0" prefWidth="1265.0" />
+            <Pane fx:id="materialPane2" layoutY="355.0" minHeight="165.0" minWidth="465.0" prefHeight="375.0" prefWidth="1265.0" />
             <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="71.0" layoutY="41.0" rotate="-45.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
          </children>
          <BorderPane.margin>
@@ -33,20 +33,20 @@
    <right>
       <VBox prefHeight="307.0" prefWidth="135.0" BorderPane.alignment="CENTER">
          <children>
-            <ChoiceBox fx:id="btnMaterial1" prefWidth="150.0" />
-            <ChoiceBox fx:id="btnMaterial2" prefWidth="150.0" />
-            <TextField fx:id="textAngle" />
-            <TextField fx:id="textN1" />
-            <TextField fx:id="textN2" />
+            <ChoiceBox fx:id="btnMaterial1" prefWidth="150.0" translateY="75.0" />
+            <ChoiceBox fx:id="btnMaterial2" prefWidth="150.0" translateY="100.0" />
+            <TextField fx:id="textAngle" translateY="150.0" />
+            <TextField fx:id="textN1" translateY="200.0" />
+            <TextField fx:id="textN2" translateY="225.0" />
          </children>
       </VBox>
    </right>
    <bottom>
       <HBox prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
          <children>
-            <Slider fx:id="sliderColor" translateX="10.0" translateY="10.0" />
-            <Button fx:id="btnAngles" mnemonicParsing="false" text="Show angles" translateX="70.0" translateY="5.0" />
-            <Button fx:id="btnLight" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Show light " translateX="200.0" translateY="5.0" />
+            <Slider fx:id="sliderColor" prefHeight="9.0" prefWidth="212.0" translateX="150.0" translateY="15.0" />
+            <Button fx:id="btnAngles" mnemonicParsing="false" text="Show angles" translateX="350.0" translateY="5.0" />
+            <Button fx:id="btnLight" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Show light " translateX="650.0" translateY="5.0" />
          </children>
       </HBox>
    </bottom>

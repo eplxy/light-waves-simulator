@@ -3,14 +3,16 @@ package edu.vanier.mainPackage.lens;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  *
  * @author Steven
  */
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class ImageObject extends Item {
 
     //properties
@@ -60,6 +62,8 @@ public class ImageObject extends Item {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }
+}
+
     
     @Override
     public String toString() {

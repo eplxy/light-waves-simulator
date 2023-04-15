@@ -1,3 +1,7 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
 package edu.vanier.mainPackage.lens;
 
 import java.text.DecimalFormat;
@@ -10,8 +14,9 @@ import lombok.Data;
 
 /**
  *
- * @author Steven
+ * @author Io si nu Vic
  */
+
 @Data
 public class ItemLabel {
 
