@@ -67,7 +67,7 @@ public class MainMenuController {
             PhotoelectricMain photoelectricMain = new PhotoelectricMain();
             try {
                 photoelectricMain.start(primaryStage);
-            } catch (Exception ex) {
+            } catch (IOException ex) {
                 System.err.println(ex.toString());
             }
 

@@ -4,6 +4,7 @@
  */
 package DoubleSlit.UI;
 
+import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
 import static java.util.EnumSet.range;
 import java.util.function.Function;

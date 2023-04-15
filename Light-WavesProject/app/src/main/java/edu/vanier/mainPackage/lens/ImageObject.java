@@ -3,12 +3,15 @@ package edu.vanier.mainPackage.lens;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Steven
  */
-@Data
+@Getter
+@Setter
 public class ImageObject extends Item {
 
     //properties
@@ -101,6 +104,10 @@ public class ImageObject extends Item {
     //public void setSource(Item source) {
     //    this.source = source;
     //}
+
+    String getImgType() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
     
     
 

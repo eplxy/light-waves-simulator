@@ -4,12 +4,16 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.shape.Circle;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  *
  * @author Steven
  */
-@Data
+@Getter
+@Setter
+
 public class Lens extends Item {
 
     //properties

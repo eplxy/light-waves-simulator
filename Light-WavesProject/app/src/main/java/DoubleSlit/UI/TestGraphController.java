@@ -5,7 +5,6 @@
 package DoubleSlit.UI;
 
 import javafx.scene.chart.LineChart;
-import DoubleSlit.Simulation.Graph;
 import java.io.IOException;
 import java.util.function.Function;
 import javafx.event.ActionEvent;

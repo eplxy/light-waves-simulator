@@ -28,9 +28,6 @@ public class MainApp extends Application {
         BorderPane root = loader.load();
         
         
-       
-       
-        
         Scene scene = new Scene(root);
         //stage.setResizable(false);
         //stage.initStyle(StageStyle.UTILITY);
