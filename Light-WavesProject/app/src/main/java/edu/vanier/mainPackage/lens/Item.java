@@ -21,9 +21,6 @@ public abstract class Item {
     
     private static LensMenuController lmc;
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
-    static Object ITEMTYPE_SOURCE;
-    static Object ITEMTYPE_LENS;
-    static Object ITEMTYPE_IMAGE;
 
     protected double size;
     protected int orderNumber;
