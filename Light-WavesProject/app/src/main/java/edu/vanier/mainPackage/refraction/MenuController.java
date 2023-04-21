@@ -1,6 +1,11 @@
 package edu.vanier.mainPackage.refraction;
 
+import edu.vanier.mainPackage.MainApp;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -30,6 +35,9 @@ public class MenuController {
     
     @FXML
     Button btnAngles;
+    
+    @FXML
+    Slider sliderAngle;
     
     @FXML
     Slider sliderColor;
@@ -80,9 +88,27 @@ public class MenuController {
     public void initialize(){
         Ray ray = new Ray();
         ray.CreateLines(primaryStage, animationPane);
+        sliderAngle.setMin(0);
+        sliderAngle.setMax(90);
+        sliderAngle.setValue(45);
+        sliderAngle.setShowTickLabels(true);
+        sliderAngle.setShowTickMarks(true);
+        sliderAngle.setMajorTickUnit(5);
+        sliderAngle.setMinorTickCount(5);
+        sliderAngle.setBlockIncrement(1);
+        
         draggableMaker.makeDraggable(rectangle, animationPane);
         addMaterials();
         
+        
+        btnMainMenu.setOnMouseClicked((event) -> {
+            MainApp mainApp = new MainApp();
+            try {
+                mainApp.start(primaryStage);
+            } catch (Exception ex) {
+                System.err.println(ex.toString());
+            }
+        });
         
         textAngle.setOnAction(e -> {
             angle1 = textAngle.getText();
@@ -121,6 +147,13 @@ public class MenuController {
             }
         });
         
+       
+        sliderAngle.valueProperty().addListener(new ChangeListener<Number>() {
+         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+            ray.updateLines(Double.parseDouble(newValue.toString()), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
+         }
+        });
+         
         btnLight.setOnAction((event) -> {
              
         }); 

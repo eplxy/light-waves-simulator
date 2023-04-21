@@ -1,18 +1,24 @@
 package edu.vanier.mainPackage.refraction;
 
 import java.util.ArrayList;
+import javafx.animation.FadeTransition;
+import javafx.animation.FillTransition;
+import javafx.animation.ScaleTransition;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.scene.shape.ArcType;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -74,6 +80,7 @@ public class Ray {
         incidentRay.endXProperty().bind(animationPane.widthProperty().divide(2));
         incidentRay.endYProperty().bind(animationPane.heightProperty().divide(2));
 
+        
         Rotate rotate = new Rotate();
         rotate.pivotXProperty().bind(incidentRay.endXProperty());
         rotate.pivotYProperty().bind(incidentRay.endYProperty());
@@ -147,6 +154,8 @@ public class Ray {
         normalRay.endYProperty().bind(animationPane.heightProperty().add(10));
         normalRay.getStrokeDashArray().addAll(10d);
 
+        Transitions();
+        
         animationPane.getChildren().addAll(incidentRay, refractedRay, normalRay, horizontalRay, totalRefractedRay, arcIncidentRay, arcRefractedRay,
                 labelTotalInternalReflection, labelAngleIncident, labelAngleRefracted);
     }
@@ -251,4 +260,37 @@ public class Ray {
         System.out.println("total internal reflection and angle: " + angle);
     }
 
+    public void Transitions(){
+        ScaleTransition st = new ScaleTransition(Duration.millis(1500), incidentRay);
+        st.toXProperty().multiply(0);
+        st.toYProperty().bind(new SimpleIntegerProperty(0).asObject());
+        st.setCycleCount(2);
+        st.jumpTo(Duration.millis(1500));
+        st.setAutoReverse(true);
+        st.play();
+        
+        ScaleTransition st2 = new ScaleTransition(Duration.millis(1500), refractedRay);
+        st2.toXProperty().multiply(0);
+        st2.toYProperty().bind(animationPane.heightProperty());
+        st2.setCycleCount(2);
+        st2.jumpTo(Duration.millis(1500));
+        st2.setAutoReverse(true);
+        st2.play();
+        
+        ScaleTransition st3 = new ScaleTransition(Duration.millis(1500), arcIncidentRay);
+        st3.toXProperty().bind(new SimpleIntegerProperty(0).asObject());
+        st3.toYProperty().bind(new SimpleIntegerProperty(0).asObject());
+        st3.setCycleCount(2);
+        st3.jumpTo(Duration.millis(1500));
+        st3.setAutoReverse(true);
+        st3.play();
+        
+        ScaleTransition st4 = new ScaleTransition(Duration.millis(1500), arcRefractedRay);
+        st4.toXProperty().bind(new SimpleIntegerProperty(0).asObject());
+        st4.toYProperty().bind(new SimpleIntegerProperty(0).asObject());
+        st4.setCycleCount(2);
+        st4.jumpTo(Duration.millis(1500));
+        st4.setAutoReverse(true);
+        st4.play();
+    } 
 }

@@ -24,7 +24,7 @@ public class Refraction extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/refractionMenu23.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/refractionMenu24.fxml"));
         MenuController menuController = new MenuController(primaryStage);
         loader.setController(menuController);
         BorderPane root = loader.load();
