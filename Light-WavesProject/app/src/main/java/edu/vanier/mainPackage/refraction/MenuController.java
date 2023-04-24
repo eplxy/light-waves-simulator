@@ -101,8 +101,9 @@ public class MenuController {
         addMaterials();
         
         
-        btnMainMenu.setOnMouseClicked((event) -> {
+        btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
+            System.out.println("lol");
             try {
                 mainApp.start(primaryStage);
             } catch (Exception ex) {
