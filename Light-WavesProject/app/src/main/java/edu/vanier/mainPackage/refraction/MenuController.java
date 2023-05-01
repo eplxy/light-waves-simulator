@@ -87,6 +87,7 @@ public class MenuController {
     
     public void initialize(){
         Ray ray = new Ray();
+        Light light = new Light();
         ray.CreateLines(primaryStage, animationPane);
         sliderAngle.setMin(0);
         sliderAngle.setMax(90);
@@ -100,6 +101,16 @@ public class MenuController {
         draggableMaker.makeDraggable(rectangle, animationPane);
         addMaterials();
         
+        sliderColor.setMin(300);
+        sliderColor.setMax(700);
+        sliderColor.setValue(300);
+        sliderColor.setShowTickLabels(true);
+        sliderColor.setShowTickMarks(true);
+        sliderColor.setMajorTickUnit(20);
+        sliderColor.setMinorTickCount(10);
+        sliderColor.setBlockIncrement(5);
+        
+        //light.color(ray.getIncidentRay(), 200);
         
         btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
@@ -155,8 +166,14 @@ public class MenuController {
          }
         });
          
+        sliderColor.valueProperty().addListener(new ChangeListener<Number>() {
+         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+            light.colorLines(ray.getIncidentRay(), (double) newValue);
+         }
+        });
+        
         btnLight.setOnAction((event) -> {
-             
+             ray.getArcIncidentRay().setStroke(Color.BLACK);
         }); 
         
         btnMaterial1.setOnAction((event) -> {
