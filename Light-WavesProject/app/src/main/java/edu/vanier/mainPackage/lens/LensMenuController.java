@@ -37,8 +37,6 @@ public class LensMenuController {
     Stage primaryStage;
     Button ctrlPaneOpenBtn;
     @FXML
-    TextField ctrlTextField2, ctrlTextField3, ctrlTextField4, ctrlTextField5, ctrlTextField6;
-    @FXML
     ImageView homeIcon;
     @FXML
     ImageView closeCtrlIcon;
@@ -71,29 +69,6 @@ public class LensMenuController {
         this.homeIconSetup();
         this.closeCtrlIconSetup();
 
-        ctrlTextField1.setOnAction(e -> {
-            SourceObject so = LensPhysics.sourceSearch();
-            so.move(Double.parseDouble(ctrlTextField1.getText()));
-            so.getImage().update();
-        });
-
-        ctrlTextField2.setOnAction(e -> {
-            Lens l = LensPhysics.lensSearch();
-            SourceObject so = LensPhysics.sourceSearch();
-            l.setFocalLength(Double.parseDouble(ctrlTextField2.getText()));
-            so.getImage().update();
-        });
-
-        ctrlTextField3.setOnAction(e -> {
-            SourceObject so = LensPhysics.sourceSearch();
-            so.getNode().setLayoutX(Double.parseDouble(ctrlTextField3.getText()));
-        });
-
-        ctrlTextField4.setOnAction(e -> {
-            SourceObject so = LensPhysics.sourceSearch();
-            so.getImage().getNode().setLayoutX(Double.parseDouble(ctrlTextField4.getText()));
-        });
-
         ctrlPaneOpenBtn = new Button();
 
         itemListView.setOnMouseClicked(e -> {
@@ -112,9 +87,6 @@ public class LensMenuController {
 
         }
 
-        if (currentParameterPane == null) {
-            propertyPane.getChildren().add(currentParameterPane);
-        }
 
     }
 
@@ -184,7 +156,7 @@ public class LensMenuController {
         FXMLLoader loader = null;
         switch (itemType) {
             case Item.ITEMTYPE_IMAGE:
-
+                loader = new FXMLLoader(getClass().getResource("/fxml/lensImagePropertyPane.fxml"));
                 break;
             case Item.ITEMTYPE_LENS:
                 loader = new FXMLLoader(getClass().getResource("/fxml/lensLensPropertyPane.fxml"));
@@ -193,11 +165,9 @@ public class LensMenuController {
                 loader = new FXMLLoader(getClass().getResource("/fxml/lensSourcePropertyPane.fxml"));
                 break;
         }
-
-        if (loader != null) {
-            this.currentParameterPane = loader.load();
-        }
-
+        this.propertyPane.getChildren().clear();
+        this.currentParameterPane = loader.load();
+        this.propertyPane.getChildren().add(this.currentParameterPane);
     }
 
     private void highlight(Item selectedItem) {
