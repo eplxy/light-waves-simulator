@@ -79,7 +79,7 @@ public class Ray {
         incidentRay.startYProperty().bind(animationPane.heightProperty().divide(2));
         incidentRay.endXProperty().bind(animationPane.widthProperty().divide(2));
         incidentRay.endYProperty().bind(animationPane.heightProperty().divide(2));
-
+        incidentRay.setStrokeWidth(3);
         
         Rotate rotate = new Rotate();
         rotate.pivotXProperty().bind(incidentRay.endXProperty());
@@ -106,7 +106,8 @@ public class Ray {
         refractedRay.startYProperty().bind(animationPane.heightProperty().divide(2));
         refractedRay.endXProperty().bind(animationPane.widthProperty());
         refractedRay.endYProperty().bind(animationPane.heightProperty().divide(2));
-
+        refractedRay.setStrokeWidth(3);
+        
         Rotate rotate2 = new Rotate();
         rotate2.pivotXProperty().bind(incidentRay.endXProperty());
         rotate2.pivotYProperty().bind(incidentRay.endYProperty());
@@ -133,7 +134,8 @@ public class Ray {
         totalRefractedRay.endXProperty().bind(animationPane.widthProperty());
         totalRefractedRay.endYProperty().bind(animationPane.heightProperty().divide(2));
         totalRefractedRay.setVisible(false);
-
+        totalRefractedRay.setStrokeWidth(3);
+        
         //label total internal reflection
         labelTotalInternalReflection.layoutXProperty().bind(animationPane.widthProperty().divide(2));
         labelTotalInternalReflection.setLayoutY(10);
@@ -193,7 +195,6 @@ public class Ray {
         materialPane1.setBackground(background);
 
         angle2 = Vector.CalculateAngle(list.get(index).getRefractionIndex(), list.get(index2).getRefractionIndex(), Double.parseDouble(angle1));
-
         if (Double.isNaN(angle2)) {
             rotateAnglesInternalReflection(Double.parseDouble(angle1));
         }

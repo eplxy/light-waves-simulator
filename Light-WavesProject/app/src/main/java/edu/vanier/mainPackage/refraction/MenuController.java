@@ -9,6 +9,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -64,10 +65,10 @@ public class MenuController {
     TextField textAngle;
     
     @FXML
-    TextField textN1;
+    Label labelMaterial1 = new Label("Material index 1: ");
     
     @FXML
-    TextField textN2;
+    Label labelMaterial2 = new Label("Material index 2: ");
     
     Stage primaryStage;
     Simulation sim;
@@ -129,15 +130,7 @@ public class MenuController {
             ray.updateLines(Double.parseDouble(angle1), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
          });
         
-        textN1.setOnAction(e -> {
-            n1 = textN1.getText();
-            System.out.println(n1);
-         });
         
-        textN2.setOnAction(e -> {
-            n2 = textN2.getText();
-            System.out.println(n2);
-         });
         
         btnAngles.setOnAction((event) -> {
             if (ray.getArcIncidentRay().isDisabled() & ray.getArcRefractedRay().isDisabled()) {
@@ -168,32 +161,32 @@ public class MenuController {
          
         sliderColor.valueProperty().addListener(new ChangeListener<Number>() {
          public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
-            light.colorLines(ray.getIncidentRay(), (double) newValue);
+            light.colorLines(ray.getIncidentRay(), ray.getRefractedRay(), ray.getTotalRefractedRay(), (double) newValue);
          }
         });
         
         btnLight.setOnAction((event) -> {
-             ray.getArcIncidentRay().setStroke(Color.BLACK);
+             ray.getIncidentRay().setStroke(Color.BLACK);
+             ray.getRefractedRay().setStroke(Color.BLACK);
+             ray.getTotalRefractedRay().setStroke(Color.BLACK);
         }); 
         
         btnMaterial1.setOnAction((event) -> {
             selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
-            Object selectedItem = btnMaterial1.getSelectionModel().getSelectedItem();
-            System.out.println(angle1);
-
+            
+            
+            labelMaterial1.setText("Material index 1: " + listMaterial.get(selectedIndex1).getRefractionIndex() + " ");
             ray.materialUpdateLines1(selectedIndex1,selectedIndex2, materialPane1, listMaterial, angle1);
-            System.out.println("Selection made: [" + selectedIndex1 + "] " + selectedItem);
-            System.out.println("   ChoiceBox.getValue(): " + btnMaterial1.getValue());
+            
         });
         
         btnMaterial2.setOnAction((event) -> {
             selectedIndex2 = btnMaterial2.getSelectionModel().getSelectedIndex();
-            Object selectedItem = btnMaterial2.getSelectionModel().getSelectedItem();
-
-            System.out.println(angle1);
+            
+            labelMaterial2.setText("Material index 2: " + listMaterial.get(selectedIndex2).getRefractionIndex() + " ");
+            
             ray.materialUpdateLines2(selectedIndex1, selectedIndex2, materialPane2, listMaterial, angle1);
-            System.out.println("Selection made: [" + selectedIndex2 + "] " + selectedItem);
-            System.out.println("   ChoiceBox.getValue(): " + btnMaterial2.getValue());
+            
         });
         
     } 

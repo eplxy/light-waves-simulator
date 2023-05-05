@@ -61,7 +61,7 @@ public class Light {
         
     }
     
-    public void colorLines(Line line, double value){
+    public void colorLines(Line incidentLine, Line refractedLine, Line totalRefractedLine, double value){
         
         int newValue = (int) ((((value - 300) * 40) / 400) + 0);
         
@@ -69,7 +69,13 @@ public class Light {
             Stop[] stops = new Stop[] { new Stop(0, Color.TRANSPARENT), new Stop(1, Color.web(colorHexList.get(newValue)))};
             LinearGradient lngnt = new LinearGradient(0, 0, 0.5, 0, true, CycleMethod.NO_CYCLE, stops);
         
-            line.setStroke(lngnt);
+            incidentLine.setStroke(lngnt);
+            
+            Stop[] stops2 = new Stop[] { new Stop(0, Color.web(colorHexList.get(newValue))), new Stop(1, Color.TRANSPARENT)};
+            LinearGradient lngnt2 = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE, stops2);
+            
+            refractedLine.setStroke(lngnt2);
+            totalRefractedLine.setStroke(lngnt2);
         } catch (Exception e) {
         }
         
