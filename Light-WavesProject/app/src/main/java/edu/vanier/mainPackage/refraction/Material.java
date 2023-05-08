@@ -2,15 +2,12 @@ package edu.vanier.mainPackage.refraction;
 
 import javafx.scene.paint.Color;
 import lombok.Data;
-import lombok.Getter;
 import lombok.Setter;
 
 /**
  *
  * @author Matthew
  */
-@Getter
-@Setter
 @Data
 public class Material {
     

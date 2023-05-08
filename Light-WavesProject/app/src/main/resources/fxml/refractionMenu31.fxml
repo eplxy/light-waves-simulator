@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
@@ -32,8 +31,7 @@
                <children>
                   <Button fx:id="btnMainMenu" mnemonicParsing="false" text="Main Menu" />
                </children></Pane>
-            <Pane fx:id="materialPane2" layoutY="355.0" minHeight="165.0" minWidth="465.0" prefHeight="375.0" prefWidth="1265.0" />
-            <Rectangle fx:id="rectangle" arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="59.0" layoutX="71.0" layoutY="41.0" rotate="-45.0" stroke="BLACK" strokeType="INSIDE" width="40.0" />
+            <Pane fx:id="materialPane2" layoutY="352.0" minHeight="165.0" minWidth="465.0" prefHeight="378.0" prefWidth="1265.0" />
          </children>
          <BorderPane.margin>
             <Insets />
@@ -65,18 +63,27 @@
                   <Insets />
                </VBox.margin>
             </Slider>
-            <TextField fx:id="textN1" translateY="200.0" />
-            <TextField fx:id="textN2" translateY="225.0" />
+            <Label fx:id="labelMaterial1" prefHeight="45.0" prefWidth="135.0" translateY="200.0" />
+            <Label fx:id="labelMaterial2" prefHeight="45.0" prefWidth="135.0" translateY="250.0" />
          </children>
       </VBox>
    </right>
    <bottom>
-      <HBox prefHeight="45.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+      <Pane BorderPane.alignment="CENTER">
          <children>
-            <Slider fx:id="sliderColor" prefHeight="9.0" prefWidth="212.0" translateX="150.0" translateY="15.0" />
-            <Button fx:id="btnAngles" mnemonicParsing="false" text="Show angles" translateX="350.0" translateY="5.0" />
-            <Button fx:id="btnLight" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Show light " translateX="650.0" translateY="5.0" />
+            <HBox layoutY="2.0" prefHeight="45.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="17.0" prefWidth="91.0" text="Color of the light" textAlignment="CENTER" translateX="300.0" translateY="-2.0">
+                     <font>
+                        <Font name="Segoe UI Semilight" size="12.0" />
+                     </font>
+                  </Label>
+                  <Slider fx:id="sliderColor" prefHeight="9.0" prefWidth="212.0" translateX="150.0" translateY="12.0" />
+                  <Button fx:id="btnAngles" mnemonicParsing="false" text="Show angles" translateX="350.0" translateY="5.0" />
+                  <Button fx:id="btnLight" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" text="Show light " translateX="650.0" translateY="5.0" />
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </Pane>
    </bottom>
 </BorderPane>

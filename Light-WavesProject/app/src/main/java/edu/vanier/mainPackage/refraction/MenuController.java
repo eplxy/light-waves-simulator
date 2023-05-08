@@ -2,8 +2,6 @@ package edu.vanier.mainPackage.refraction;
 
 import edu.vanier.mainPackage.MainApp;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
@@ -16,16 +14,12 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *
  * @author Matthew Hantar
  */
 @lombok.Data
-@Getter
-@Setter
 public class MenuController {
     
     @FXML
@@ -71,13 +65,7 @@ public class MenuController {
     Label labelMaterial2 = new Label("Material index 2: ");
     
     Stage primaryStage;
-    Simulation sim;
-    
-    Draggable draggableMaker = new Draggable();
     ArrayList<Material> listMaterial = new ArrayList<>();
-    
-    private String n1;
-    private String n2;
     private int selectedIndex1;
     private int selectedIndex2;
     private String angle1 = "45";
@@ -86,33 +74,21 @@ public class MenuController {
         this.primaryStage = primaryStage;
     }
     
+    /**
+     * The initialize method creates the lines, adds the materials, then it
+     * updates the lines with the user input.
+     */
     public void initialize(){
         Ray ray = new Ray();
         Light light = new Light();
+        
         ray.CreateLines(primaryStage, animationPane);
-        sliderAngle.setMin(0);
-        sliderAngle.setMax(90);
-        sliderAngle.setValue(45);
-        sliderAngle.setShowTickLabels(true);
-        sliderAngle.setShowTickMarks(true);
-        sliderAngle.setMajorTickUnit(5);
-        sliderAngle.setMinorTickCount(5);
-        sliderAngle.setBlockIncrement(1);
-        
-        draggableMaker.makeDraggable(rectangle, animationPane);
         addMaterials();
+        sliderSetup();
         
-        sliderColor.setMin(300);
-        sliderColor.setMax(700);
-        sliderColor.setValue(300);
-        sliderColor.setShowTickLabels(true);
-        sliderColor.setShowTickMarks(true);
-        sliderColor.setMajorTickUnit(20);
-        sliderColor.setMinorTickCount(10);
-        sliderColor.setBlockIncrement(5);
-        
-        //light.color(ray.getIncidentRay(), 200);
-        
+        /**
+         * 
+         */
         btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
             System.out.println("lol");
@@ -153,16 +129,12 @@ public class MenuController {
         });
         
        
-        sliderAngle.valueProperty().addListener(new ChangeListener<Number>() {
-         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+        sliderAngle.valueProperty().addListener((ObservableValue <?extends Number>observable, Number oldValue, Number newValue) -> {
             ray.updateLines(Double.parseDouble(newValue.toString()), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
-         }
         });
          
-        sliderColor.valueProperty().addListener(new ChangeListener<Number>() {
-         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+        sliderColor.valueProperty().addListener((ObservableValue <?extends Number>observable, Number oldValue, Number newValue) -> {
             light.colorLines(ray.getIncidentRay(), ray.getRefractedRay(), ray.getTotalRefractedRay(), (double) newValue);
-         }
         });
         
         btnLight.setOnAction((event) -> {
@@ -190,6 +162,26 @@ public class MenuController {
         });
         
     } 
+    
+    public void sliderSetup(){
+        sliderAngle.setMin(0);
+        sliderAngle.setMax(90);
+        sliderAngle.setValue(45);
+        sliderAngle.setShowTickLabels(true);
+        sliderAngle.setShowTickMarks(true);
+        sliderAngle.setMajorTickUnit(5);
+        sliderAngle.setMinorTickCount(5);
+        sliderAngle.setBlockIncrement(1);
+        
+        sliderColor.setMin(300);
+        sliderColor.setMax(700);
+        sliderColor.setValue(300);
+        sliderColor.setShowTickLabels(true);
+        sliderColor.setShowTickMarks(true);
+        sliderColor.setMajorTickUnit(20);
+        sliderColor.setMinorTickCount(10);
+        sliderColor.setBlockIncrement(5);
+    }
     
      public void addMaterials(){
         
