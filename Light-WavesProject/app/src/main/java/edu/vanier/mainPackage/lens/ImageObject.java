@@ -2,6 +2,7 @@ package edu.vanier.mainPackage.lens;
 
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.transform.Scale;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -25,7 +26,7 @@ public class ImageObject extends Item {
     public ImageObject(SourceObject source) {
         this.itemType = Item.ITEMTYPE_IMAGE;
         this.source = source;
-        this.node = new ImageView(new Image(getClass().getResource("/images/lens/candle.png").toString()));
+        this.node = new ImageView(ResourceManager.retrieveCandleImage());
         this.node.setOpacity(0.5);
         this.label = new ItemLabel(this);
 
@@ -37,9 +38,11 @@ public class ImageObject extends Item {
         updatePosition();
         updateImgType();
     }
+    
 
     public void updatePosition() {
         this.move(LensPhysics.computeImageAbsPos(source));
+        this.setRelPos(LensPhysics.computeRelPos(source)[1]);
     }
 
     private void updateSize() {
@@ -57,7 +60,7 @@ public class ImageObject extends Item {
         }
     }
 
-    private void scaleNodeToSize() {
+    public void scaleNodeToSize() {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }

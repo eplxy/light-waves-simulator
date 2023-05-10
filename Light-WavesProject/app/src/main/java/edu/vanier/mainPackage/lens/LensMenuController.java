@@ -1,6 +1,10 @@
 package edu.vanier.mainPackage.lens;
 
 import edu.vanier.mainPackage.MainApp;
+import edu.vanier.mainPackage.lens.propertyPanes.PPController;
+import edu.vanier.mainPackage.lens.propertyPanes.PPImageController;
+import edu.vanier.mainPackage.lens.propertyPanes.PPLensController;
+import edu.vanier.mainPackage.lens.propertyPanes.PPSourceController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +18,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -22,6 +25,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -35,13 +39,11 @@ public class LensMenuController {
 
     LensMain lensMain;
     Stage primaryStage;
-    Button ctrlPaneOpenBtn;
+    Button ctrlPaneOpenBtn, btnPulseRays, btnLockItem;
     @FXML
     ImageView homeIcon;
     @FXML
     ImageView closeCtrlIcon;
-    @FXML
-    TextField ctrlTextField1;
     @FXML
     BorderPane borderPane;
     @FXML
@@ -55,15 +57,22 @@ public class LensMenuController {
     @FXML
     ListView itemListView;
     Pane currentParameterPane;
+    public static LensMenuController currentLMC;
+
+    public static PPController currentPPController;
+
+    public Item selectedItem;
 
     public LensMenuController(Stage stage, LensMain lensMain) {
         this.primaryStage = stage;
         this.lensMain = lensMain;
-        Item.setLmc(this);
-        ItemLabel.setLmc(this);
+
     }
 
     public void initialize() {
+        Item.setLmc(this);
+        ItemLabel.setLmc(this);
+        currentLMC = this;
 
         this.ctrlPaneOpenBtnSetup();
         this.homeIconSetup();
@@ -78,15 +87,14 @@ public class LensMenuController {
     }
 
     public void itemListViewHandle() {
-        Item selectedItem = (Item) itemListView.getSelectionModel().getSelectedItem();
+        selectedItem = (Item) itemListView.getSelectionModel().getSelectedItem();
         highlight(selectedItem);
 
         try {
-            createParametersPane(selectedItem.getItemType());
+            createParametersPane(selectedItem);
         } catch (IOException e) {
 
         }
-
 
     }
 
@@ -103,14 +111,11 @@ public class LensMenuController {
         ctrlPaneOpenBtn.setVisible(true);
 
         ctrlPaneOpenBtn.setLayoutX(675);
-        ctrlPaneOpenBtn.setLayoutY(675);
+        ctrlPaneOpenBtn.setLayoutY(800);
         animationPane.getChildren().add(ctrlPaneOpenBtn);
-        //ctrlPaneOpenBtn.setLayoutX(700);
-        //ctrlPaneOpenBtn.setLayoutY(700);
 
         ctrlPaneOpenBtn.setOnAction(e -> {
             controlPane.setVisible(true);
-            //ctrlPaneOpenBtn.setVisible(false);
         });
     }
 
@@ -128,6 +133,7 @@ public class LensMenuController {
             try {
                 main.start(primaryStage);
                 Item.getItemList().clear();
+                Rays.clearRays();
                 lensMain.stop();
 
             } catch (Exception ex) {
@@ -151,20 +157,31 @@ public class LensMenuController {
         });
     }
 
-    private void createParametersPane(String itemType) throws IOException {
+    private void createParametersPane(Item item) throws IOException {
 
         FXMLLoader loader = null;
-        switch (itemType) {
+        switch (item.itemType) {
             case Item.ITEMTYPE_IMAGE:
                 loader = new FXMLLoader(getClass().getResource("/fxml/lensImagePropertyPane.fxml"));
+                currentPPController = new PPImageController(item);
+                loader.setController(currentPPController);
+
                 break;
             case Item.ITEMTYPE_LENS:
                 loader = new FXMLLoader(getClass().getResource("/fxml/lensLensPropertyPane.fxml"));
+                currentPPController = new PPLensController(item);
+                loader.setController(currentPPController);
                 break;
             case Item.ITEMTYPE_SOURCE:
                 loader = new FXMLLoader(getClass().getResource("/fxml/lensSourcePropertyPane.fxml"));
+                currentPPController = new PPSourceController(item);
+                loader.setController(currentPPController);
                 break;
         }
+        parameterClearAndLoad(loader);
+    }
+
+    private void parameterClearAndLoad(FXMLLoader loader) throws IOException {
         this.propertyPane.getChildren().clear();
         this.currentParameterPane = loader.load();
         this.propertyPane.getChildren().add(this.currentParameterPane);

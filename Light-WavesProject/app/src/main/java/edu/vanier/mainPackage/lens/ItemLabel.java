@@ -14,9 +14,8 @@ import lombok.Data;
 
 /**
  *
- * @author Io si nu Vic
+ * @author Steven
  */
-
 @Data
 public class ItemLabel {
 
@@ -40,12 +39,15 @@ public class ItemLabel {
         this.itemType = item.getItemType();
         activeLabelList = new ArrayList<Label>();
         activeLabelList.add(labAbsPos);
-        activeLabelList.add(labRelPos);
+
         if (this.itemType.equals(Item.ITEMTYPE_SOURCE)) {
+            activeLabelList.add(labRelPos);
             activeLabelList.add(labSize);
+
         } else if (this.itemType.equals(Item.ITEMTYPE_LENS)) {
             activeLabelList.add(labFocalLength);
         } else if (this.itemType.equals(Item.ITEMTYPE_IMAGE)) {
+            activeLabelList.add(labRelPos);
             activeLabelList.add(labSize);
             activeLabelList.add(labMagnification);
             activeLabelList.add(labInversion);
