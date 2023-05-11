@@ -21,7 +21,7 @@ public class Refraction extends Application{
          *Loads the main refraction menu and everything else around it.
          *It loads the menu controller with the initialize method. 
          */
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/refractionMenu31.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/refractionMenu32.fxml"));
         MenuController menuController = new MenuController(primaryStage);
         loader.setController(menuController);
         BorderPane root = loader.load();
