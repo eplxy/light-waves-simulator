@@ -64,7 +64,7 @@ public abstract class Item {
     public void move(double absPos) {
         this.absPos = absPos;
         //this.node.setLayoutX((this.getNode().getParent().getParent().getBoundsInParent().getWidth() / 2 + this.getAbsPos() * 20 - this.getNode().getBoundsInParent().getWidth() / 2));
-        this.node.setLayoutX((1400/ 2 + this.getAbsPos() * LensMain.CONVERSIONFACTOR - this.getNode().getBoundsInParent().getWidth() / 2));
+        this.node.setLayoutX((700 + this.getAbsPos() * LensMain.CONVERSIONFACTOR - this.getNode().getLayoutBounds().getWidth() / 2));
         //this.node.setLayoutX((1400/ 2 + this.getAbsPos() * 20));
         this.label.updateLabel();
         

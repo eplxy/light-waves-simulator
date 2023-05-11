@@ -8,6 +8,11 @@ package edu.vanier.mainPackage.lens;
 
 public class LensPhysics {
     
+    public static double sourceAbsPosFromImageRelPos(double q){
+        Lens lens = LensPhysics.lensSearch();
+        return lens.absPos-(1 / ((1 / lens.getFocalLength()) - (1 / q)));
+    }
+    
     public static double lensMakerToFocalLength(Lens lens){
         return 1/((2/lens.getRadius())*(lens.getRefractionIndex()-1));
     }

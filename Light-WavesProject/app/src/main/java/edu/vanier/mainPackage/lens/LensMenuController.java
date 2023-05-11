@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
@@ -39,7 +40,11 @@ public class LensMenuController {
 
     LensMain lensMain;
     Stage primaryStage;
-    Button ctrlPaneOpenBtn, btnPulseRays, btnLockItem;
+    Button ctrlPaneOpenBtn;
+    @FXML
+    TextField txtP, txtQ;
+    @FXML
+    Button btnPulseRays, btnLockItem, btnToggleLensLine;
     @FXML
     ImageView homeIcon;
     @FXML
@@ -47,7 +52,7 @@ public class LensMenuController {
     @FXML
     BorderPane borderPane;
     @FXML
-    Line principalAxis;
+    Line principalAxis, verticalLensLine;
     @FXML
     Pane animationPane, controlPane, itemPane, propertyPane;
     @FXML
@@ -73,7 +78,9 @@ public class LensMenuController {
         Item.setLmc(this);
         ItemLabel.setLmc(this);
         currentLMC = this;
-
+        
+        this.setupPQ();
+        this.lensLineSetup();
         this.ctrlPaneOpenBtnSetup();
         this.homeIconSetup();
         this.closeCtrlIconSetup();
@@ -82,6 +89,13 @@ public class LensMenuController {
 
         itemListView.setOnMouseClicked(e -> {
             itemListViewHandle();
+        });
+
+    }
+
+    private void lensLineSetup() {
+        btnToggleLensLine.setOnAction(e -> {
+            verticalLensLine.setVisible(!verticalLensLine.isVisible());
         });
 
     }
@@ -116,6 +130,27 @@ public class LensMenuController {
 
         ctrlPaneOpenBtn.setOnAction(e -> {
             controlPane.setVisible(true);
+        });
+    }
+
+    private void setupPQ() {
+
+        txtP.setOnAction(e -> {
+            SourceObject s = LensPhysics.sourceSearch();
+            double p = Double.parseDouble(txtP.getText());
+
+            s.move(LensPhysics.lensSearch().getAbsPos() - p);
+            s.getImage().update();
+            Rays.updateRays();
+        });
+
+        txtQ.setOnAction(e -> {
+            SourceObject s = LensPhysics.sourceSearch();
+            double q = Double.parseDouble(txtQ.getText());
+
+            s.move(LensPhysics.sourceAbsPosFromImageRelPos(q));
+            s.getImage().update();
+            Rays.updateRays();
         });
     }
 
@@ -185,6 +220,10 @@ public class LensMenuController {
         this.propertyPane.getChildren().clear();
         this.currentParameterPane = loader.load();
         this.propertyPane.getChildren().add(this.currentParameterPane);
+    }
+
+    public void lensLineMove() {
+        verticalLensLine.setLayoutX(LensPhysics.lensSearch().getNode().getBoundsInParent().getCenterX());
     }
 
     private void highlight(Item selectedItem) {

@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import lombok.Getter;
@@ -61,6 +60,8 @@ public class Lens extends Item {
             SourceObject tempSource = LensPhysics.sourceSearch();
             tempSource.getImage().update();
             tempSource.setRelPos(LensPhysics.computeRelPos(tempSource)[0]);
+            LensMenuController.currentLMC.lensLineMove();
+            Rays.updateRays();
 
         });
 

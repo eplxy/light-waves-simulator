@@ -2,6 +2,7 @@ package edu.vanier.mainPackage.lens.propertyPanes;
 
 import edu.vanier.mainPackage.lens.Item;
 import edu.vanier.mainPackage.lens.LensPhysics;
+import edu.vanier.mainPackage.lens.Rays;
 import edu.vanier.mainPackage.lens.SourceObject;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
@@ -40,6 +41,7 @@ public class PPSourceController extends PPController {
             LensPhysics.sourceSearch().getImage().update();
             this.source.scaleNodeToSize();
             updateTextFields();
+            
         });
     }
 
@@ -51,6 +53,7 @@ public class PPSourceController extends PPController {
 
     @Override
     public void updateTextFields() {
+        Rays.updateRays();
         txtAbsPos.setText(df.format(source.getAbsPos()));
         txtSize.setText(df.format(source.getSize()));
     }

@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import edu.vanier.mainPackage.lens.propertyPanes.PPImageController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 /**
@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  * @author Steven
  */
 public class LensMain extends Application {
-    
+
     //conversion factor, abspos to layoutx 
     public static final double CONVERSIONFACTOR = 15;
 
@@ -32,6 +32,7 @@ public class LensMain extends Application {
         //testing source object
         SourceObject so1 = new SourceObject(30, -20);
         Lens l1 = new Lens(10, 0);
+        l1.move(l1.absPos);
 
         Item.addToList(so1);
         Item.addToList(l1);
@@ -55,7 +56,7 @@ public class LensMain extends Application {
         stage.sizeToScene();
         stage.show();
         positionDebug();
-        
+
         Rays.generateRays();
 
     }
@@ -64,6 +65,19 @@ public class LensMain extends Application {
         launch(args);
     }
 
+//    public Circle rayDotDebug() {
+//        Circle c = new Circle(10);
+//
+//        lmc.animationPane.setOnMouseClicked((mouseEvent) -> {
+//
+//            c.setLayoutX(LensPhysics.sourceSearch().getImage().getAbsPos() * CONVERSIONFACTOR + 700);
+//
+//        });
+//        c.setLayoutX(20 * CONVERSIONFACTOR + 700);
+//        c.setLayoutY(375);
+//        return c;
+//    }
+
     private void positionDebug() {
 
         VBox box = new VBox();
@@ -71,8 +85,8 @@ public class LensMain extends Application {
         Label lblY = new Label();
 
         lmc.animationPane.setOnMouseMoved((mouseEvent) -> {
-            lblX.setText("x=" + mouseEvent.getScreenX());
-            lblY.setText("y=" + mouseEvent.getScreenY());
+            lblX.setText("x=" + mouseEvent.getX());
+            lblY.setText("y=" + mouseEvent.getY());
         });
 
         box.getChildren().addAll(lblX, lblY);

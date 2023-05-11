@@ -2,6 +2,7 @@ package edu.vanier.mainPackage.lens.propertyPanes;
 
 import edu.vanier.mainPackage.lens.ImageObject;
 import edu.vanier.mainPackage.lens.Item;
+import edu.vanier.mainPackage.lens.Rays;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -30,18 +31,14 @@ public class PPImageController extends PPController {
         labelItemID.setText(img.toString());
         updateTextFields();
     }
-    
-    
 
     @Override
     public void updateTextFields() {
-
         txtAbsPos.setText(df.format(img.getAbsPos()));
         txtSize.setText(df.format(img.getSize()));
         txtSource.setText(img.getSource().toString());
         txtMagnification.setText(df.format(img.getMagnification()));
         txtInversion.setText(Boolean.toString(img.isInverted()));
         txtImgType.setText(img.getImgType());
-
     }
 }

@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import java.awt.font.TextHitInfo;
 import javafx.scene.shape.Line;
 
 /**
@@ -30,14 +29,14 @@ public class Rays {
         line3a = new Line(source.getNode().getBoundsInParent().getCenterX(), source.getRayPointHeight(), lens.getNode().getBoundsInParent().getCenterX(), compute1cExtrapolation(lens, source));
 
         //set B
-        double[] line1bext = extendLines(
+        double[] line1bext = extendLinesRight(
                 lens.getNode().getBoundsInParent().getCenterX(),
                 line1a.getEndY(),
                 lens.getNode().getBoundsInParent().getCenterX() + lens.getFocalLength() * LensMain.CONVERSIONFACTOR,
                 350);
         line1b = new Line(line1a.getEndX(), line1a.getEndY(), line1bext[0], line1bext[1]);
 
-        double[] line2bext = extendLines(line2a.getStartX(),
+        double[] line2bext = extendLinesRight(line2a.getStartX(),
                 line2a.getStartY(),
                 line2a.getEndX(),
                 line2a.getEndY());
@@ -46,11 +45,32 @@ public class Rays {
         line3b = new Line(line3a.getEndX(), line3a.getEndY(), 1400, line3a.getEndY());
 
         //set C
-        //line1c = new Line(line1a.getEndX(),line1a.getEndY(),image.node.getBoundsInParent().getCenterX(), );
-        
+        line1c = new Line(line1a.getEndX(), line1a.getEndY(),
+                image.getNode().getBoundsInParent().getCenterX(),
+                computeYExtrapolation(line1a.getEndX(),
+                        line1a.getEndY(),
+                        lens.getNode().getBoundsInParent().getCenterX() + (lens.getFocalLength() * LensMain.CONVERSIONFACTOR),
+                        350,
+                        image.getNode().getBoundsInParent().getCenterX()));
+
+        line2c = new Line(line2a.getStartX(), line2a.getStartY(), image.getNode().getBoundsInParent().getCenterX(),
+                computeYExtrapolation(line1a.getEndX(),
+                        line1a.getEndY(),
+                        lens.getNode().getBoundsInParent().getCenterX() + (lens.getFocalLength() * LensMain.CONVERSIONFACTOR),
+                        350,
+                        image.getNode().getBoundsInParent().getCenterX()));
+
+        line3c = new Line(line3b.getStartX(), line3b.getStartY(),
+                image.getNode().getBoundsInParent().getCenterX(),
+                line3b.getStartY());
+
+        //style set c
+        line1c.getStrokeDashArray().add(5d);
+        line2c.getStrokeDashArray().add(5d);
+        line3c.getStrokeDashArray().add(5d);
         
         lmc.animationPane.getChildren().addAll(line1a, line2a, line3a,
-                line1b, line2b, line3b);
+                line1b, line2b, line3b, line1c, line2c, line3c);
 
     }
 
@@ -84,12 +104,12 @@ public class Rays {
                 350, lens.getNode().getBoundsInParent().getCenterX()));
 
         //set B
-        double[] line1bext = extendLines(
+        double[] line1bext = extendLinesRight(
                 lens.getNode().getBoundsInParent().getCenterX(),
                 line1a.getEndY(),
                 lens.getNode().getBoundsInParent().getCenterX() + lens.getFocalLength() * LensMain.CONVERSIONFACTOR,
                 350);
-        double[] line2bext = extendLines(line2a.getStartX(),
+        double[] line2bext = extendLinesRight(line2a.getStartX(),
                 line2a.getStartY(),
                 line2a.getEndX(),
                 line2a.getEndY());
@@ -109,10 +129,34 @@ public class Rays {
         line1b.setEndY(line1bext[1]);
         line2b.setEndY(line2bext[1]);
         line3b.setEndY(line3a.getEndY());
+        
+        //set C
 
+        line1c.setStartX(line1a.getEndX());
+        line2c.setStartX(line2a.getStartX());
+        line3c.setStartX(line3b.getStartX());
+        
+        line1c.setStartY(line1a.getEndY());
+        line2c.setStartY(line2a.getStartY());
+        line3c.setStartY(line3b.getStartY());
+
+        line1c.setEndX(image.getNode().getBoundsInParent().getCenterX());
+        line2c.setEndX(image.getNode().getBoundsInParent().getCenterX());
+        line3c.setEndX(image.getNode().getBoundsInParent().getCenterX());
+        
+        line1c.setEndY(computeYExtrapolation(line1a.getEndX(),
+                        line1a.getEndY(),
+                        lens.getNode().getBoundsInParent().getCenterX() + (lens.getFocalLength() * LensMain.CONVERSIONFACTOR),
+                        350,
+                        image.getNode().getBoundsInParent().getCenterX()));
+        line2c.setEndY(computeYExtrapolation(line1a.getEndX(),
+                        line1a.getEndY(),
+                        lens.getNode().getBoundsInParent().getCenterX() + (lens.getFocalLength() * LensMain.CONVERSIONFACTOR),
+                        350,
+                        image.getNode().getBoundsInParent().getCenterX()));
+        line3c.setEndY(line3b.getStartY());
     }
-
-    private static double[] extendLines(double x1, double y1, double x2, double y2) {
+    private static double[] extendLinesRight(double x1, double y1, double x2, double y2) {
         if (computeYExtrapolation(x1, y1, x2, y2, 1400) > 800) {
             return new double[]{computeXExtrapolation(x1, y1, x2, y2, 800), 800};
         } else {

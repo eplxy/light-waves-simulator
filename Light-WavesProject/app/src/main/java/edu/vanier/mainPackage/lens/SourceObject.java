@@ -57,10 +57,16 @@ public class SourceObject extends Item {
         });
         
     }
+    
+    public void adjustRayPointHeight(){
+        this.setRayPointHeight(350-this.getSize()*1.6666);
+    }
 
     public void scaleNodeToSize() {
+        this.adjustRayPointHeight();
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
+        
     }
 
     //getters and setters
