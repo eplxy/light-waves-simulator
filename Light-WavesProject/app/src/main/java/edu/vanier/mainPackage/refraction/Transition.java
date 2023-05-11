@@ -13,6 +13,14 @@ import javafx.util.Duration;
  */
 public class Transition {
     
+    /**
+    Creates a transition animation for the incident and refracted rays and their corresponding arcs.
+    @param incidentRay the incident ray Line object to animate
+    @param refractedRay the refracted ray Line object to animate
+    @param arcIncidentRay the incident ray Arc object to animate
+    @param arcRefractedRay the refracted ray Arc object to animate
+    @param animationPane the Pane object where the animation will be played
+    */
     public void CreatingLinesTransition(Line incidentRay, Line refractedRay, Arc arcIncidentRay, Arc arcRefractedRay, Pane animationPane){
         ScaleTransition st = new ScaleTransition(Duration.millis(1500), incidentRay);
         st.toXProperty().multiply(0);
