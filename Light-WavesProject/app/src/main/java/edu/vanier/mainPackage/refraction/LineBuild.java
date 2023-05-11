@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.refraction;
 
-import java.util.ArrayList;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Arc;
@@ -11,6 +10,8 @@ import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 
 /**
+ * This abstract class provides the necessary methods for creating lines and arcs 
+ * for the simulation of the refraction of light.
  *
  * @author Matthew Hantar
  */
@@ -65,7 +66,7 @@ public abstract class LineBuild implements LineAndRay{
         horizontalRay.endYProperty().bind(animationPane.heightProperty().divide(2));
         horizontalRay.getStrokeDashArray().addAll(3d);
 
-        //Normal Ray
+        //Normal Ray which is the vertical Ray
         normalRay.startXProperty().bind(animationPane.widthProperty().divide(2));
         normalRay.startYProperty().setValue(-20);
         normalRay.endXProperty().bind(animationPane.widthProperty().divide(2));

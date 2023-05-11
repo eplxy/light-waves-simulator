@@ -56,13 +56,13 @@ public class MenuController {
      * The choice box for selecting the first material.
      */
     @FXML
-    ChoiceBox choiceBoxMaterial1;
+    ChoiceBox btnMaterial1;
     
     /**
      * The choice box for selecting the first material.
      */
     @FXML
-    ChoiceBox choiceBoxMaterial2;
+    ChoiceBox btnMaterial2;
     
      /**
      * The pane where the animation of the light ray and material interfaces are 
@@ -207,8 +207,8 @@ public class MenuController {
          * This action event updates the choiceBox for the materials 1 depending 
          * on the selected index chosen.
          */
-        choiceBoxMaterial1.setOnAction((event) -> {
-            selectedIndex1 = choiceBoxMaterial1.getSelectionModel().getSelectedIndex();
+        btnMaterial1.setOnAction((event) -> {
+            selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
             
             
             labelMaterial1.setText("Material index 1: " + listMaterial.get(selectedIndex1).getRefractionIndex() + " ");
@@ -220,8 +220,8 @@ public class MenuController {
          * This action event updates the choiceBox for the materials 2 depending 
          * on the selected index chosen.
          */
-        choiceBoxMaterial2.setOnAction((event) -> {
-            selectedIndex2 = choiceBoxMaterial2.getSelectionModel().getSelectedIndex();
+        btnMaterial2.setOnAction((event) -> {
+            selectedIndex2 = btnMaterial2.getSelectionModel().getSelectedIndex();
             
             labelMaterial2.setText("Material index 2: " + listMaterial.get(selectedIndex2).getRefractionIndex() + " ");
             
@@ -273,8 +273,8 @@ public class MenuController {
         listMaterial.add(new Material(Color.SLATEGREY, "Silicon", 3.42)); 
         
         for (int i = 0; i < listMaterial.size(); i++) {
-            choiceBoxMaterial1.getItems().add(listMaterial.get(i));
-            choiceBoxMaterial2.getItems().add(listMaterial.get(i));
+            btnMaterial1.getItems().add(listMaterial.get(i));
+            btnMaterial2.getItems().add(listMaterial.get(i));
         }
         
     }

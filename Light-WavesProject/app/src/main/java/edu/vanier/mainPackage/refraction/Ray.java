@@ -11,6 +11,11 @@ import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * This class represents a ray of light and provides methods to update the ray 
+ * based on angle and refractive index.
+ * 
+ * It extends the abstract class LineBuild and all the methods are described in
+ * the LineAndRay class. 
  *
  * @author Matthew Hantar
  */

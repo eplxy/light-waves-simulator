@@ -28,16 +28,11 @@ public class Light {
     
     /**
     Changes the color of the given lines to a color based on a given value.
-
     @param incidentLine The incident line.
-
     @param refractedLine The refracted line.
-
     @param totalRefractedLine The total refracted line.
-
     @param value The value based on which the color of the lines is determined.
     */
-    
     public void colorLines(Line incidentLine, Line refractedLine, Line totalRefractedLine, double value){
         
         //Changes the range of the value, from 300 to 700, to the colorHexList length. 

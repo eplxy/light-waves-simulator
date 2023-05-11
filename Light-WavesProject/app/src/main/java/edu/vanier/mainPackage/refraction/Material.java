@@ -4,8 +4,9 @@ import javafx.scene.paint.Color;
 import lombok.Data;
 
 /**
- * The Material class represents a material through its color, name, and refraction index.
- * It provides a constructor to initialize these fields, and a toString method to retrieve a string representation of the material.
+ * The Material class represents a material through its color, name, and 
+ * refraction index. It provides a constructor to initialize these fields, 
+ * and a toString method to retrieve a string representation of the material.
  *
  * @author Matthew
  */
