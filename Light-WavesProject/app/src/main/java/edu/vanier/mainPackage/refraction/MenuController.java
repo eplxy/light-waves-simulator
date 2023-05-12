@@ -151,8 +151,6 @@ public class MenuController {
          */
         textAngle.setOnAction(e -> {
             angle1 = textAngle.getText();
-            System.out.println(listMaterial.get(selectedIndex1));
-            System.out.println(listMaterial.get(selectedIndex2));
             ray.updateLines(Double.parseDouble(angle1), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
          });
         

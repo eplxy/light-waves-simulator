@@ -15,7 +15,7 @@ import lombok.Setter;
  * based on angle and refractive index.
  * 
  * It extends the abstract class LineBuild and all the methods are described in
- * the LineAndRay class. 
+ * the LineAndRay interface. 
  *
  * @author Matthew Hantar
  */
@@ -31,7 +31,6 @@ public class Ray extends LineBuild{
         newRotate.pivotYProperty().bind(incidentRay.endYProperty());
         incidentRay.getTransforms().setAll(newRotate);
         newRotate.setAngle(angle);
-        System.out.println(angle);
         arcIncidentRay.setLength(-angle);
 
         angle2 = Vector.CalculateAngle(index1, index2, angle);
@@ -101,9 +100,8 @@ public class Ray extends LineBuild{
         newRotate2.setAngle(90 - angle2);
 
         arcRefractedRay.setLength(-(90 - angle2));
-        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", angle2) + "°");
-
-        System.out.println("Angle 2: " + (90 - angle2));
+        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", 90 - angle2) + "°");
+        
         refractedRay.getTransforms().setAll(newRotate2);
     }
 
@@ -123,7 +121,5 @@ public class Ray extends LineBuild{
         arcRefractedRay.setLength(90 - angle);
 
         labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", (90 - angle)) + "°");
-
-        System.out.println("total internal reflection and angle: " + angle);
     }
 }
