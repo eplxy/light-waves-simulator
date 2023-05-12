@@ -2,23 +2,23 @@ package edu.vanier.mainPackage.refraction;
 
 import edu.vanier.mainPackage.MainApp;
 import java.util.ArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 
 /**
+ * The MenuController class is the controller for the main menu FXML file.
+ * It contains methods and event handlers for handling user input and updating
+ * the visual representation of the application.
  *
  * @author Matthew Hantar
  */
@@ -26,84 +26,122 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MenuController {
-    
+    /**
+     * The main menu button that returns the user to the main menu.
+     */
     @FXML
     Button btnMainMenu;
     
+     /**
+     * The button that toggles the line to its initial color.
+     */
     @FXML
     Button btnLight;
     
+    /**
+     * The button that toggles the visibility of the angle labels and arcs.
+     */
     @FXML
     Button btnAngles;
     
+    /**
+     * The slider for adjusting the angle of incidence of the light ray.
+     */
     @FXML
     Slider sliderAngle;
     
+    /**
+     * The slider for adjusting the color of the light source.
+     */
     @FXML
     Slider sliderColor;
     
+     /**
+     * The choice box for selecting the first material.
+     */
     @FXML
     ChoiceBox btnMaterial1;
     
+    /**
+     * The choice box for selecting the first material.
+     */
     @FXML
     ChoiceBox btnMaterial2;
     
+     /**
+     * The pane where the animation of the light ray and material interfaces are 
+     * displayed.
+     */
     @FXML
     Pane animationPane;
     
+    /**
+     * The pane where the first material interface is displayed.
+     */
     @FXML
     Pane materialPane1;
             
+    /**
+     * The pane where the second material interface is displayed.
+     */
     @FXML
-    Pane materialPane2;        
+    Pane materialPane2;
     
-    @FXML
-    Rectangle rectangle;
-    
+    /**
+     * The text field for entering the angle of incidence of the light ray.
+     */
     @FXML
     TextField textAngle;
     
+    /**
+     * The label for displaying the refractive index of the first material.
+     */
     @FXML
-    TextField textN1;
+    Label labelMaterial1 = new Label("Material index 1: ");
     
+    /**
+     * The label for displaying the refractive index of the second material.
+     */
     @FXML
-    TextField textN2;
+    Label labelMaterial2 = new Label("Material index 2: ");
     
     Stage primaryStage;
-    Simulation sim;
-    
-    Draggable draggableMaker = new Draggable();
     ArrayList<Material> listMaterial = new ArrayList<>();
-    
-    private String n1;
-    private String n2;
     private int selectedIndex1;
     private int selectedIndex2;
     private String angle1 = "45";
     
+     /**
+     * Constructs a new MenuController object with the given stage.
+     *
+     * @param primaryStage the stage where the application is displayed.
+     */
     MenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
     
+    /**
+     * The initialize method creates the lines, adds the materials, then it
+     * updates the lines with the user input.
+     */
     public void initialize(){
         Ray ray = new Ray();
+        Light light = new Light();
+        
+        /**
+         * These methods create the lines from the ray class which inherits from
+         * the LineBuild class. Then the next methods add the materials and the 
+         * sliders visuals. 
+         */
         ray.CreateLines(primaryStage, animationPane);
-        sliderAngle.setMin(0);
-        sliderAngle.setMax(90);
-        sliderAngle.setValue(45);
-        sliderAngle.setShowTickLabels(true);
-        sliderAngle.setShowTickMarks(true);
-        sliderAngle.setMajorTickUnit(5);
-        sliderAngle.setMinorTickCount(5);
-        sliderAngle.setBlockIncrement(1);
-        
-        draggableMaker.makeDraggable(rectangle, animationPane);
         addMaterials();
+        sliderSetup();
         
-        
+        /**
+         * This action event makes the user go back to the main menu.
+         */
         btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
-            System.out.println("lol");
             try {
                 mainApp.start(primaryStage);
             } catch (Exception ex) {
@@ -111,23 +149,18 @@ public class MenuController {
             }
         });
         
+        /**
+         * This action event updates the angle of the incident line based on 
+         * the user input. 
+         */
         textAngle.setOnAction(e -> {
             angle1 = textAngle.getText();
-            System.out.println(listMaterial.get(selectedIndex1));
-            System.out.println(listMaterial.get(selectedIndex2));
             ray.updateLines(Double.parseDouble(angle1), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
          });
         
-        textN1.setOnAction(e -> {
-            n1 = textN1.getText();
-            System.out.println(n1);
-         });
-        
-        textN2.setOnAction(e -> {
-            n2 = textN2.getText();
-            System.out.println(n2);
-         });
-        
+        /**
+         * This action event disables the angles.
+         */
         btnAngles.setOnAction((event) -> {
             if (ray.getArcIncidentRay().isDisabled() & ray.getArcRefractedRay().isDisabled()) {
                 
@@ -148,39 +181,85 @@ public class MenuController {
             }
         });
         
-       
-        sliderAngle.valueProperty().addListener(new ChangeListener<Number>() {
-         public void changed(ObservableValue <?extends Number>observable, Number oldValue, Number newValue){
+        /**
+         * This action event is for the slider that changes the angle.
+         */
+        sliderAngle.valueProperty().addListener((ObservableValue <?extends Number>observable, Number oldValue, Number newValue) -> {
             ray.updateLines(Double.parseDouble(newValue.toString()), listMaterial.get(selectedIndex1).getRefractionIndex(), listMaterial.get(selectedIndex2).getRefractionIndex());
-         }
         });
-         
+        
+         /**
+          * This action event is for the slider that changes the color.
+          */
+        sliderColor.valueProperty().addListener((ObservableValue <?extends Number>observable, Number oldValue, Number newValue) -> {
+            light.colorLines(ray.getIncidentRay(), ray.getRefractedRay(), ray.getTotalRefractedRay(), (double) newValue);
+        });
+        
+        /**
+         * The action event puts the different colors of the light to their 
+         * original colors.
+         */
         btnLight.setOnAction((event) -> {
-             
+             ray.getIncidentRay().setStroke(Color.BLACK);
+             ray.getRefractedRay().setStroke(Color.BLACK);
+             ray.getTotalRefractedRay().setStroke(Color.BLACK);
         }); 
         
+        /**
+         * This action event updates the choiceBox for the materials 1 depending 
+         * on the selected index chosen.
+         */
         btnMaterial1.setOnAction((event) -> {
             selectedIndex1 = btnMaterial1.getSelectionModel().getSelectedIndex();
-            Object selectedItem = btnMaterial1.getSelectionModel().getSelectedItem();
-            System.out.println(angle1);
-
+            
+            
+            labelMaterial1.setText("Material index 1: " + listMaterial.get(selectedIndex1).getRefractionIndex() + " ");
             ray.materialUpdateLines1(selectedIndex1,selectedIndex2, materialPane1, listMaterial, angle1);
-            System.out.println("Selection made: [" + selectedIndex1 + "] " + selectedItem);
-            System.out.println("   ChoiceBox.getValue(): " + btnMaterial1.getValue());
+            
         });
         
+        /**
+         * This action event updates the choiceBox for the materials 2 depending 
+         * on the selected index chosen.
+         */
         btnMaterial2.setOnAction((event) -> {
             selectedIndex2 = btnMaterial2.getSelectionModel().getSelectedIndex();
-            Object selectedItem = btnMaterial2.getSelectionModel().getSelectedItem();
-
-            System.out.println(angle1);
+            
+            labelMaterial2.setText("Material index 2: " + listMaterial.get(selectedIndex2).getRefractionIndex() + " ");
+            
             ray.materialUpdateLines2(selectedIndex1, selectedIndex2, materialPane2, listMaterial, angle1);
-            System.out.println("Selection made: [" + selectedIndex2 + "] " + selectedItem);
-            System.out.println("   ChoiceBox.getValue(): " + btnMaterial2.getValue());
+            
         });
         
     } 
     
+     /**
+     * Sets up the slider properties for adjusting the angle of incidence of the
+     * light ray and the color of the light source.
+     */
+    public void sliderSetup(){
+        sliderAngle.setMin(0);
+        sliderAngle.setMax(90);
+        sliderAngle.setValue(45);
+        sliderAngle.setShowTickLabels(true);
+        sliderAngle.setShowTickMarks(true);
+        sliderAngle.setMajorTickUnit(5);
+        sliderAngle.setMinorTickCount(5);
+        sliderAngle.setBlockIncrement(1);
+        
+        sliderColor.setMin(300);
+        sliderColor.setMax(700);
+        sliderColor.setValue(300);
+        sliderColor.setShowTickLabels(true);
+        sliderColor.setShowTickMarks(true);
+        sliderColor.setMajorTickUnit(20);
+        sliderColor.setMinorTickCount(10);
+        sliderColor.setBlockIncrement(5);
+    }
+    
+    /**
+     * Adds the materials in the arrayList based on real properties. 
+     */
      public void addMaterials(){
         
         listMaterial.add(new Material(Color.TRANSPARENT, "Air", 1.0));
