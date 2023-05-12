@@ -1,8 +1,6 @@
 package edu.vanier.mainPackage;
 
 import DoubleSlit.UI.DoubleSlitMenuController;
-import DoubleSlit.UI.GraphController;
-import DoubleSlit.UI.TestGraphController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -40,5 +38,5 @@ public class MainApp extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
+    
 }

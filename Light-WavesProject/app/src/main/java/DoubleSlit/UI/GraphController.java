@@ -4,6 +4,7 @@
  */
 package DoubleSlit.UI;
 
+import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
 import static java.util.EnumSet.range;
 import java.util.function.Function;
@@ -87,6 +88,7 @@ public class GraphController{
     }
 
     public void plotLine() {
+        graph.getData().clear();
         final Function<Double, Double> function;
         if (selectedGraph.equals("Diffraction")){
             function = plotDiffraction();

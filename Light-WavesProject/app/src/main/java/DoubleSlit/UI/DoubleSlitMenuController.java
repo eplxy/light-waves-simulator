@@ -2,6 +2,7 @@ package DoubleSlit.UI;
 
 import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
+import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -15,6 +16,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 
 /**
@@ -37,16 +39,11 @@ public class DoubleSlitMenuController {
 
     Stage primaryStage;
 
-    private Parameters parameters;
-
     @FXML
     Slider sliderWavelength;
 
     @FXML
     Slider sliderWidth;
-
-    @FXML
-    Slider sliderScreen;
 
     @FXML
     Slider sliderSpacing;
@@ -56,9 +53,6 @@ public class DoubleSlitMenuController {
 
     @FXML
     TextField txtFieldWidth;
-
-    @FXML
-    TextField txtFieldScreen;
 
     @FXML
     TextField txtFieldSpacing;
@@ -76,6 +70,7 @@ public class DoubleSlitMenuController {
     Button btnEnter;
 
     GraphController graphController;
+    AnimationController animationController;
     String selectedView;
 
     public DoubleSlitMenuController(Stage primaryStage) {
@@ -98,27 +93,14 @@ public class DoubleSlitMenuController {
         radioBtnGraph.setSelected(true);
         sliderWavelength.valueProperty().addListener(
                 new ChangeListener<Number>() {
-                    public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                        txtFieldWavelength.setText(newValue.toString());
-                        //Parameters.setWavelength(Double.parseDouble(txtFieldWavelength.getText()));
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                updateTextField(txtFieldWavelength, newValue);
             }
         });
         sliderWidth.valueProperty().addListener(
                 new ChangeListener<Number>() {
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                txtFieldWidth.setText(newValue.toString());
-                //Parameters.setWidth (Double.parseDouble(txtFieldWidth.getText()));
-
-            }
-        });
-        sliderScreen.valueProperty().addListener(
-                new ChangeListener<Number>() {
-
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                txtFieldScreen.setText(newValue.toString());
-                //Parameters.setScreen(Double.parseDouble(txtFieldScreen.getText()));
+                updateTextField(txtFieldWidth, newValue);
 
             }
         });
@@ -126,14 +108,21 @@ public class DoubleSlitMenuController {
                 new ChangeListener<Number>() {
 
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-
-                txtFieldSpacing.setText(newValue.toString());
-                //Parameters.setSpacing( Double.parseDouble(txtFieldSpacing.getText()));
+                updateTextField(txtFieldSpacing, newValue);
+                //updateCircles((double)newValue);
             }
         });
-        btnEnter.setOnAction((event) -> {
-            handleEnter(event, this.primaryStage);
+        txtFieldWavelength.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSlider(sliderWavelength, newValue);
         });
+        txtFieldWidth.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSlider(sliderWidth, newValue);
+        });
+        txtFieldSpacing.textProperty().addListener((observable, oldValue, newValue) -> {
+            updateSlider(sliderSpacing, newValue);
+            updateCircles(Double.parseDouble(newValue));
+        });
+
         defaultValues();
     }
 
@@ -141,7 +130,9 @@ public class DoubleSlitMenuController {
         if (selectedView.equals("Animation")) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/animation.fxml"));
-                AnimationController animationController = new AnimationController(primaryStage, this.parameters);
+                AnimationController animationController = new AnimationController(primaryStage, this);
+                this.animationController = animationController;
+                
                 loader.setController(animationController);
                 BorderPane root = loader.load();
                 paneView.getChildren().clear();
@@ -159,6 +150,7 @@ public class DoubleSlitMenuController {
                 BorderPane root = loader.load();
                 paneView.getChildren().clear();
                 paneView.getChildren().add(root);
+                graphController.plotLine();
 
             } catch (IOException e) {
                 System.out.println(e);
@@ -167,23 +159,63 @@ public class DoubleSlitMenuController {
 
     }
 
-    public void handleEnter(ActionEvent event, Stage primaryStage) {
+    private void updateParameters() {
         Parameters.setWavelength(Double.parseDouble(txtFieldWavelength.getText()));
         Parameters.setWidth(Double.parseDouble(txtFieldWidth.getText()));
-        Parameters.setScreen(Double.parseDouble(txtFieldScreen.getText()));
         Parameters.setSpacing(Double.parseDouble(txtFieldSpacing.getText()));
         if (selectedView.equals("Graph")) {
             this.graphController.plotLine();
+        } else {
+
+        }
+    }
+
+    private void updateTextField(TextField textField, Number newValue) {
+        try {
+            textField.setText(newValue.toString());
+            updateParameters();
+            if(textField.equals(txtFieldSpacing)){
+                updateCircles((double)newValue);
+                updateArcs(animationController.getRaysManager().getTopArcList(),
+                        animationController.getRaysManager().getBottomArcList());
+            }
+        } catch (Exception e) {
+        }
+    }
+    public void updateArcs(List<Arc> topArcList, List<Arc> bottomArcList) {
+        for( Arc a:topArcList){
+            a.setCenterY(this.animationController.getCircleTop().getCenterY());
+        }
+        for( Arc a:bottomArcList){
+            a.setCenterY(this.animationController.getCircleBottom().getCenterY());
+        }
+    }
+    public void updateCircles(double spacing){
+        try{
+        double relativeSpacing = spacing*30;
+        double center = this.animationController.animationPane.getLayoutBounds().getCenterY();
+        this.animationController.getCircleBottom().setCenterY(center + relativeSpacing);
+        this.animationController.getCircleTop().setCenterY(center-relativeSpacing);
+        }catch(NullPointerException e){};
+    }
+
+    public void updateSlider(Slider slider, String newValue) {
+        try {
+            slider.setValue(Double.parseDouble(newValue));
+        } catch (NumberFormatException e) {
         }
     }
 
     public void defaultValues() {
         sliderWavelength.setValue(generateRandom(380, 750));
         sliderWidth.setValue(generateRandom(0, 10));
-        sliderScreen.setValue(generateRandom(0, 20));
         sliderSpacing.setValue(generateRandom(0, 10));
+        //updateCircles(sliderSpacing.getValue());
         if (selectedView.equals("Graph")) {
-            //this.graphController.plotLine();
+            this.graphController.plotLine();
+        }
+        else{
+            
         }
     }
 

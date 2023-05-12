@@ -7,7 +7,6 @@ package DoubleSlit.Simulation;
 public class Parameters {
     private static double wavelength;
     private static double width;
-    private static double screen;
     private static double spacing;
 
     public static double getWavelength() {
@@ -24,14 +23,6 @@ public class Parameters {
 
     public static void setWidth(double width) {
         Parameters.width = width;
-    }
-
-    public static double getScreen() {
-        return screen;
-    }
-
-    public static void setScreen(double screen) {
-        Parameters.screen = screen;
     }
 
     public static double getSpacing() {
