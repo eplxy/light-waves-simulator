@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
    <right>
-      <VBox fx:id="parametersVBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="396.0" prefWidth="199.0" BorderPane.alignment="CENTER">
+      <VBox fx:id="parametersVBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="396.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <Label alignment="CENTER" prefHeight="40.0" prefWidth="137.0" text="Parameters" textAlignment="CENTER">
                <font>
@@ -32,7 +32,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Slider fx:id="sliderWavelength" majorTickUnit="50.0" max="750.0" min="380.0" minorTickCount="10" showTickLabels="true" />
+                  <Slider fx:id="sliderWavelength" majorTickUnit="50.0" max="750.0" maxHeight="-Infinity" maxWidth="-Infinity" min="380.0" minHeight="-Infinity" minWidth="-Infinity" minorTickCount="10" prefHeight="35.0" prefWidth="180.0" showTickLabels="true" />
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="txtFieldWavelength" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="54.0">
@@ -51,29 +51,10 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Slider fx:id="sliderWidth" majorTickUnit="1.0" max="10.0" showTickLabels="true" />
+                  <Slider fx:id="sliderWidth" majorTickUnit="1.0" max="10.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="35.0" prefWidth="180.0" showTickLabels="true" />
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="txtFieldWidth" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="54.0">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </TextField>
-                     </children>
-                  </HBox>
-               </children>
-            </VBox>
-            <VBox prefHeight="200.0" prefWidth="100.0">
-               <children>
-                  <Label text="Screen Distance">
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                  </Label>
-                  <Slider fx:id="sliderScreen" majorTickUnit="2.0" max="20.0" showTickLabels="true" />
-                  <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
-                     <children>
-                        <TextField fx:id="txtFieldScreen" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="54.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -89,7 +70,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <Slider fx:id="sliderSpacing" majorTickUnit="1.0" max="10.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="18.0" prefWidth="182.0" showTickLabels="true" />
+                  <Slider fx:id="sliderSpacing" majorTickUnit="1.0" max="10.0" maxWidth="-Infinity" minHeight="-Infinity" prefHeight="35.0" prefWidth="180.0" showTickLabels="true" />
                   <HBox alignment="CENTER_RIGHT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="200.0">
                      <children>
                         <TextField fx:id="txtFieldSpacing" alignment="CENTER" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="54.0">
@@ -98,14 +79,6 @@
                            </HBox.margin>
                         </TextField>
                      </children>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
-                     <children>
-                        <Button fx:id="btnEnter" mnemonicParsing="false" text="Enter" />
-                     </children>
-                     <VBox.margin>
-                        <Insets bottom="10.0" />
-                     </VBox.margin>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
@@ -119,6 +92,9 @@
                </children>
             </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets left="5.0" right="5.0" />
+         </BorderPane.margin>
       </VBox>
    </right>
    <top>
@@ -137,6 +113,6 @@
       </ToolBar>
    </top>
    <center>
-      <Pane fx:id="paneView" prefHeight="750.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
+      <Pane fx:id="paneView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1100.0" BorderPane.alignment="CENTER" />
    </center>
 </BorderPane>

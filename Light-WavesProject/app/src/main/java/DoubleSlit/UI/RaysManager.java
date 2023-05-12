@@ -4,6 +4,7 @@
  */
 package DoubleSlit.UI;
 
+import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,6 +14,8 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
@@ -50,6 +53,7 @@ public class RaysManager {
      * @return 
      */ 
     private Timeline animationLoop() {
+        
 
         EventHandler<ActionEvent> onFinished = (event) -> {
             update(arcList);            
@@ -92,23 +96,47 @@ public class RaysManager {
         //Setting the type of the arc 
         arc.setType(ArcType.OPEN);
         arc.setFill(Color.TRANSPARENT);
-        arc.setStroke(Color.BLACK);
+        arc.setStroke(colorPicker(Parameters.getWavelength()));
         animationController.animationPane.getChildren().add(arc);
         arcList.add(arc);
         return arc;
 
     }
+     
+     public Color colorPicker(double wavelength){
+         Color color;
+                 if(380<= wavelength && wavelength<450){
+            color = Color.VIOLET;
+        }else if(450<= wavelength && wavelength<495){
+            color = Color.BLUE; 
+        }else if(495<= wavelength&& wavelength <570){
+            color = Color.GREEN;
+        }else if(570<= wavelength && wavelength<590){
+            color = Color.YELLOW;
+        }else if(590<= wavelength && wavelength<620){
+            color = Color.ORANGE;
+        }else{
+            color = Color.RED;
+        }
+                 return color;
+     }
+     
+//     public double radiusPicker(double wavelength){
+//        return wavelength/60;
+//     }
 
     public void update(List<Arc> arcList) {
+        try{
+            
         for( Arc a:arcList){
             a.setRadiusX(a.getRadiusX()+1);
             a.setRadiusY(a.getRadiusY()+1);
-            try{
+            
             if(a.getRadiusX()>2000){
                 arcList.remove(a);
-            }}catch(ConcurrentModificationException e){};
+            }}}catch(ConcurrentModificationException e){};
         }
-    }
+    
     
     public void reset(){
         addRaysLoop().stop();
@@ -116,6 +144,8 @@ public class RaysManager {
         animationController.animationPane.getChildren().removeAll(arcList);
         arcList.clear();
     }
+    
+    
 
     public Timeline getAnimationLoop() {
         return animationLoop;

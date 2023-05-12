@@ -56,6 +56,7 @@ public class AnimationController {
  
 
     public void initialize() {
+        animationPane.setStyle("-fx-border-color: lightGrey");
         
         btnPlay.setOnAction((event) -> {
             handlePlay(event);

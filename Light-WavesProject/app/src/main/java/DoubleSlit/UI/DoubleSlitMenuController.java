@@ -2,6 +2,7 @@ package DoubleSlit.UI;
 
 import DoubleSlit.Simulation.Parameters;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.List;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,6 +17,7 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Arc;
 import javafx.stage.Stage;
 
@@ -32,7 +34,6 @@ simplify the formula
 remove useless empty lines
 create constants 
 private functions
-changing text changes slider value
 
  */
 public class DoubleSlitMenuController {
@@ -72,6 +73,10 @@ public class DoubleSlitMenuController {
     GraphController graphController;
     AnimationController animationController;
     String selectedView;
+    private final DecimalFormat dfWavelength = new DecimalFormat("0.00");
+    private final DecimalFormat df = new DecimalFormat("0.0000");
+
+
 
     public DoubleSlitMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -109,21 +114,29 @@ public class DoubleSlitMenuController {
 
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
                 updateTextField(txtFieldSpacing, newValue);
-                //updateCircles((double)newValue);
             }
         });
-        txtFieldWavelength.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateSlider(sliderWavelength, newValue);
-        });
-        txtFieldWidth.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateSlider(sliderWidth, newValue);
-        });
-        txtFieldSpacing.textProperty().addListener((observable, oldValue, newValue) -> {
-            updateSlider(sliderSpacing, newValue);
-            updateCircles(Double.parseDouble(newValue));
-        });
+        txtFieldWavelength.setOnAction(e->{
+              updateSlider(sliderWavelength, txtFieldWavelength.getText());
+         });
+        txtFieldWidth.setOnAction(e->{
+              updateSlider(sliderWavelength, txtFieldWidth.getText());
+         });
+        txtFieldSpacing.setOnAction(e->{
+              updateSlider(sliderWavelength, txtFieldSpacing.getText());
+         });
 
         defaultValues();
+    }
+    
+    public void updateColor(double wavelength, List<Arc> arcList){
+        try{
+        Color color = animationController.getRaysManager().colorPicker(wavelength);
+        
+        for(Arc a: arcList){
+            a.setStroke(color);
+        }
+        }catch(NullPointerException e){};
     }
 
     public void changeView(String selectedView) {
@@ -172,16 +185,26 @@ public class DoubleSlitMenuController {
 
     private void updateTextField(TextField textField, Number newValue) {
         try {
-            textField.setText(newValue.toString());
+            if(textField.equals(txtFieldWavelength)){
+                textField.setText(dfWavelength.format(newValue).toString());
+            
+        }else{
+            textField.setText(df.format(newValue).toString());
+        }
+            
             updateParameters();
             if(textField.equals(txtFieldSpacing)){
                 updateCircles((double)newValue);
                 updateArcs(animationController.getRaysManager().getTopArcList(),
                         animationController.getRaysManager().getBottomArcList());
+            }else if(textField.equals(txtFieldWavelength)){
+                updateColor(Parameters.getWavelength(),animationController.getRaysManager().getArcList());
             }
+            
         } catch (Exception e) {
         }
     }
+    
     public void updateArcs(List<Arc> topArcList, List<Arc> bottomArcList) {
         for( Arc a:topArcList){
             a.setCenterY(this.animationController.getCircleTop().getCenterY());
@@ -210,7 +233,6 @@ public class DoubleSlitMenuController {
         sliderWavelength.setValue(generateRandom(380, 750));
         sliderWidth.setValue(generateRandom(0, 10));
         sliderSpacing.setValue(generateRandom(0, 10));
-        //updateCircles(sliderSpacing.getValue());
         if (selectedView.equals("Graph")) {
             this.graphController.plotLine();
         }
