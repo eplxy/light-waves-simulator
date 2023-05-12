@@ -20,7 +20,7 @@ public class Metal {
         metalWorkFunction.put("Copper", 5.0);
         metalWorkFunction.put("Gold", 5.1);
     }
-    
+
     public double getWorkFunction(String metalName){
         return metalWorkFunction.get(metalName);
     }

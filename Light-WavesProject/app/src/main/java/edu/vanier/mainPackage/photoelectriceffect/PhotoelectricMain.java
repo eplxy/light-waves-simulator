@@ -2,15 +2,11 @@ package edu.vanier.mainPackage.photoelectriceffect;
 
 import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMenuController;
 import java.io.IOException;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 
 //@author Maesha Mahmud
 public class PhotoelectricMain extends Application {
