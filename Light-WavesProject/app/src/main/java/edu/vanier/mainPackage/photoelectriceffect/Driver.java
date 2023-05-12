@@ -44,7 +44,7 @@ public class Driver extends Application {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/PhotoelectricEffectMenu.fxml"));
 
             //connect to the controller class
-            PhotoelectricMenuController controller = new PhotoelectricMenuController();
+            PhotoelectricMenuController controller = new PhotoelectricMenuController(stage);
             loader.setController(controller);
 
             //set and show scene

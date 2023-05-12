@@ -1,5 +1,6 @@
 package edu.vanier.mainPackage.photoelectriceffect;
 
+import edu.vanier.mainPackage.MainApp;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -68,6 +69,8 @@ public class PhotoelectricMenuController{
     Button btnPlay = new Button();
     @FXML 
     Button btnHelp = new Button();
+    @FXML
+    Button btnMainMenu = new Button();
     @FXML 
     private Label intensityLabel;
     @FXML 
@@ -80,6 +83,12 @@ public class PhotoelectricMenuController{
     private Label minimumEnergyLabel;
     @FXML
     private Label displayBatteryVoltageLabel;
+    
+    Stage stage;
+    
+    PhotoelectricMenuController(Stage stage) {
+        this.stage = stage;
+    }
     
     Electron electron = new Electron();
     
@@ -95,6 +104,17 @@ public class PhotoelectricMenuController{
         metalWorkFunctions.put("Calcium", 3.0);
         metalWorkFunctions.put("Copper", 5.0);
         metalWorkFunctions.put("Gold", 5.1);
+        
+        btnMainMenu.setOnAction(e -> {
+            MainApp mainApp = new MainApp();
+            System.out.println("lol");
+            try {
+                mainApp.start(stage);
+            } catch (Exception ex) {
+                System.err.println(ex.toString());
+            }
+        });
+        
         /**
          * what this does is when the help button is clicked, a window opens up
          * explaining how to use this simulation. 
