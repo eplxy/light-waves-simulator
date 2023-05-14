@@ -23,6 +23,14 @@ public class Electron {
     private int randomNumber;
     private double duration;
     
+    public Electron(){}
+
+    public Electron(Timeline circlesTimeline, int randomNumber, double duration) {
+        this.circlesTimeline = circlesTimeline;
+        this.randomNumber = randomNumber;
+        this.duration = duration;
+    }    
+    
     /**
      * This is the main animation where the electron (or photoelectrons) eject
      * from the metal plate if the minimum energy of the photons are higher than
@@ -50,5 +58,31 @@ public class Electron {
             circlesTimeline = timeline;
             }
     }
+
+    public Timeline getCirclesTimeline() {
+        return circlesTimeline;
+    }
+
+    public void setCirclesTimeline(Timeline circlesTimeline) {
+        this.circlesTimeline = circlesTimeline;
+    }
+
+    public int getRandomNumber() {
+        return randomNumber;
+    }
+
+    public void setRandomNumber(int randomNumber) {
+        this.randomNumber = randomNumber;
+    }
+
+    public double getDuration() {
+        return duration;
+    }
+
+    public void setDuration(double duration) {
+        this.duration = duration;
+    }
+    
+    
     
 }

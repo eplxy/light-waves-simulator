@@ -9,7 +9,6 @@ import java.util.HashMap;
 public class Metal {
     private String metalName;
     private double workFunction;
-    
     private HashMap<String, Double> metalWorkFunction;
     
     public Metal(){
@@ -45,4 +44,13 @@ public class Metal {
     public void setWorkFunction(double workFunction) {
         this.workFunction = workFunction;
     }
+
+    public HashMap<String, Double> getMetalWorkFunction() {
+        return metalWorkFunction;
+    }
+
+    public void setMetalWorkFunction(HashMap<String, Double> metalWorkFunction) {
+        this.metalWorkFunction = metalWorkFunction;
+    }
+    
 }

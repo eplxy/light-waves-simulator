@@ -60,6 +60,11 @@ public class PhotoelectricMenuController{
      * The wavelength of the incident light
      */
     private double wavelength;
+    
+    /**
+     * The intensity of the incident light
+     */
+    private int intensity;
 
     /**
      * The type of metal being used in the simulation
@@ -285,23 +290,30 @@ public class PhotoelectricMenuController{
             helpStage.show();
         });
         
-        /**
-         * this generates the animation code when the play button is clicked.
-         * it will only run if the minimum energy is higher than 0
-         */
-        
         btnPlay.setOnAction(e ->{
-            if(minimumEnergy > 0){
-                
-                if (circlesGenerated) {
-                    pane.getChildren().removeIf(node -> node instanceof Circle);
-                }
-                electron.generateCircles(numCircles, pane);
-                circlesGenerated = true;
-                buttonWasPressed = true;
-            }  
-                
+            electronsEjected(minimumEnergy);
+            if(minimumEnergy < 0){
+                Stage playStage = new Stage();
+                playStage.setTitle("Minimum Energy");
+
+                TextFlow helpTextFlow = new TextFlow();
+                Text helpText = new Text("There was an error.\n"
+                        + "it seems that the minimum energy is \n"
+                        + "less than zero. Therefore, the wavelength that you \n"
+                        + "chosen does not surpass the threshold compared to \n"
+                        + "the energy of the electron on the metal plate."
+                );
+                helpTextFlow.getChildren().add(helpText);
+
+                VBox playLayout = new VBox();
+                playLayout.getChildren().add(helpTextFlow);
+                playLayout.getChildren().add(helpText);
+                Scene playScene = new Scene(playLayout, 300, 200);
+                playStage.setScene(playScene);
+                playStage.show();
+            }
         });
+        
         /**
          * this is to update the intensity slider
          */
@@ -316,48 +328,30 @@ public class PhotoelectricMenuController{
              * similarly, this updates the intensity of the animation according 
              * to the percentage of intensity
              */
-            int intensity = newValue.intValue();
+            intensity = newValue.intValue();
             numCircles = (intensity / 2);
             
-            
-            
-            if(minimumEnergy > 0){
-                if (buttonWasPressed == true) {
-                    if (circlesGenerated) {
-                        
-                        pane.getChildren().removeIf(node -> node instanceof Circle);
-                    }
-                    electron.generateCircles(numCircles, pane);
-                    circlesGenerated = true;
-                }
-            }
-            
+            electronsEjected(minimumEnergy);
         });
         
         sliderWavelength.valueProperty().addListener((observable, oldValue, newValue) -> {
+            /**
+             * this updates the wavelength label every time the user changes 
+             * something
+             */
             wavelengthLabel.setText((String.format("%.2f", newValue)) + " nm");
             wavelength = newValue.doubleValue();
             Color colour = photon.getColorForWavelength(wavelength);
-            
             Stop[] stops = new Stop[] { new Stop(0, Color.WHITE), new Stop(1, colour)};
             LinearGradient lg1 = new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE, stops);
             light.setFill(lg1);
             
-            if(buttonWasPressed == true){
-            minimumEnergy = photon.photonMinuimumEnergy(wavelength, metal);
-            minimumEnergyLabel.setText(String.format("%.2f J", minimumEnergy));
+            if(metal != null){
+            setWorkFunction(metal, wavelength);
             }
             
-            if(minimumEnergy > 0 && buttonWasPressed == true){
-                if (circlesGenerated) {
-                    pane.getChildren().removeIf(node -> node instanceof Circle);
-                }
-                electron.generateCircles(numCircles, pane);
-                circlesGenerated = true;
-            }
-        }
-        
-        );
+            electronsEjected(minimumEnergy);
+        });
         
         sliderBatteryVoltage.valueProperty().addListener((observable, oldValue, newValue) -> {
             batteryVoltageLabel.setText((String.format("%.2f", newValue)) + " V");
@@ -366,27 +360,27 @@ public class PhotoelectricMenuController{
         
         magnesiumMenuItem.setOnAction(event -> {
             setWorkFunction("Magnesium", wavelength);
-            metal = "Magnesium";
+            setMetal("Magnesium");
         });
         
         aluminiumMenuItem.setOnAction(event -> {
             setWorkFunction("Aluminium", wavelength);
-            metal = "Aluminium";
+            setMetal("Aluminium");
         });
         
         calciumMenuItem.setOnAction(event -> {
-                setWorkFunction("Calcium", wavelength);
-                metal = "Calcium";
+            setWorkFunction("Calcium", wavelength);
+            setMetal("Calcium");
         });
         
         copperMenuItem.setOnAction(event -> {
             setWorkFunction("Copper", wavelength);
-            metal = "Copper";
+            setMetal("Copper");
         });
         
         goldMenuItem.setOnAction(event -> {
             setWorkFunction("Gold", wavelength);
-            metal = "Copper";
+            setMetal("Gold");
         });
     }
     /**
@@ -400,312 +394,508 @@ public class PhotoelectricMenuController{
         minimumEnergy = photon.photonMinuimumEnergy(wavelength, metal);
         minimumEnergyLabel.setText(String.format("%.2f J", minimumEnergy));
     }
+    
+    private void electronsEjected(double minimumEnergy){
+        if (minimumEnergy > 0){
+                if (circlesGenerated) {
+                    pane.getChildren().removeIf(node -> node instanceof Circle);
+                }
+                electron.generateCircles(numCircles, pane);
+                circlesGenerated = true;
+                if(minimumEnergy < 0){
+                    pane.getChildren().removeIf(node -> node instanceof Circle);
+                    circlesGenerated = false;
+                }
+            } else {
+                pane.getChildren().removeIf(node -> node instanceof Circle);
+                circlesGenerated = false;
+            }
+    }
 
     /**
     * Returns the number of circles generated.
     * @return the number of circles generated
     */
-   public int getNumCircles() {
+    public int getNumCircles() {
        return numCircles;
-   }
+    }
 
    /**
     * Sets the number of circles generated.
     * @param numCircles the number of circles to set
     */
-   public void setNumCircles(int numCircles) {
+    public void setNumCircles(int numCircles) {
        this.numCircles = numCircles;
-   }
+    }
 
    /**
     * Returns a boolean indicating whether or not the circles have been generated.
     * @return true if the circles have been generated, false otherwise
     */
-   public boolean isCirclesGenerated() {
+    public boolean isCirclesGenerated() {
        return circlesGenerated;
-   }
+    }
 
    /**
     * Sets a boolean indicating whether or not the circles have been generated.
     * @param circlesGenerated true if the circles have been generated, false otherwise
     */
-   public void setCirclesGenerated(boolean circlesGenerated) {
+    public void setCirclesGenerated(boolean circlesGenerated) {
        this.circlesGenerated = circlesGenerated;
-   }
+    }
 
    /**
     * Returns the minimum energy value.
     * @return the minimum energy value
     */
-   public double getMinimumEnergy() {
+    public double getMinimumEnergy() {
        return minimumEnergy;
-   }
+    }
 
    /**
     * Sets the minimum energy value.
     * @param minimumEnergy the minimum energy value to set
     */
-   public void setMinimumEnergy(double minimumEnergy) {
+    public void setMinimumEnergy(double minimumEnergy) {
        this.minimumEnergy = minimumEnergy;
-   }
+    }
 
    /**
     * Returns a boolean indicating whether or not the button was pressed.
     * @return true if the button was pressed, false otherwise
     */
-   public boolean isButtonWasPressed() {
+    public boolean isButtonWasPressed() {
        return buttonWasPressed;
-   }
+    }
 
    /**
     * Sets a boolean indicating whether or not the button was pressed.
     * @param buttonWasPressed true if the button was pressed, false otherwise
     */
-   public void setButtonWasPressed(boolean buttonWasPressed) {
+    public void setButtonWasPressed(boolean buttonWasPressed) {
        this.buttonWasPressed = buttonWasPressed;
-   }
+    }
 
    /**
     * Returns the wavelength value.
     * @return the wavelength value
     */
-   public double getWavelength() {
+    public double getWavelength() {
        return wavelength;
-   }
+    }
 
    /**
     * Sets the wavelength value.
     * @param wavelength the wavelength value to set
     */
-   public void setWavelength(double wavelength) {
+    public void setWavelength(double wavelength) {
        this.wavelength = wavelength;
-   }
+    } 
 
    /**
     * Returns the metal value.
     * @return the metal value
     */
-   public String getMetal() {
+    public String getMetal() {
        return metal;
-   }
+    }
 
    /**
     * Sets the metal value.
     * @param metal the metal value to set
     */
-   public void setMetal(String metal) {
+    public void setMetal(String metal) {
        this.metal = metal;
-   }
+    }
 
    /**
     * Returns the Photon object.
     * @return the Photon object
     */
-   public Photon getPhoton() {
+    public Photon getPhoton() {
        return photon;
-   }
+    }
 
    /**
     * Sets the Photon object.
     * @param photon the Photon object to set
     */
-   public void setPhoton(Photon photon) {
+    public void setPhoton(Photon photon) {
        this.photon = photon;
-   }
+    }
 
    /**
     * Returns the AnchorPane object.
     * @return the AnchorPane object
     */
-   public AnchorPane getPane() {
+    public AnchorPane getPane() {
        return pane;
-   }
+    }
 
    /**
     * Sets the AnchorPane object.
     * @param pane the AnchorPane object to set
     */
-   public void setPane(AnchorPane pane) {
+    public void setPane(AnchorPane pane) {
        this.pane = pane;
-   }
+    }
 
    /**
     * Returns the Polygon object representing the light.
     * @return the Polygon object representing the light
     */
-   public Polygon getLight() {
+    public Polygon getLight() {
        return light;
-   }
+    }
 
-
+    /**
+    Sets the light polygon.
+    @param light the polygon to set
+    */
     public void setLight(Polygon light) {
         this.light = light;
     }
+    /**
 
+    Gets the slider for intensity.
+    @return the intensity slider
+    */
     public Slider getSliderIntensity() {
         return sliderIntensity;
     }
+    /**
 
+    Sets the slider for intensity.
+    @param sliderIntensity the slider to set
+    */
     public void setSliderIntensity(Slider sliderIntensity) {
         this.sliderIntensity = sliderIntensity;
     }
+    /**
 
+    Gets the slider for wavelength.
+    @return the wavelength slider
+    */
     public Slider getSliderWavelength() {
         return sliderWavelength;
     }
+    /**
 
+    Sets the slider for wavelength.
+    @param sliderWavelength the slider to set
+    */
     public void setSliderWavelength(Slider sliderWavelength) {
         this.sliderWavelength = sliderWavelength;
     }
+    /**
 
+    Gets the slider for battery voltage.
+    @return the battery voltage slider
+    */
     public Slider getSliderBatteryVoltage() {
         return sliderBatteryVoltage;
     }
+    /**
 
+    Sets the slider for battery voltage.
+    @param sliderBatteryVoltage the slider to set
+    */
     public void setSliderBatteryVoltage(Slider sliderBatteryVoltage) {
         this.sliderBatteryVoltage = sliderBatteryVoltage;
     }
+    /**
 
+    Gets the metal menu button.
+    @return the metal menu button
+    */
     public MenuButton getMetalMenuButton() {
         return metalMenuButton;
     }
+    /**
 
+    Sets the metal menu button.
+    @param metalMenuButton the menu button to set
+    */
     public void setMetalMenuButton(MenuButton metalMenuButton) {
         this.metalMenuButton = metalMenuButton;
     }
+    /**
 
+    Gets the menu item for magnesium.
+    @return the magnesium menu item
+    */
     public MenuItem getMagnesiumMenuItem() {
         return magnesiumMenuItem;
     }
+    /**
 
+    Sets the menu item for magnesium.
+    @param magnesiumMenuItem the menu item to set
+    */
     public void setMagnesiumMenuItem(MenuItem magnesiumMenuItem) {
         this.magnesiumMenuItem = magnesiumMenuItem;
     }
+    /**
 
+    Gets the menu item for aluminium.
+    @return the aluminium menu item
+    */
     public MenuItem getAluminiumMenuItem() {
         return aluminiumMenuItem;
     }
+    /**
 
+    Sets the menu item for aluminium.
+    @param aluminiumMenuItem the menu item to set
+    */
     public void setAluminiumMenuItem(MenuItem aluminiumMenuItem) {
         this.aluminiumMenuItem = aluminiumMenuItem;
     }
+    /**
 
+    Gets the menu item for calcium.
+    @return the calcium menu item
+    */
     public MenuItem getCalciumMenuItem() {
         return calciumMenuItem;
     }
+    /**
 
+    Sets the menu item for calcium.
+    @param calciumMenuItem the menu item to set
+    */
     public void setCalciumMenuItem(MenuItem calciumMenuItem) {
         this.calciumMenuItem = calciumMenuItem;
     }
+    /**
 
+    Gets the menu item for copper.
+    @return the copper menu item
+    */
     public MenuItem getCopperMenuItem() {
         return copperMenuItem;
     }
+    /**
 
+    Sets the menu item for copper.
+    @param copperMenuItem the menu item to set
+    */
     public void setCopperMenuItem(MenuItem copperMenuItem) {
         this.copperMenuItem = copperMenuItem;
     }
+    /**
 
+    Gets the menu item for gold.
+    @return the gold menu item
+    */
     public MenuItem getGoldMenuItem() {
         return goldMenuItem;
     }
+    /**
 
+    Sets the menu item for gold.
+    @param goldMenuItem the menu item to set
+    */
     public void setGoldMenuItem(MenuItem goldMenuItem) {
         this.goldMenuItem = goldMenuItem;
     }
+    /**
 
+    Gets the metal work functions hash map.
+    @return the metal work functions hash map
+    */
     public HashMap<String, Double> getMetalWorkFunctions() {
         return metalWorkFunctions;
     }
-
+    
+    /**
+    *Sets the work function values of the metals in the simulation.
+    *@param metalWorkFunctions a HashMap containing the metal names as keys
+    * */
+    
     public void setMetalWorkFunctions(HashMap<String, Double> metalWorkFunctions) {
         this.metalWorkFunctions = metalWorkFunctions;
     }
 
+    /**
+
+    Returns the "Play" button in the user interface.
+    @return the "Play" button.
+    */
     public Button getBtnPlay() {
         return btnPlay;
     }
+    /**
 
+    Sets the "Play" button in the user interface.
+    @param btnPlay the "Play" button to be set.
+    */
     public void setBtnPlay(Button btnPlay) {
         this.btnPlay = btnPlay;
     }
+    /**
 
+    Returns the "Help" button in the user interface.
+    @return the "Help" button.
+    */
     public Button getBtnHelp() {
         return btnHelp;
     }
+    /**
 
+    Sets the "Help" button in the user interface.
+    @param btnHelp the "Help" button to be set.
+    */
     public void setBtnHelp(Button btnHelp) {
         this.btnHelp = btnHelp;
     }
+    /**
 
+    Returns the "Main Menu" button in the user interface.
+    @return the "Main Menu" button.
+    */
     public Button getBtnMainMenu() {
         return btnMainMenu;
     }
+    /**
 
+    Sets the "Main Menu" button in the user interface.
+    @param btnMainMenu the "Main Menu" button to be set.
+    */
     public void setBtnMainMenu(Button btnMainMenu) {
         this.btnMainMenu = btnMainMenu;
     }
+    /**
 
+    Returns the intensity label in the user interface.
+    @return the intensity label.
+    */
     public Label getIntensityLabel() {
         return intensityLabel;
     }
+    /**
 
+    Sets the intensity label in the user interface.
+    @param intensityLabel the intensity label to be set.
+    */
     public void setIntensityLabel(Label intensityLabel) {
         this.intensityLabel = intensityLabel;
     }
+    /**
 
+    Returns the wavelength label in the user interface.
+    @return the wavelength label.
+    */
     public Label getWavelengthLabel() {
         return wavelengthLabel;
     }
+    /**
 
+    Sets the wavelength label in the user interface.
+    @param wavelengthLabel the wavelength label to be set.
+    */
     public void setWavelengthLabel(Label wavelengthLabel) {
         this.wavelengthLabel = wavelengthLabel;
     }
+    /**
 
+    Returns the battery voltage label in the user interface.
+    @return the battery voltage label.
+    */
     public Label getBatteryVoltageLabel() {
         return batteryVoltageLabel;
     }
+    /**
 
+    Sets the battery voltage label in the user interface.
+    @param batteryVoltageLabel the battery voltage label to be set.
+    */
     public void setBatteryVoltageLabel(Label batteryVoltageLabel) {
         this.batteryVoltageLabel = batteryVoltageLabel;
     }
+    /**
 
+    Returns the work function label in the user interface.
+    @return the work function label.
+    */
     public Label getWorkFunctionLabel() {
         return workFunctionLabel;
     }
+    /**
 
+    Sets the work function label in the user interface.
+    @param workFunctionLabel the work function label to be set.
+    */
     public void setWorkFunctionLabel(Label workFunctionLabel) {
         this.workFunctionLabel = workFunctionLabel;
     }
+    /**
 
+    Returns the minimum energy label in the user interface.
+    @return the minimum energy label.
+    */
     public Label getMinimumEnergyLabel() {
         return minimumEnergyLabel;
     }
+    /**
 
+    Sets the minimum energy label in the user interface.
+    @param minimumEnergyLabel the minimum energy label to be set.
+    */
     public void setMinimumEnergyLabel(Label minimumEnergyLabel) {
         this.minimumEnergyLabel = minimumEnergyLabel;
     }
 
+        /**
+     * Returns the display battery voltage label.
+     *
+     * @return the display battery voltage label
+     */
     public Label getDisplayBatteryVoltageLabel() {
         return displayBatteryVoltageLabel;
     }
 
+    /**
+     * Sets the display battery voltage label.
+     *
+     * @param displayBatteryVoltageLabel the new display battery voltage label to set
+     */
     public void setDisplayBatteryVoltageLabel(Label displayBatteryVoltageLabel) {
         this.displayBatteryVoltageLabel = displayBatteryVoltageLabel;
     }
 
+    /**
+     * Returns the stage.
+     *
+     * @return the stage
+     */
     public Stage getStage() {
         return stage;
     }
 
+    /**
+     * Sets the stage.
+     *
+     * @param stage the new stage to set
+     */
     public void setStage(Stage stage) {
         this.stage = stage;
     }
 
+    /**
+     * Returns the electron.
+     *
+     * @return the electron
+     */
     public Electron getElectron() {
         return electron;
     }
 
+    /**
+     * Sets the electron.
+     *
+     * @param electron the new electron to set
+     */
     public void setElectron(Electron electron) {
         this.electron = electron;
     }

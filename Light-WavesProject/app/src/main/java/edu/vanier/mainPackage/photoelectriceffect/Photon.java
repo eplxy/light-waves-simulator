@@ -12,6 +12,12 @@ public class Photon {
     private static final double convertionJoulesToElectronVolt = 1.602e-19;
     public double energyMinimum;
     
+    public Photon(){}
+
+    public Photon(double energyMinimum) {
+        this.energyMinimum = energyMinimum;
+    }
+    
     /**
      * this metal is used to calculate the minimum energy of the photoelectron. 
      * It takes in account of the work function of the metal and substracts from 
@@ -84,4 +90,12 @@ public class Photon {
 
     return Color.rgb((int) red, (int) green, (int) blue);
    }
+
+    public double getEnergyMinimum() {
+        return energyMinimum;
+    }
+
+    public void setEnergyMinimum(double energyMinimum) {
+        this.energyMinimum = energyMinimum;
+    }
 }
