@@ -10,14 +10,19 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
+import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Ellipse;
+import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -76,7 +81,7 @@ public class PhotoelectricMenuController{
             this.minimumEnergy = minimumEnergy;
             this.wavelength = wavelength;
             this.metal = metal;
-            this.pane = pane;
+            this.anchorpane = pane;
             this.sliderIntensity = sliderIntensity;
             this.sliderWavelength = sliderWavelength;
             this.sliderBatteryVoltage = sliderBatteryVoltage;
@@ -106,7 +111,10 @@ public class PhotoelectricMenuController{
      * The AnchorPane on which the simulation is displayed.
      */
     @FXML
-    private AnchorPane pane;
+    private AnchorPane anchorpane;
+    
+    @FXML
+    private BorderPane borderpane;
 
     /**
      * The Polygon representing the light in the simulation.
@@ -191,6 +199,12 @@ public class PhotoelectricMenuController{
      */
     @FXML
     private Button btnMainMenu = new Button();
+    
+    /**
+     * The Toggle Button for Dark Mode. 
+     */
+    @FXML
+    private ToggleButton darkModeToggle = new ToggleButton();
 
     /**
      * The Label displaying the current intensity of the light in the simulation.
@@ -227,13 +241,66 @@ public class PhotoelectricMenuController{
      */
     @FXML
     private Label displayBatteryVoltageLabel;
-
+    
+    @FXML
+    private Rectangle intensityBox;
+    @FXML
+    private Rectangle wavelengthBox;
+    @FXML
+    private Rectangle batteryVoltageBox;
+    @FXML
+    private Rectangle workFunctionBox;
+    @FXML
+    private Rectangle minimumEnergyBox;
+    @FXML
+    private Rectangle displayBatteryVoltageBox;
+    
+    @FXML
+    private Text intensityText;
+    @FXML
+    private Text wavelengthText;
+    @FXML
+    private Text minimumEnergyText;
+    @FXML
+    private Text batteryVoltageText;
+    
+    @FXML
+    private Line line1;
+    @FXML
+    private Line line2;
+    @FXML
+    private Line line3;
+    @FXML
+    private Line line4;
+    @FXML
+    private Line line5;
+    @FXML
+    private Line line6;
+    @FXML
+    private Line line7;
+    @FXML
+    private Line line8;
+    @FXML
+    private Line line9;
+    @FXML
+    private Line line10;
+    @FXML
+    private Line line11;
+    
+    @FXML
+    private Ellipse metalPlate;
+    @FXML
+    private Ellipse plate;
+    
     /**
      * The Stage in which the simulation is displayed.
      */
     Stage stage;
+    Stage primaryStage;
     
-    public PhotoelectricMenuController(Stage stage){}
+    PhotoelectricMenuController(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
 
     /**
      * The Electron object representing the electrons in the simulation.
@@ -257,7 +324,7 @@ public class PhotoelectricMenuController{
         btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
             try {
-                mainApp.start(stage);
+                mainApp.start(primaryStage);
             } catch (Exception ex) {
                 System.err.println(ex.toString());
             }
@@ -342,7 +409,7 @@ public class PhotoelectricMenuController{
             wavelengthLabel.setText((String.format("%.2f", newValue)) + " nm");
             wavelength = newValue.doubleValue();
             Color colour = photon.getColorForWavelength(wavelength);
-            Stop[] stops = new Stop[] { new Stop(0, Color.WHITE), new Stop(1, colour)};
+            Stop[] stops = new Stop[] { new Stop(0, Color.TRANSPARENT), new Stop(1, colour)};
             LinearGradient lg1 = new LinearGradient(0, 1, 0, 0, true, CycleMethod.NO_CYCLE, stops);
             light.setFill(lg1);
             
@@ -382,7 +449,104 @@ public class PhotoelectricMenuController{
             setWorkFunction("Gold", wavelength);
             setMetal("Gold");
         });
+                
+        darkModeToggle.setOnAction(event -> {
+            if (darkModeToggle.isSelected()) {
+                setBlackAndWhite(true);
+            } else {
+                setBlackAndWhite(false);
+            }
+        });
     }
+    
+    private void setBlackAndWhite(boolean isBlackAndWhite) {
+        if (isBlackAndWhite) {
+            intensityLabel.setStyle("-fx-text-fill: white;");
+            wavelengthLabel.setStyle("-fx-text-fill: white;");
+            batteryVoltageLabel.setStyle("-fx-text-fill: white;");
+            workFunctionLabel.setStyle("-fx-text-fill: white;");
+            minimumEnergyLabel.setStyle("-fx-text-fill: white;");
+            displayBatteryVoltageLabel.setStyle("-fx-text-fill: white;");
+            
+            btnPlay.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            btnHelp.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            btnMainMenu.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            metalMenuButton.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            darkModeToggle.setStyle("-fx-background-color: black; -fx-text-fill: white;");
+            
+            intensityBox.setStyle("-fx-fill: black;");
+            wavelengthBox.setStyle("-fx-fill: black;");
+            batteryVoltageBox.setStyle("-fx-fill: black;");
+            workFunctionBox.setStyle("-fx-fill: black;");
+            minimumEnergyBox.setStyle("-fx-fill: black;");
+            displayBatteryVoltageBox.setStyle("-fx-fill: black;");
+            
+            intensityText.setStyle("-fx-fill: white;");
+            wavelengthText.setStyle("-fx-fill: white;");
+            minimumEnergyText.setStyle("-fx-fill: white;");
+            batteryVoltageText.setStyle("-fx-fill: white;");
+            
+            line1.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line2.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line3.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line4.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line5.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line6.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line7.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line8.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line9.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line10.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            line11.setStyle("-fx-stroke: white; -fx-stroke-width: 2px;");
+            
+            metalPlate.setStyle("-fx-stroke: white;");
+            plate.setStyle("-fx-stroke: white;");
+            
+            borderpane.setStyle("-fx-background-color: #333333;");
+            
+        } else {
+            intensityLabel.setStyle("");
+            wavelengthLabel.setStyle("");
+            batteryVoltageLabel.setStyle("");
+            workFunctionLabel.setStyle("");
+            minimumEnergyLabel.setStyle("");
+            displayBatteryVoltageLabel.setStyle("");
+            
+            btnPlay.setStyle("");
+            btnHelp.setStyle("");
+            btnMainMenu.setStyle("");
+            metalMenuButton.setStyle("");
+            darkModeToggle.setStyle("");
+            
+            intensityBox.setStyle("");
+            wavelengthBox.setStyle("");
+            batteryVoltageBox.setStyle("");
+            workFunctionBox.setStyle("");
+            minimumEnergyBox.setStyle("");
+            intensityText.setStyle("");
+            
+            intensityText.setStyle("");
+            wavelengthText.setStyle("");
+            minimumEnergyText.setStyle("");
+            
+            line1.setStyle("");
+            line2.setStyle("");
+            line3.setStyle("");
+            line4.setStyle("");
+            line5.setStyle("");
+            line6.setStyle("");
+            line7.setStyle("");
+            line8.setStyle("");
+            line9.setStyle("");
+            line10.setStyle("");
+            line11.setStyle("");
+            
+            metalPlate.setStyle("");
+            plate.setStyle("");
+            
+            borderpane.setStyle("");
+        }
+    }
+    
     /**
     * Sets the work function and minimum energy values based on the given metal and wavelength.
     * @param metal the metal whose work function is being set
@@ -395,19 +559,28 @@ public class PhotoelectricMenuController{
         minimumEnergyLabel.setText(String.format("%.2f J", minimumEnergy));
     }
     
+    /**
+    *This method simulates the ejection of electrons with a minimum energy.
+    *@param minimumEnergy the minimum energy required for an electron to be ejected
+    *This method simulates the ejection of electrons with a minimum energy.
+    *It removes all the circles from the pane and generates new circles with the
+    *specified minimum energy if it is greater than zero. If it is less than zero,
+    *it removes all the circles and sets circlesGenerated to false.
+    *@param minimumEnergy the minimum energy required for an electron to be ejected
+    */
     private void electronsEjected(double minimumEnergy){
         if (minimumEnergy > 0){
                 if (circlesGenerated) {
-                    pane.getChildren().removeIf(node -> node instanceof Circle);
+                    anchorpane.getChildren().removeIf(node -> node instanceof Circle);
                 }
-                electron.generateCircles(numCircles, pane);
+                electron.generateCircles(numCircles, anchorpane);
                 circlesGenerated = true;
                 if(minimumEnergy < 0){
-                    pane.getChildren().removeIf(node -> node instanceof Circle);
+                    anchorpane.getChildren().removeIf(node -> node instanceof Circle);
                     circlesGenerated = false;
                 }
             } else {
-                pane.getChildren().removeIf(node -> node instanceof Circle);
+                anchorpane.getChildren().removeIf(node -> node instanceof Circle);
                 circlesGenerated = false;
             }
     }
@@ -528,16 +701,16 @@ public class PhotoelectricMenuController{
     * Returns the AnchorPane object.
     * @return the AnchorPane object
     */
-    public AnchorPane getPane() {
-       return pane;
+    public AnchorPane getAnchorPane() {
+       return anchorpane;
     }
 
    /**
     * Sets the AnchorPane object.
     * @param pane the AnchorPane object to set
     */
-    public void setPane(AnchorPane pane) {
-       this.pane = pane;
+    public void setAnchorPane(AnchorPane anchorpane) {
+       this.anchorpane = anchorpane;
     }
 
    /**
@@ -899,4 +1072,46 @@ public class PhotoelectricMenuController{
     public void setElectron(Electron electron) {
         this.electron = electron;
     }
+
+    public int getIntensity() {
+        return intensity;
+    }
+
+    public void setIntensity(int intensity) {
+        this.intensity = intensity;
+    }
+
+    public AnchorPane getAnchorpane() {
+        return anchorpane;
+    }
+
+    public void setAnchorpane(AnchorPane anchorpane) {
+        this.anchorpane = anchorpane;
+    }
+
+    public BorderPane getBorderpane() {
+        return borderpane;
+    }
+
+    public void setBorderpane(BorderPane borderpane) {
+        this.borderpane = borderpane;
+    }
+
+    public ToggleButton getDarkModeToggle() {
+        return darkModeToggle;
+    }
+
+    public void setDarkModeToggle(ToggleButton darkModeToggle) {
+        this.darkModeToggle = darkModeToggle;
+    }
+
+    public Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+    public void setPrimaryStage(Stage primaryStage) {
+        this.primaryStage = primaryStage;
+    }
+    
+    
 }
