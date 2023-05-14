@@ -22,6 +22,8 @@ public class Electron {
     public Timeline circlesTimeline;
     private int randomNumber;
     private double duration;
+    private static final double plankConstant = 6.62607015e-34;
+    private double chargeElectron = 1.602e-19;
     
     public Electron(){}
 
@@ -57,6 +59,11 @@ public class Electron {
             timeline.play();
             circlesTimeline = timeline;
             }
+    }
+    
+    public double kineticEnergyElectron(double wavelength, double workFunction, double voltage){
+        double kineticEnergyElectron = (plankConstant * wavelength) - workFunction - (chargeElectron * voltage);
+        return kineticEnergyElectron;
     }
 
     public Timeline getCirclesTimeline() {

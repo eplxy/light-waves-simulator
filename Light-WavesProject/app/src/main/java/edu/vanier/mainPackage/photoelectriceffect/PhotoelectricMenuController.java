@@ -113,6 +113,9 @@ public class PhotoelectricMenuController{
     @FXML
     private AnchorPane anchorpane;
     
+    /**
+     * The BorderPane on which the simulation is displayed.
+     */
     @FXML
     private BorderPane borderpane;
 
@@ -292,6 +295,11 @@ public class PhotoelectricMenuController{
     @FXML
     private Ellipse plate;
     
+    @FXML
+    MenuItem mainMenu = new MenuItem("Item 1");
+    @FXML
+    MenuItem help = new MenuItem("Item 2");
+    
     /**
      * The Stage in which the simulation is displayed.
      */
@@ -321,7 +329,7 @@ public class PhotoelectricMenuController{
         metalWorkFunctions.put("Copper", 5.0);
         metalWorkFunctions.put("Gold", 5.1);
         
-        btnMainMenu.setOnAction(e -> {
+        mainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
             try {
                 mainApp.start(primaryStage);
@@ -330,11 +338,7 @@ public class PhotoelectricMenuController{
             }
         });
         
-        /**
-         * what this does is when the help button is clicked, a window opens up
-         * explaining how to use this simulation. 
-         */
-        btnHelp.setOnAction((ActionEvent event) -> {
+        help.setOnAction((ActionEvent event) -> {
             Stage helpStage = new Stage();
             helpStage.setTitle("PHOTOELECTRIC EFFECT");
             
@@ -428,26 +432,31 @@ public class PhotoelectricMenuController{
         magnesiumMenuItem.setOnAction(event -> {
             setWorkFunction("Magnesium", wavelength);
             setMetal("Magnesium");
+            metalPlate.setFill(Color.PINK);
         });
         
         aluminiumMenuItem.setOnAction(event -> {
             setWorkFunction("Aluminium", wavelength);
             setMetal("Aluminium");
+            metalPlate.setFill(Color.GREY);
         });
         
         calciumMenuItem.setOnAction(event -> {
             setWorkFunction("Calcium", wavelength);
             setMetal("Calcium");
+            metalPlate.setFill(Color.ORANGE);
         });
         
         copperMenuItem.setOnAction(event -> {
             setWorkFunction("Copper", wavelength);
             setMetal("Copper");
+            metalPlate.setFill(Color.BROWN);
         });
         
         goldMenuItem.setOnAction(event -> {
             setWorkFunction("Gold", wavelength);
             setMetal("Gold");
+            metalPlate.setFill(Color.YELLOW);
         });
                 
         darkModeToggle.setOnAction(event -> {
@@ -459,6 +468,13 @@ public class PhotoelectricMenuController{
         });
     }
     
+    /**
+    *Sets the color scheme of the UI to black and white if the input parameter
+    *is true, and resets the color scheme to the default colors if the input
+    *parameter is false.
+    *@param isBlackAndWhite a boolean flag indicating whether the black and white
+    * 
+    */
     private void setBlackAndWhite(boolean isBlackAndWhite) {
         if (isBlackAndWhite) {
             intensityLabel.setStyle("-fx-text-fill: white;");
@@ -1073,45 +1089,84 @@ public class PhotoelectricMenuController{
         this.electron = electron;
     }
 
+    /**
+
+    Gets the intensity value of the object.
+    @return the intensity value of the object
+    */
     public int getIntensity() {
         return intensity;
     }
+    /**
 
+    Sets the intensity value of the object.
+    @param intensity the new intensity value to set
+    */
     public void setIntensity(int intensity) {
         this.intensity = intensity;
     }
+    /**
 
+    Gets the AnchorPane node of the object.
+    @return the AnchorPane node of the object
+    */
     public AnchorPane getAnchorpane() {
         return anchorpane;
     }
+    /**
 
+    Sets the AnchorPane node of the object.
+    @param anchorpane the new AnchorPane node to set
+    */
     public void setAnchorpane(AnchorPane anchorpane) {
         this.anchorpane = anchorpane;
     }
+    /**
 
+    Gets the BorderPane node of the object.
+    @return the BorderPane node of the object
+    */
     public BorderPane getBorderpane() {
         return borderpane;
     }
+    /**
 
+    Sets the BorderPane node of the object.
+    @param borderpane the new BorderPane node to set
+    */
     public void setBorderpane(BorderPane borderpane) {
         this.borderpane = borderpane;
     }
+    /**
 
+    Gets the ToggleButton node of the object.
+    @return the ToggleButton node of the object
+    */
     public ToggleButton getDarkModeToggle() {
         return darkModeToggle;
     }
+    /**
 
+    Sets the ToggleButton node of the object.
+    @param darkModeToggle the new ToggleButton node to set
+    */
     public void setDarkModeToggle(ToggleButton darkModeToggle) {
         this.darkModeToggle = darkModeToggle;
     }
+    /**
 
+    Gets the Stage node of the object.
+    @return the Stage node of the object
+    */
     public Stage getPrimaryStage() {
         return primaryStage;
     }
+    /**
 
+    Sets the Stage node of the object.
+    @param primaryStage the new Stage node to set
+    */
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
-    
-    
 }
