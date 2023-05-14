@@ -1,5 +1,7 @@
 package edu.vanier.mainPackage.lens;
 
+import javafx.scene.paint.CycleMethod;
+import javafx.scene.paint.LinearGradient;
 import javafx.scene.shape.Line;
 
 /**
@@ -8,6 +10,8 @@ import javafx.scene.shape.Line;
  */
 public class Rays {
 
+    public static boolean visible=true;
+    
     //source to lens
     public static Line line1a, line2a, line3a;
     //lens to infinity
@@ -156,6 +160,23 @@ public class Rays {
                         image.getNode().getBoundsInParent().getCenterX()));
         line3c.setEndY(line3b.getStartY());
     }
+    
+    public static void toggleRays(){
+        
+        //i hate this too
+        visible = !visible;
+        
+        line1a.setVisible(visible);
+        line2a.setVisible(visible);
+        line3a.setVisible(visible);
+        line1b.setVisible(visible);
+        line2b.setVisible(visible);
+        line3b.setVisible(visible);
+        line1c.setVisible(visible);
+        line2c.setVisible(visible);
+        line3c.setVisible(visible);
+    }
+    
     private static double[] extendLinesRight(double x1, double y1, double x2, double y2) {
         if (computeYExtrapolation(x1, y1, x2, y2, 1400) > 800) {
             return new double[]{computeXExtrapolation(x1, y1, x2, y2, 800), 800};

@@ -3,10 +3,13 @@ package edu.vanier.mainPackage.lens.propertyPanes;
 import edu.vanier.mainPackage.lens.Item;
 import edu.vanier.mainPackage.lens.LensPhysics;
 import edu.vanier.mainPackage.lens.Rays;
+import edu.vanier.mainPackage.lens.ResourceManager;
 import edu.vanier.mainPackage.lens.SourceObject;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuButton;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 
 /**
@@ -22,9 +25,34 @@ public class PPSourceController extends PPController {
     TextField txtAbsPos, txtSize;
     @FXML
     Label labelItemID;
+    @FXML
+    MenuButton choiceImage;
 
     public PPSourceController(Item item) {
         this.source = (SourceObject) item;
+
+    }
+
+    public void initialize() {
+        labelItemID.setText(source.toString());
+        setupTextFields();
+        updateTextFields();
+        setupChoiceImage();
+    }
+
+    private void setupChoiceImage() {
+
+        if (ResourceManager.getPathList() != null) {
+
+            for (String pathName : ResourceManager.getPathList()) {
+                MenuItem menuItem = new MenuItem(pathName);
+                choiceImage.getItems().add(menuItem);
+                menuItem.setOnAction(e -> {
+                    ResourceManager.changeSourceImage(source, pathName);
+                    choiceImage.setText(pathName);
+                });
+            }
+        }
 
     }
 
@@ -41,14 +69,8 @@ public class PPSourceController extends PPController {
             LensPhysics.sourceSearch().getImage().update();
             this.source.scaleNodeToSize();
             updateTextFields();
-            
-        });
-    }
 
-    public void initialize() {
-        labelItemID.setText(source.toString());
-        setupTextFields();
-        updateTextFields();
+        });
     }
 
     @Override

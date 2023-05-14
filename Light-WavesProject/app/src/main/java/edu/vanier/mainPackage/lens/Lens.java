@@ -1,6 +1,8 @@
 package edu.vanier.mainPackage.lens;
 
+import java.io.IOException;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -25,8 +27,9 @@ public class Lens extends Item {
     public Lens(double focalLength, double absPos) {
         this.itemType = Item.ITEMTYPE_LENS;
         this.focalLength = focalLength;
+        this.setLensType(this.determineType());
         this.node = new ImageView(ResourceManager.retrieveConvergentLensImage());
-        setDragListeners();
+        setMouseListeners();
         this.label = new ItemLabel(this);
         this.refractionIndex = 1.5;
         this.radius = LensPhysics.lensMakerToRadius(this);
@@ -46,9 +49,17 @@ public class Lens extends Item {
     }
 
     //methods
-    private void setDragListeners() {
+    private void setMouseListeners() {
         node.setOnMousePressed((mouseEvent) -> {
             mouseAnchorX = mouseEvent.getX();
+
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                try {
+                    LensMenuController.currentLMC.createParametersPane(this);
+                } catch (IOException e) {
+                }
+
+            }
 
         });
 
@@ -60,7 +71,9 @@ public class Lens extends Item {
             SourceObject tempSource = LensPhysics.sourceSearch();
             tempSource.getImage().update();
             tempSource.setRelPos(LensPhysics.computeRelPos(tempSource)[0]);
+            tempSource.getLabel().updateLabel();
             LensMenuController.currentLMC.lensLineMove();
+            
             Rays.updateRays();
 
         });
@@ -73,9 +86,18 @@ public class Lens extends Item {
 
     }
 
+    private void positionAdjustFix() {
+        this.move(absPos);
+    }
+
     public void updateLensImage() {
-        //TODO:inaccurate radius changes
-        this.node.setScaleX(1 - this.radius / 400);
+        if (this.getLensType().equals(Lens.LENSTYPE_CONVERGENT)) {
+            ((ImageView) this.node).setImage(ResourceManager.retrieveConvergentLensImage());
+        } else {
+            ((ImageView) this.node).setImage(ResourceManager.retrieveDivergentLensImage());
+        }
+        this.node.setScaleX(1 - Math.abs(this.radius) / 400);
+        positionAdjustFix();
     }
 
     public void updateFocalLength() {

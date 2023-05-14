@@ -4,10 +4,7 @@ import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 
 /**
@@ -32,7 +29,6 @@ public class LensMain extends Application {
         //testing source object
         SourceObject so1 = new SourceObject(30, -20);
         Lens l1 = new Lens(10, 0);
-        l1.move(l1.absPos);
 
         Item.addToList(so1);
         Item.addToList(l1);
@@ -48,6 +44,10 @@ public class LensMain extends Application {
         so1.getLabel().updateLabel();
         so1.getImage().getLabel().updateLabel();
 
+        so1.fixVerticalPosition();
+        l1.fixVerticalPosition();
+        so1.getImage().fixVerticalPosition();
+        
         lmc.itemListViewUpdate();
 
         Scene scene = new Scene(root);
@@ -55,7 +55,6 @@ public class LensMain extends Application {
         stage.setScene(scene);
         stage.sizeToScene();
         stage.show();
-        positionDebug();
 
         Rays.generateRays();
 
@@ -63,35 +62,6 @@ public class LensMain extends Application {
 
     public static void main(String[] args) {
         launch(args);
-    }
-
-//    public Circle rayDotDebug() {
-//        Circle c = new Circle(10);
-//
-//        lmc.animationPane.setOnMouseClicked((mouseEvent) -> {
-//
-//            c.setLayoutX(LensPhysics.sourceSearch().getImage().getAbsPos() * CONVERSIONFACTOR + 700);
-//
-//        });
-//        c.setLayoutX(20 * CONVERSIONFACTOR + 700);
-//        c.setLayoutY(375);
-//        return c;
-//    }
-
-    private void positionDebug() {
-
-        VBox box = new VBox();
-        Label lblX = new Label();
-        Label lblY = new Label();
-
-        lmc.animationPane.setOnMouseMoved((mouseEvent) -> {
-            lblX.setText("x=" + mouseEvent.getX());
-            lblY.setText("y=" + mouseEvent.getY());
-        });
-
-        box.getChildren().addAll(lblX, lblY);
-        lmc.controlPane.getChildren().add(box);
-
     }
 
 }

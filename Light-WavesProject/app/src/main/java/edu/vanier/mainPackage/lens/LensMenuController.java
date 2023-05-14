@@ -1,5 +1,6 @@
 package edu.vanier.mainPackage.lens;
 
+import com.sun.marlin.Renderer;
 import edu.vanier.mainPackage.MainApp;
 import edu.vanier.mainPackage.lens.propertyPanes.PPController;
 import edu.vanier.mainPackage.lens.propertyPanes.PPImageController;
@@ -17,6 +18,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
@@ -44,17 +47,18 @@ public class LensMenuController {
     @FXML
     TextField txtP, txtQ;
     @FXML
-    Button btnPulseRays, btnLockItem, btnToggleLensLine;
+    Button btnToggleRays, btnToggleLabels, btnToggleLensLine;
     @FXML
-    ImageView homeIcon;
-    @FXML
-    ImageView closeCtrlIcon;
+    ImageView homeIcon, closeCtrlIcon, bgColorIcon;
     @FXML
     BorderPane borderPane;
     @FXML
     Line principalAxis, verticalLensLine;
     @FXML
-    Pane animationPane, controlPane, itemPane, propertyPane;
+    Pane animationPane, controlPane, itemPane, propertyPane, colorPickerPane;
+    @FXML
+    ColorPicker bgColorPicker;
+    
     @FXML
     HBox itemBox;
     @FXML
@@ -78,7 +82,9 @@ public class LensMenuController {
         Item.setLmc(this);
         ItemLabel.setLmc(this);
         currentLMC = this;
-        
+
+        this.toggleRaysSetup();
+        this.toggleLabelSetup();
         this.setupPQ();
         this.lensLineSetup();
         this.ctrlPaneOpenBtnSetup();
@@ -93,8 +99,40 @@ public class LensMenuController {
 
     }
 
+    private void toggleRaysSetup() {
+        btnToggleRays.setOnAction(e -> {
+            Rays.toggleRays();
+            if (Rays.visible) {
+                btnToggleRays.setText("Hide Rays");
+            } else {
+                btnToggleRays.setText("Show Rays");
+
+            }
+        });
+
+    }
+
+    private void toggleLabelSetup() {
+        btnToggleLabels.setOnAction(e -> {
+            ItemLabel.toggleAllLabelVisibility();
+            if (ItemLabel.allVisible) {
+                btnToggleLabels.setText("Show All Labels");
+            } else {
+                btnToggleLabels.setText("Hide All Labels");
+            }
+
+        });
+    }
+
     private void lensLineSetup() {
+        
+        
         btnToggleLensLine.setOnAction(e -> {
+            if (verticalLensLine.isVisible()) {
+                btnToggleLensLine.setText("Show Lens Line");
+            } else {
+                btnToggleLensLine.setText("Hide Lens Line");
+            }
             verticalLensLine.setVisible(!verticalLensLine.isVisible());
         });
 
@@ -136,24 +174,71 @@ public class LensMenuController {
     private void setupPQ() {
 
         txtP.setOnAction(e -> {
-            SourceObject s = LensPhysics.sourceSearch();
-            double p = Double.parseDouble(txtP.getText());
+            if (Double.parseDouble(txtP.getText()) <= 0) {
+                txtP.setText("error!");
+            } else {
+                SourceObject s = LensPhysics.sourceSearch();
+                double p = Double.parseDouble(txtP.getText());
 
-            s.move(LensPhysics.lensSearch().getAbsPos() - p);
-            s.getImage().update();
-            Rays.updateRays();
+                s.move(LensPhysics.lensSearch().getAbsPos() - p);
+                s.getImage().update();
+                Rays.updateRays();
+                currentPPController.updateTextFields();
+            }
         });
 
         txtQ.setOnAction(e -> {
-            SourceObject s = LensPhysics.sourceSearch();
-            double q = Double.parseDouble(txtQ.getText());
 
-            s.move(LensPhysics.sourceAbsPosFromImageRelPos(q));
-            s.getImage().update();
-            Rays.updateRays();
+            if (LensPhysics.lensSearch().getLensType().equals(Lens.LENSTYPE_CONVERGENT)) {
+                if (Double.parseDouble(txtQ.getText()) <= LensPhysics.lensSearch().getFocalLength()) {
+                    txtQ.setText("error!");
+                } else {
+                    SourceObject s = LensPhysics.sourceSearch();
+                    double q = Double.parseDouble(txtQ.getText());
+
+                    s.move(LensPhysics.sourceAbsPosFromImageRelPos(q));
+                    s.getImage().update();
+                    Rays.updateRays();
+                    currentPPController.updateTextFields();
+                }
+            } else {
+                if (Double.parseDouble(txtQ.getText()) >= 0) {
+                    txtQ.setText("error!");
+                } else {
+                    SourceObject s = LensPhysics.sourceSearch();
+                    double q = Double.parseDouble(txtQ.getText());
+
+                    s.move(LensPhysics.sourceAbsPosFromImageRelPos(q));
+                    s.getImage().update();
+                    Rays.updateRays();
+                    currentPPController.updateTextFields();
+
+                }
+            }
+
         });
     }
 
+    private void colorPickSetup(){
+        bgColorIcon.setOpacity(0.7);
+        bgColorIcon.setOnMouseEntered(e -> {
+            bgColorIcon.setOpacity(1);
+
+        });
+        bgColorIcon.setOnMouseExited(e -> {
+            bgColorIcon.setOpacity(0.7);
+        });
+        bgColorIcon.setOnMouseClicked(e -> {
+            colorPickerPane.setVisible(!colorPickerPane.isVisible());
+            
+        });
+        
+        
+        bgColorPicker.setOnAction(e ->{
+        });
+    }
+    
+    
     private void homeIconSetup() {
         homeIcon.setOpacity(0.7);
         homeIcon.setOnMouseEntered(e -> {
@@ -192,7 +277,7 @@ public class LensMenuController {
         });
     }
 
-    private void createParametersPane(Item item) throws IOException {
+    public void createParametersPane(Item item) throws IOException {
 
         FXMLLoader loader = null;
         switch (item.itemType) {

@@ -14,11 +14,10 @@ import lombok.Data;
 public abstract class Item {
 
     //properties
-
     public static final String ITEMTYPE_SOURCE = "Source";
     public static final String ITEMTYPE_LENS = "Lens";
     public static final String ITEMTYPE_IMAGE = "Image";
-    
+
     private static LensMenuController lmc;
     private static SortedMap<Integer, Item> itemList = new TreeMap<>();
 
@@ -67,7 +66,11 @@ public abstract class Item {
         this.node.setLayoutX((700 + this.getAbsPos() * LensMain.CONVERSIONFACTOR - this.getNode().getLayoutBounds().getWidth() / 2));
         //this.node.setLayoutX((1400/ 2 + this.getAbsPos() * 20));
         this.label.updateLabel();
-        
+
+    }
+
+    public void fixVerticalPosition() {
+        this.getNode().setLayoutY(250 - this.getNode().getLayoutBounds().getHeight() / 2);
     }
 
     //getters and setters
@@ -155,7 +158,5 @@ public abstract class Item {
     public static void setLmc(LensMenuController lmc) {
         Item.lmc = lmc;
     }
-    
-   
 
 }

@@ -1,11 +1,10 @@
 package edu.vanier.mainPackage.lens;
 
-import javafx.scene.image.Image;
+import java.io.IOException;
 import javafx.scene.image.ImageView;
-import javafx.scene.transform.Scale;
+import javafx.scene.input.MouseButton;
 import lombok.Getter;
 import lombok.Setter;
-
 
 /**
  *
@@ -29,17 +28,29 @@ public class ImageObject extends Item {
         this.node = new ImageView(ResourceManager.retrieveCandleImage());
         this.node.setOpacity(0.5);
         this.label = new ItemLabel(this);
-
+        setMouseListeners();
     }
 
     //methods
+    private void setMouseListeners() {
+        node.setOnMousePressed((mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                try {
+                    LensMenuController.currentLMC.createParametersPane(this);
+                } catch (IOException e) {
+                }
+
+            }
+        });
+    }
+
     public void update() {
         updateSize();
         updatePosition();
         updateImgType();
     }
-    
 
+    
     public void updatePosition() {
         this.move(LensPhysics.computeImageAbsPos(source));
         this.setRelPos(LensPhysics.computeRelPos(source)[1]);
@@ -55,7 +66,7 @@ public class ImageObject extends Item {
         if (this.absPos > LensPhysics.lensSearch().getAbsPos()) {
             this.imgType = "real";
         }
-        if (this.absPos < LensPhysics.lensSearch().getAbsPos()){
+        if (this.absPos < LensPhysics.lensSearch().getAbsPos()) {
             this.imgType = "virtual";
         }
     }

@@ -26,6 +26,9 @@ public class MainMenuController {
     Stage primaryStage;
 
     @FXML
+    Button btnSettings;
+
+    @FXML
     Button btnDoubleSlit;
 
     @FXML
@@ -76,6 +79,25 @@ public class MainMenuController {
             handleDoubleSlit(event, this.primaryStage);
         });
 
+        btnSettings.setOnAction((e) -> {
+            handleSettings(primaryStage);
+        });
+    }
+
+    private void handleSettings(Stage primaryStage) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/generalSettings.fxml"));
+            loader.setController(new GeneralSettingsController(primaryStage));
+            BorderPane root = loader.load();
+
+            primaryStage.close();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+
+        } catch (IOException e) {
+
+        }
     }
 
     public void handleDoubleSlit(ActionEvent event, Stage primaryStage) {

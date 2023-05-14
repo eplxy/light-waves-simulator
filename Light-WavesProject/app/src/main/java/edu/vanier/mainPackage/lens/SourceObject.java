@@ -1,8 +1,10 @@
 package edu.vanier.mainPackage.lens;
 
+import java.io.IOException;
 import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.transform.Scale;
 
 /**
@@ -26,15 +28,21 @@ public class SourceObject extends Item {
         this.rayPointHeight = 300;
         this.image = new ImageObject(this);
         scaleNodeToSize();
-        setDragListeners();
+        setMouseListeners();
         this.label = new ItemLabel(this);
     }
 
     //methods
-    private void setDragListeners() {
+    private void setMouseListeners() {
         node.setOnMousePressed((mouseEvent) -> {
             mouseAnchorX = mouseEvent.getX();
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                try {
+                    LensMenuController.currentLMC.createParametersPane(this);
+                } catch (IOException e) {
+                }
 
+            }
         });
 
         node.setOnMouseDragged((mouseEvent) -> {
@@ -42,8 +50,11 @@ public class SourceObject extends Item {
                     .getWidth() / 2) - 1400 / 2) / LensMain.CONVERSIONFACTOR < LensPhysics.lensSearch().getAbsPos()) {
                 node.setLayoutX(mouseEvent.getSceneX() - mouseAnchorX);
                 this.setAbsPos(((this.node.getLayoutX() + this.node.getBoundsInLocal()
-                        .getWidth() / 2) - 1400 / 2) / LensMain.CONVERSIONFACTOR);
-                this.setRelPos(LensPhysics.computeRelPos(this)[0]);
+                        .getWidth() / 2) - 1400 / 2) / LensMain.CONVERSIONFACTOR
+                );
+                
+                
+                this.setRelPos(LensPhysics.lensSearch().getAbsPos() - this.absPos);
                 this.label.updateLabel();
                 this.image.update();
             }
@@ -55,18 +66,18 @@ public class SourceObject extends Item {
                 LensMenuController.currentPPController.updateTextFields();
             }
         });
-        
+
     }
-    
-    public void adjustRayPointHeight(){
-        this.setRayPointHeight(350-this.getSize()*1.6666);
+
+    public void adjustRayPointHeight() {
+        this.setRayPointHeight(350 - this.getSize() * 1.6666);
     }
 
     public void scaleNodeToSize() {
         this.adjustRayPointHeight();
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
-        
+
     }
 
     //getters and setters
