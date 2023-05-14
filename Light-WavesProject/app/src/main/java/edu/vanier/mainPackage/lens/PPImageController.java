@@ -1,8 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import edu.vanier.mainPackage.lens.ImageObject;
-import edu.vanier.mainPackage.lens.Item;
-import edu.vanier.mainPackage.lens.Rays;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,11 +12,12 @@ import javafx.scene.control.TextField;
 public class PPImageController extends PPController {
 
     //decimal format
-    private static DecimalFormat df = new DecimalFormat("######.##");
+    private static final DecimalFormat df = new DecimalFormat("######.##");
 
     private ImageObject img;
     @FXML
     TextField txtAbsPos, txtSize, txtSource, txtMagnification, txtInversion, txtImgType;
+
     @FXML
     Label labelItemID;
 
@@ -32,6 +30,9 @@ public class PPImageController extends PPController {
         updateTextFields();
     }
 
+    /**
+     * Update the textfields
+     */
     @Override
     public void updateTextFields() {
         txtAbsPos.setText(df.format(img.getAbsPos()));

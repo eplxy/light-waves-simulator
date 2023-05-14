@@ -112,7 +112,7 @@
             <Text fx:id="minimumEnergyText" layoutX="1131.0" layoutY="346.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Photon Energy" />
             <Circle fill="#fcffce" layoutX="537.0" layoutY="65.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
             <Polyline fill="#6b6b6b" layoutX="532.0" layoutY="26.0" points="32.0, -8.000001907348633, 61.5999755859375, 46.400001525878906, -49.4000244140625, 46.400001525878906, -20.79998779296875, -8.000001907348633" strokeType="INSIDE" />
-            <ToggleButton fx:id="darkModeToggle" layoutX="1159.0" layoutY="434.0" mnemonicParsing="false" text="Dark Mode" />
+            <ToggleButton fx:id="darkModeToggle" layoutX="1159.0" layoutY="434.0" mnemonicParsing="false" text="Toggle Theme" />
             <Button fx:id="btnStop" layoutX="573.0" layoutY="725.0" mnemonicParsing="false" />
             <MenuButton fx:id="settingMenu" layoutY="2.0" mnemonicParsing="false" text="Setting">
               <items>

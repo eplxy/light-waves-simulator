@@ -1,10 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import edu.vanier.mainPackage.lens.Item;
-import edu.vanier.mainPackage.lens.LensPhysics;
-import edu.vanier.mainPackage.lens.Rays;
-import edu.vanier.mainPackage.lens.ResourceManager;
-import edu.vanier.mainPackage.lens.SourceObject;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -23,8 +18,10 @@ public class PPSourceController extends PPController {
     private SourceObject source;
     @FXML
     TextField txtAbsPos, txtSize;
+    
     @FXML
     Label labelItemID;
+    
     @FXML
     MenuButton choiceImage;
 
@@ -40,7 +37,18 @@ public class PPSourceController extends PPController {
         setupChoiceImage();
     }
 
+    /**
+     * Setup the source image chooser
+     */
     private void setupChoiceImage() {
+        
+        MenuItem defaultCandle = new MenuItem("candle.png");
+        defaultCandle.setOnAction(e ->{
+            ResourceManager.resetSourceImage(source);
+            choiceImage.setText("candle.png");
+        });
+        
+        choiceImage.getItems().add(defaultCandle);
 
         if (ResourceManager.getPathList() != null) {
 
@@ -56,6 +64,9 @@ public class PPSourceController extends PPController {
 
     }
 
+    /**
+     * Setup the editable textfields
+     */
     private void setupTextFields() {
         this.txtAbsPos.setOnAction(e -> {
             this.source.move(Double.parseDouble(txtAbsPos.getText()));
@@ -73,6 +84,9 @@ public class PPSourceController extends PPController {
         });
     }
 
+    /**
+     * Updates the textfields
+     */
     @Override
     public void updateTextFields() {
         Rays.updateRays();

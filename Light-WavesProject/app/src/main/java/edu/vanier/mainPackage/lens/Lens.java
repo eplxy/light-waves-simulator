@@ -21,7 +21,6 @@ public class Lens extends Item {
 
     private double focalLength, refractionIndex, radius;
     private String lensType;
-    private FocalPoint focalPoint;
 
     //constructor(s)
     public Lens(double focalLength, double absPos) {
@@ -40,6 +39,13 @@ public class Lens extends Item {
     public static final String LENSTYPE_CONVERGENT = "Convergent";
     public static final String LENSTYPE_DIVERGENT = "Divergent";
 
+    //methods
+    /**
+     * Returns the type of lens, dependent on focal length.
+     *
+     * @return "Convergent" if focal length is positive, "Divergent" if focal
+     * length is negative.
+     */
     public String determineType() {
         if (this.focalLength > 0) {
             return LENSTYPE_CONVERGENT;
@@ -48,7 +54,9 @@ public class Lens extends Item {
         }
     }
 
-    //methods
+    /**
+     * Setup mouse listeners for dragging and clicking.
+     */
     private void setMouseListeners() {
         node.setOnMousePressed((mouseEvent) -> {
             mouseAnchorX = mouseEvent.getX();
@@ -73,7 +81,7 @@ public class Lens extends Item {
             tempSource.setRelPos(LensPhysics.computeRelPos(tempSource)[0]);
             tempSource.getLabel().updateLabel();
             LensMenuController.currentLMC.lensLineMove();
-            
+
             Rays.updateRays();
 
         });
@@ -86,10 +94,17 @@ public class Lens extends Item {
 
     }
 
+    /**
+     * Updates position in case of needed fix.
+     */
     private void positionAdjustFix() {
         this.move(absPos);
     }
 
+    /**
+     * Updates the node iamge of the lens, depending on whether it is convergent
+     * or divergent.
+     */
     public void updateLensImage() {
         if (this.getLensType().equals(Lens.LENSTYPE_CONVERGENT)) {
             ((ImageView) this.node).setImage(ResourceManager.retrieveConvergentLensImage());
@@ -100,50 +115,18 @@ public class Lens extends Item {
         positionAdjustFix();
     }
 
+    /**
+     * Updates the focal length of the lens.
+     */
     public void updateFocalLength() {
         this.setFocalLength(LensPhysics.lensMakerToFocalLength(this));
     }
 
+    /**
+     * Updates the radius of curvature of the lens.
+     */
     public void updateRadius() {
         this.setRadius(LensPhysics.lensMakerToRadius(this));
     }
 
-    //getters and setters
-    public double getFocalLength() {
-        return focalLength;
-    }
-
-    public void setFocalLength(double focalLength) {
-        this.focalLength = focalLength;
-    }
-
-    public double getRefractionIndex() {
-        return refractionIndex;
-    }
-
-    public void setRefractionIndex(double refractionIndex) {
-        this.refractionIndex = refractionIndex;
-    }
-
-    public String getLensType() {
-        this.setLensType(this.determineType());
-        return lensType;
-    }
-
-    public void setLensType(String lensType) {
-        this.lensType = lensType;
-    }
-
-    public FocalPoint getFocalPoint() {
-        return focalPoint;
-    }
-
-    public void setFocalPoint(FocalPoint focalPoint) {
-        this.focalPoint = focalPoint;
-    }
-
-    @Override
-    public String toString() {
-        return Integer.toString(this.orderNumber) + " " + this.itemType;
-    }
 }

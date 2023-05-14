@@ -1,5 +1,6 @@
 package edu.vanier.mainPackage.DoubleSlit.UI;
 
+import edu.vanier.mainPackage.GeneralSettingsController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -25,6 +26,7 @@ public class DoubleSlitMain extends Application{
         //MainMenuController menuController = new MainMenuController(stage);
         BorderPane root = loader.load();
         Scene scene = new Scene(root);
+        GeneralSettingsController.changeTheme(scene);
         stage.setScene(scene);
         stage.show();
     }

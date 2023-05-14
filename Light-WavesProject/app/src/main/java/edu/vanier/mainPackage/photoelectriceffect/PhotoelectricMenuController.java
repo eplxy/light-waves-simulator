@@ -1,5 +1,6 @@
 package edu.vanier.mainPackage.photoelectriceffect;
 
+import edu.vanier.mainPackage.GeneralSettingsController;
 import edu.vanier.mainPackage.MainApp;
 import java.util.HashMap;
 import javafx.event.ActionEvent;
@@ -505,6 +506,15 @@ public class PhotoelectricMenuController{
                 setBlackAndWhite(false, blackStopView, stopView, playView, whitePlayView);
             }
         });
+        
+        if(GeneralSettingsController.selectedTheme.equals("Dark")){
+            darkModeToggle.setSelected(true);
+            setBlackAndWhite(true, blackStopView, stopView, playView, whitePlayView);
+        } else{
+            darkModeToggle.setSelected(false);
+            setBlackAndWhite(false, blackStopView, stopView, playView, whitePlayView);
+        }
+        
     }
     
     /**
@@ -1213,4 +1223,5 @@ public class PhotoelectricMenuController{
     public void setPrimaryStage(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
+    
 }

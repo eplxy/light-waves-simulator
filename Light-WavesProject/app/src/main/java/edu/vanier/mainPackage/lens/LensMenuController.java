@@ -10,11 +10,13 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.css.Stylesheet;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
@@ -43,26 +45,39 @@ public class LensMenuController {
     Button ctrlPaneOpenBtn;
     @FXML
     TextField txtP, txtQ;
+
     @FXML
     Button btnToggleRays, btnToggleLabels, btnToggleLensLine;
+
     @FXML
-    ImageView homeIcon, closeCtrlIcon, bgColorIcon;
+    ImageView homeIcon, closeCtrlIcon, bgColorIcon, helpIcon;
+
     @FXML
     BorderPane borderPane;
+
     @FXML
     Line principalAxis, verticalLensLine;
+
     @FXML
-    Pane animationPane, controlPane, itemPane, propertyPane, colorPickerPane;
+    Pane animationPane, controlPane, itemPane, propertyPane, colorPickerPane, helpPane;
+
     @FXML
     ColorPicker bgColorPicker;
 
     @FXML
+    Label labelHelp;
+
+    @FXML
     HBox itemBox;
+
     @FXML
     AnchorPane midAnchorPane;
+
     @FXML
     ListView itemListView;
+
     Pane currentParameterPane;
+
     public static LensMenuController currentLMC;
 
     public static PPController currentPPController;
@@ -88,6 +103,7 @@ public class LensMenuController {
         this.homeIconSetup();
         this.closeCtrlIconSetup();
         this.colorPickSetup();
+        this.helpIconSetup();
 
         ctrlPaneOpenBtn = new Button();
 
@@ -97,6 +113,41 @@ public class LensMenuController {
 
     }
 
+    
+    /**
+     * Setup help icon text and hover over.
+     */
+    private void helpIconSetup() {
+        labelHelp.setText(
+                "This is a simulation on geometric optics."
+                + "\nLight reflected off of objects and into thin lenses follow trajectories defined by the focal lengths of lenses."
+                + "\nDepending on the positioning of an object relative to a lens, its image can vary in size, inversion, and position."
+                + "\nAn image can be either real or virtual, given by whether or not the principal rays intersect before or after the lens."
+                + "\n"
+                + "\nClick and drag either the lens or the source object to adjust their position."
+                + "\nSelect and item in the lower panel's list to observe and edit their properties."
+                + "\nThe sprite used for the source object (by default, a candle) can be imported through the main menu settings."
+                + "\nInput number values into the 'p' or 'q' textboxes to edit relative object and image positions respectively."
+                + "\nVarious toggleable settings are also available, feel free to try them out."
+                + "\nClick on the pallette button in the top right corner to change the background image."
+        );
+
+        helpIcon.setOnMouseEntered(e -> {
+
+            helpPane.toFront();
+            helpPane.setVisible(true);
+            helpPane.toFront();
+            Rays.clearRays();
+        });
+        helpIcon.setOnMouseExited(e -> {
+            helpPane.setVisible(false);
+            Rays.generateRays();
+        });
+    }
+
+    /**
+     * Setup toggle rays button.
+     */
     private void toggleRaysSetup() {
         btnToggleRays.setOnAction(e -> {
             Rays.toggleRays();
@@ -110,6 +161,9 @@ public class LensMenuController {
 
     }
 
+    /**
+     * Setup toggle labels button.
+     */
     private void toggleLabelSetup() {
         btnToggleLabels.setOnAction(e -> {
             ItemLabel.toggleAllLabelVisibility();
@@ -122,6 +176,9 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Setup toggle lens line button.
+     */
     private void lensLineSetup() {
 
         btnToggleLensLine.setOnAction(e -> {
@@ -135,6 +192,9 @@ public class LensMenuController {
 
     }
 
+    /**
+     * Setup list view for items to open associated parameter panes.
+     */
     public void itemListViewHandle() {
         selectedItem = (Item) itemListView.getSelectionModel().getSelectedItem();
         highlight(selectedItem);
@@ -147,6 +207,9 @@ public class LensMenuController {
 
     }
 
+    /**
+     * Update the list view based on the list of items.
+     */
     public void itemListViewUpdate() {
         ObservableList<Item> obsItemList = FXCollections.observableArrayList();
         for (int i = 0; i < Item.getItemList().size(); i++) {
@@ -155,6 +218,9 @@ public class LensMenuController {
         itemListView.setItems(obsItemList);
     }
 
+    /**
+     * Setup the button to open the control pane that shows up when the control pane is closed.
+     */
     private void ctrlPaneOpenBtnSetup() {
         ctrlPaneOpenBtn = new Button("Show");
         ctrlPaneOpenBtn.setVisible(true);
@@ -168,6 +234,9 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Setup the p and q textfields for relative position adjustments.
+     */
     private void setupPQ() {
 
         txtP.setOnAction(e -> {
@@ -216,6 +285,9 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Setup the background color picking.
+     */
     private void colorPickSetup() {
         bgColorIcon.setOpacity(0.7);
         bgColorIcon.setOnMouseEntered(e -> {
@@ -236,6 +308,9 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Setup the back to main menu (home) icon.
+     */
     private void homeIconSetup() {
         homeIcon.setOpacity(0.7);
         homeIcon.setOnMouseEntered(e -> {
@@ -260,6 +335,9 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Setup the close control pane (X) button.
+     */
     private void closeCtrlIconSetup() {
         closeCtrlIcon.setOnMouseEntered(e -> {
             closeCtrlIcon.setOpacity(0.6);
@@ -274,6 +352,11 @@ public class LensMenuController {
         });
     }
 
+    /**
+     * Initialize the parameter pane based on which item is chosen.
+     * @param item
+     * @throws IOException 
+     */
     public void createParametersPane(Item item) throws IOException {
 
         FXMLLoader loader = null;
@@ -298,16 +381,28 @@ public class LensMenuController {
         parameterClearAndLoad(loader);
     }
 
+    /**
+     * Clears current parameter pane and loads the new one
+     * @param loader
+     * @throws IOException 
+     */
     private void parameterClearAndLoad(FXMLLoader loader) throws IOException {
         this.propertyPane.getChildren().clear();
         this.currentParameterPane = loader.load();
         this.propertyPane.getChildren().add(this.currentParameterPane);
     }
 
+    /**
+     * Adjusts the lens line to move with the lens.
+     */
     public void lensLineMove() {
         verticalLensLine.setLayoutX(LensPhysics.lensSearch().getNode().getBoundsInParent().getCenterX());
     }
 
+    /**
+     * Highlights item that is clicked on in list view.
+     * @param selectedItem 
+     */
     private void highlight(Item selectedItem) {
 
         DropShadow outerFocus = new DropShadow();

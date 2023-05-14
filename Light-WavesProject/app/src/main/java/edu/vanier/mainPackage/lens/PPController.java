@@ -1,8 +1,8 @@
 package edu.vanier.mainPackage.lens;
 
 /**
- *
- * @author someo
+ * Abstract class for all PP Controllers
+ * @author Steven
  */
 public abstract class PPController {
     public void updateTextFields(){

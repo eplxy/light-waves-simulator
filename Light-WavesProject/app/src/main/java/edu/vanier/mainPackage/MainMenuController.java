@@ -5,21 +5,22 @@
 package edu.vanier.mainPackage;
 
 import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMain;
-import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
-import edu.vanier.mainPackage.DoubleSlit.UI.GraphController;
 import edu.vanier.mainPackage.lens.LensMain;
 import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMain;
 import edu.vanier.mainPackage.refraction.Refraction;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Border;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 
 /**
  *
@@ -44,6 +45,17 @@ public class MainMenuController {
     @FXML
     Button btnPhotoelectric;
 
+    @FXML
+    Button btnStart;
+
+    @FXML
+    Label labelDescription;
+
+    @FXML
+    ImageView imgPreview;
+
+    private int selectedSimIndex;
+
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
@@ -51,59 +63,120 @@ public class MainMenuController {
 
     public void initialize() throws IOException {
 
-        btnLens.setOnAction((event) -> {
-            LensMain lensMain = new LensMain();
-            try {
-                lensMain.start(primaryStage);
-            } catch (Exception ex) {
-                System.err.println(ex.toString());
-            }
+        btnRefraction.setOnAction((event) -> {
+            selectedSimIndex = 1;
+            displayPreview();
         });
 
-        btnRefraction.setOnAction((event) -> {
-            Refraction refractionMain = new Refraction();
+        btnLens.setOnAction((event) -> {
+            selectedSimIndex = 2;
+            displayPreview();
+        });
 
-            try {
-                refractionMain.start(primaryStage);
-            } catch (Exception ex) {
-                System.err.println(ex.toString());
-            }
+        btnDoubleSlit.setOnAction((event) -> {
+            selectedSimIndex = 3;
+            displayPreview();
         });
 
         btnPhotoelectric.setOnAction((event) -> {
-            PhotoelectricMain photoelectricMain = new PhotoelectricMain();
-            try {
-                photoelectricMain.start(primaryStage);
-            } catch (IOException ex) {
-                System.err.println(ex.toString());
-            }
+            selectedSimIndex = 4;
+            displayPreview();
+        });
+
+        btnStart.setOnAction(e -> {
+            runSimulation();
+        });
+
+        btnSettings.setOnAction((event) -> {
+            handleBtnSettings();
 
         });
-        btnDoubleSlit.setOnAction((event) -> {
-            DoubleSlitMain doubleSlitMain = new DoubleSlitMain();
+
+    }
+
+    private void displayPreview() {
+        clearButtonHighlights();
+        switch (selectedSimIndex) {
+            case 1:
+                imgPreview.setImage(new Image(this.getClass().getResource("/images/previewRefraction.png").toString()));
+                labelDescription.setText("Experiment with the physical phenomenon of refraction and reflection through different transparent mediums.");
+                btnRefraction.setBorder(Border.stroke(Color.WHITE));
+                break;
+            case 2:
+                imgPreview.setImage(new Image(this.getClass().getResource("/images/previewLens.png").toString()));
+                labelDescription.setText("Visualize geometric optics by adjusting lens and source object properties, such as position, focal length, and more.");
+                btnLens.setBorder(Border.stroke(Color.WHITE));
+                break;
+            case 3:
+                imgPreview.setImage(new Image(this.getClass().getResource("/images/previewDoubleSlit.png").toString()));
+                labelDescription.setText("Simulate the interactions of light waves passing through small slits. Control properties and visualize their impact through an animated and/or graphical view.");
+                btnDoubleSlit.setBorder(Border.stroke(Color.WHITE));
+                break;
+            case 4:
+                imgPreview.setImage(new Image(this.getClass().getResource("/images/previewPhotoelectric.png").toString()));
+                labelDescription.setText("Experience the photoelectric effect before your vey eyes. Control which wavelengths, intensities, voltages and metals you want to experiment with.");
+                btnPhotoelectric.setBorder(Border.stroke(Color.WHITE));
+        }
+        labelDescription.setTextFill(Color.BLACK);
+    }
+
+    private void clearButtonHighlights() {
+        btnRefraction.setBorder(Border.EMPTY);
+        btnLens.setBorder(Border.EMPTY);
+        btnDoubleSlit.setBorder(Border.EMPTY);
+        btnPhotoelectric.setBorder(Border.EMPTY);
+    }
+
+    private void runSimulation() {
+        switch (selectedSimIndex) {
+            case 1:
+                Refraction refractionMain = new Refraction();
+                try {
+                    refractionMain.start(primaryStage);
+                } catch (Exception ex) {
+                    System.err.println(ex.toString());
+                }
+                break;
+            case 2:
+                LensMain lensMain = new LensMain();
+                try {
+                    lensMain.start(primaryStage);
+                } catch (Exception ex) {
+                    System.err.println(ex.toString());
+                }
+                break;
+            case 3:
+                DoubleSlitMain doubleSlitMain = new DoubleSlitMain();
                 try {
                     doubleSlitMain.start(primaryStage);
                 } catch (Exception ex) {
                     System.err.println(ex.toString());
                 }
-        });
-        btnSettings.setOnAction((event) -> {
-            handleBtnSettings();
-            
-        });
 
+                break;
+            case 4:
+                PhotoelectricMain photoelectricMain = new PhotoelectricMain();
+                try {
+                    photoelectricMain.start(primaryStage);
+                } catch (IOException ex) {
+                    System.err.println(ex.toString());
+                }
+                break;
+        }
     }
-    
-    private void handleBtnSettings(){
+
+    private void handleBtnSettings() {
         FXMLLoader loader = new FXMLLoader(
-                        getClass().getResource("/fxml/generalSettings.fxml"));
-                GeneralSettingsController settingsController = new GeneralSettingsController(primaryStage);
-                loader.setController(settingsController);
-            try {
-                BorderPane root = loader.load();
-                Scene scene = new Scene(root);
-                primaryStage.setScene(scene);
-                primaryStage.show();
-            } catch (IOException ex) {System.out.println(ex);}
+                getClass().getResource("/fxml/generalSettings.fxml"));
+        GeneralSettingsController settingsController = new GeneralSettingsController(primaryStage);
+        loader.setController(settingsController);
+        try {
+            BorderPane root = loader.load();
+            Scene scene = new Scene(root);
+            primaryStage.setScene(scene);
+            primaryStage.show();
+        } catch (IOException ex) {
+            System.out.println(ex);
+        }
     }
 }

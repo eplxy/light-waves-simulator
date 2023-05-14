@@ -1,10 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import edu.vanier.mainPackage.lens.Item;
-import edu.vanier.mainPackage.lens.Lens;
-import edu.vanier.mainPackage.lens.LensPhysics;
-import edu.vanier.mainPackage.lens.Rays;
-import edu.vanier.mainPackage.lens.SourceObject;
 import java.text.DecimalFormat;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -20,17 +15,21 @@ import javafx.scene.paint.Color;
 public class PPLensController extends PPController {
 
     //decimal format
-    private static DecimalFormat df = new DecimalFormat("######.##");
+    private static final DecimalFormat df = new DecimalFormat("######.##");
 
     private Lens lens;
     @FXML
     TextField txtAbsPos, txtFocalLength;
+    
     @FXML
     Label labelIndex, labelRadius, labelRadiusName;
+    
     @FXML
     Slider sliderIndex, sliderRadius;
+    
     @FXML
     Button btnLensType;
+    
     @FXML
     Label labelItemID;
 
@@ -44,6 +43,9 @@ public class PPLensController extends PPController {
         setupControls();
     }
 
+    /**
+     * Setup the different controls
+     */
     private void setupControls() {
         this.txtAbsPos.setOnAction(e -> {
             this.lens.move(Double.parseDouble(txtAbsPos.getText()));
@@ -96,6 +98,9 @@ public class PPLensController extends PPController {
 
     }
 
+    /**
+     * Update the textfields
+     */
     @Override
     public void updateTextFields() {
         Rays.updateRays();

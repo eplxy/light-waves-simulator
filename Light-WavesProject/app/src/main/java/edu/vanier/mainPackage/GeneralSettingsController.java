@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.Style;
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
@@ -25,22 +26,19 @@ public class GeneralSettingsController {
     @FXML
 
     BorderPane generalSettingsPane;
-    
+
     @FXML
     Label labelCurrentPath;
-    
+
     @FXML
     Button btnSearch, btnMainMenu;
-    
+
     @FXML
     RadioButton radioBtnLight, radioBtnDark;
-            
 
     private final Stage primaryStage;
     public static String currentImageFolderPath = "";
-    private static String selectedTheme;
-
-
+    public static String selectedTheme = "Dark";
 
     public GeneralSettingsController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -56,22 +54,23 @@ public class GeneralSettingsController {
                 RadioButton rb = (RadioButton) themeTG.getSelectedToggle();
                 if (rb != null) {
                     selectedTheme = rb.getText();
-                    changeTheme(selectedTheme);
+                    changeTheme(primaryStage.getScene());
                 }
             }
         });
-        radioBtnLight.setSelected(true);
+        radioBtnLight.setSelected(selectedTheme.equalsIgnoreCase("Light"));
+        radioBtnDark.setSelected(selectedTheme.equalsIgnoreCase("Dark"));
 
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         labelCurrentPath.setText(currentImageFolderPath);
-        btnSearch.setOnAction(e->{
+        btnSearch.setOnAction(e -> {
             File file = directoryChooser.showDialog(primaryStage);
-            if(file !=null){
+            if (file != null) {
                 currentImageFolderPath = file.getPath();
                 labelCurrentPath.setText(currentImageFolderPath);
             }
         });
-        
+
         btnMainMenu.setOnAction(e -> {
             MainApp mainApp = new MainApp();
             try {
@@ -82,16 +81,13 @@ public class GeneralSettingsController {
         });
 
     }
-    
-    public void changeTheme(String selectedView) {
-        if (selectedView.equals("Dark")) {
-            
+
+    public static void changeTheme(Scene scene) {
+        if (selectedTheme.equals("Dark")) {
+            scene.getStylesheets().add(GeneralSettingsController.class.getResource("/fxml/moderna_dark.css").toString());
         } else {
-            
+            scene.getStylesheets().add(GeneralSettingsController.class.getResource("/fxml/moderna_light.css").toString());
         }
     }
-
-
-
 
 }

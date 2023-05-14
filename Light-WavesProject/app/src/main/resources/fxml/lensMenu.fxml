@@ -58,7 +58,18 @@
                         <Line fx:id="principalAxis" endX="1400.0" startX="1.0" style="-fx-stroke-dash-array: 3;" />
                      </children>
                   </StackPane>
-                  <Pane fx:id="itemPane" layoutY="100.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1400.0" />
+                  <Pane fx:id="itemPane" layoutY="100.0" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="1400.0">
+                     <children>
+                        <Pane fx:id="helpPane" layoutX="42.0" layoutY="-24.0" prefHeight="339.0" prefWidth="738.0" style="-fx-background-color: #CFCFCF;" visible="false">
+                           <children>
+                              <Label fx:id="labelHelp" layoutX="14.0" layoutY="14.0" prefHeight="313.0" prefWidth="707.0">
+                                 <font>
+                                    <Font size="14.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                     </children></Pane>
                   <ImageView fx:id="homeIcon" fitHeight="31.0" fitWidth="34.0" layoutX="5.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../images/home_icon.png" />
@@ -80,6 +91,14 @@
                         <ColorPicker fx:id="bgColorPicker" layoutX="7.0" layoutY="6.0" />
                      </children>
                   </Pane>
+                  <ImageView fx:id="helpIcon" fitHeight="31.0" fitWidth="34.0" layoutX="52.0" layoutY="39.0" opacity="0.7" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/help_icon.png" />
+                     </image>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </ImageView>
                </children>
             </Pane>
          </children>

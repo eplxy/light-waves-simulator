@@ -26,6 +26,8 @@ public class PhotoelectricMain extends Application {
             //set and show scene
             BorderPane root = loader.load();
             Scene scene = new Scene(root);
+            
+            
             stage.setScene(scene);
             stage.sizeToScene();
             stage.show();

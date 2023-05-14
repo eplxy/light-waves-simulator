@@ -3,19 +3,20 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" stylesheets="@moderna_dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" stylesheets="@moderna_dark.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <top>
       <HBox alignment="CENTER" prefHeight="126.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Light Waves Simulator">
                <font>
-                  <Font name="Yu Gothic Medium" size="40.0" />
+                  <Font name="Yu Gothic Medium" size="54.0" />
                </font>
             </Label>
          </children>
@@ -24,22 +25,22 @@
    <left>
       <TilePane prefHeight="674.0" prefWidth="308.0" vgap="25.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="btnRefraction" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Refraction">
+            <Button fx:id="btnRefraction" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #0074ff 0.0%, #60a2ec 51.9512%, #0074ff 100.0%);" text="Refraction" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnLens" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Lenses">
+            <Button fx:id="btnLens" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #facd05 0.0%, #facd05 0.6729%, #faeb7d 50.6057%, #facd05 100.0%);" text="Lenses" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnDoubleSlit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Double Slit">
+            <Button fx:id="btnDoubleSlit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #facd05 0.0%, #48f700 0.6729%, #44c744 50.8748%, #48f700 100.0%);" text="Double Slit" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnPhotoelectric" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Photoelectric">
+            <Button fx:id="btnPhotoelectric" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" style="-fx-background-color: linear-gradient(from 0.0% 0.0% to 100.0% 100.0%, #facd05 0.0%, #ff1a1a 0.6729%, #e76d61 50.8748%, #ff1a1a 100.0%);" text="Photoelectric" textFill="WHITE">
                <font>
                   <Font size="30.0" />
                </font>
@@ -55,20 +56,21 @@
          <children>
             <Pane layoutX="25.0" layoutY="18.0" prefHeight="483.0" prefWidth="1038.0" style="-fx-background-color: darkgrey;">
                <children>
-                  <Label layoutX="400.0" layoutY="222.0" text="[insert image here]">
+                  <Label layoutX="400.0" layoutY="222.0" text="Select an option" textFill="#303030">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Label>
+                  <ImageView fx:id="imgPreview" fitHeight="480.0" fitWidth="864.0" layoutX="86.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true" />
                </children>
             </Pane>
             <HBox layoutX="25.0" layoutY="528.0" prefHeight="126.0" prefWidth="1038.0" spacing="15.0">
                <children>
                   <Pane prefHeight="126.0" prefWidth="678.0" style="-fx-background-color: darkgrey;">
                      <children>
-                        <Label layoutX="183.0" layoutY="42.0" text="[insert description here]">
+                        <Label fx:id="labelDescription" layoutX="7.0" layoutY="-6.0" prefHeight="138.0" prefWidth="667.0" textFill="#181818" wrapText="true">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="26.0" />
                            </font>
                         </Label>
                      </children>
@@ -77,16 +79,16 @@
                      <children>
                         <Button fx:id="btnSettings" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="117.0" text="settings">
                            <font>
-                              <Font size="20.0" />
+                              <Font size="24.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: darkgrey;">
                      <children>
-                        <Button layoutX="6.0" layoutY="6.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="188.0" text="Start">
+                        <Button fx:id="btnStart" layoutX="6.0" layoutY="6.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="188.0" text="Start">
                            <font>
-                              <Font size="30.0" />
+                              <Font size="24.0" />
                            </font>
                         </Button>
                      </children>

@@ -1,11 +1,13 @@
 package edu.vanier.mainPackage.lens;
 
 import java.io.IOException;
-import javafx.geometry.Point2D;
 import javafx.scene.image.ImageView;
-import javafx.scene.image.Image;
 import javafx.scene.input.MouseButton;
-import javafx.scene.transform.Scale;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 
 /**
  *
@@ -14,8 +16,7 @@ import javafx.scene.transform.Scale;
 public class SourceObject extends Item {
 
     //properties
-    static double mouseAnchorX;
-    private boolean fromImage;
+    private static double mouseAnchorX;
     private ImageObject image;
     private double rayPointHeight;
 
@@ -33,6 +34,9 @@ public class SourceObject extends Item {
     }
 
     //methods
+    /**
+     * Setup mouse listeners for dragging and clicking.
+     */
     private void setMouseListeners() {
         node.setOnMousePressed((mouseEvent) -> {
             mouseAnchorX = mouseEvent.getX();
@@ -69,10 +73,17 @@ public class SourceObject extends Item {
 
     }
 
+    /**
+     * Adjusts the point at which rays start when size is changed.
+     */
     public void adjustRayPointHeight() {
         this.setRayPointHeight(350 - this.getSize() * 1.6666);
     }
 
+    
+    /**
+     * Adjust node scaling according to object sizing.
+     */
     public void scaleNodeToSize() {
         this.adjustRayPointHeight();
         this.node.setScaleX(this.size / 40);
@@ -80,29 +91,7 @@ public class SourceObject extends Item {
 
     }
 
-    //getters and setters
-    public boolean isFromImage() {
-        return fromImage;
-    }
 
-    public void setFromImage(boolean fromImage) {
-        this.fromImage = fromImage;
-    }
 
-    public ImageObject getImage() {
-        return image;
-    }
-
-    public void setImage(ImageObject image) {
-        this.image = image;
-    }
-
-    public double getRayPointHeight() {
-        return this.rayPointHeight;
-    }
-
-    public void setRayPointHeight(double rayPointHeight) {
-        this.rayPointHeight = rayPointHeight;
-    }
 
 }

@@ -32,6 +32,9 @@ public class ImageObject extends Item {
     }
 
     //methods
+    /**
+     * Setup mouse listeners for right clicking only.
+     */
     private void setMouseListeners() {
         node.setOnMousePressed((mouseEvent) -> {
             if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
@@ -44,23 +47,35 @@ public class ImageObject extends Item {
         });
     }
 
+    /**
+     * Updates based on source and lens properties.
+     */
     public void update() {
         updateSize();
         updatePosition();
         updateImgType();
     }
 
+    /**
+     * Updates the position of an image based on source and lens properties.
+     */
     public void updatePosition() {
         this.move(LensPhysics.computeImageAbsPos(source));
         this.setRelPos(LensPhysics.computeRelPos(source)[1]);
     }
 
+    /**
+     * Updates the size of an image based on source and lens properties.
+     */
     private void updateSize() {
         this.size = LensPhysics.computeImageSize(source);
         this.magnification = LensPhysics.computeImageMag(source);
         scaleNodeToSize();
     }
 
+    /**
+     * Updates the image type of an image based on source and lens properties.
+     */
     private void updateImgType() {
         if (this.absPos > LensPhysics.lensSearch().getAbsPos()) {
             this.imgType = "real";
@@ -70,13 +85,12 @@ public class ImageObject extends Item {
         }
     }
 
+    /**
+     * Adjusts node scaling based on item sizing.
+     */
     public void scaleNodeToSize() {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(this.orderNumber) + " " + this.itemType;
-    }
 }

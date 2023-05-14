@@ -1,5 +1,6 @@
 package edu.vanier.mainPackage.refraction;
 
+import edu.vanier.mainPackage.GeneralSettingsController;
 import javafx.application.Application;
 import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +28,7 @@ public class Refraction extends Application{
         BorderPane root = loader.load();
         
         Scene scene = new Scene(root);
+        GeneralSettingsController.changeTheme(scene);
         primaryStage.setScene(scene);
         primaryStage.show();
         

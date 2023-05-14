@@ -55,6 +55,10 @@ public class ItemLabel {
     }
 
     //methods
+    
+    /**
+     * Instantiates each property's label.
+     */
     public void instantiateLabels() {
         labelContainer = new FlowPane();
         labelContainer.setMaxWidth(100);
@@ -70,6 +74,9 @@ public class ItemLabel {
         labImgType = new Label();
     }
 
+    /**
+     * Toggles all labels' visibility.
+     */
     public static void toggleAllLabelVisibility() {
         allVisible=!allVisible;
         for (ItemLabel itmLab : itemLabelList) {
@@ -78,6 +85,9 @@ public class ItemLabel {
 
     }
 
+    /**
+     * Updates the labels based on current values.
+     */
     public void updateLabel() {
         for (Label label : activeLabelList) {
             if (label.equals(labAbsPos)) {
@@ -105,6 +115,9 @@ public class ItemLabel {
         positionItemLabel();
     }
 
+    /**
+     * Adds label to UI (visual creating)
+     */
     public void createLabel() {
         for (Label lab : activeLabelList) {
             labelContainer.getChildren().add(lab);
@@ -113,6 +126,9 @@ public class ItemLabel {
         updateLabel();
     }
 
+    /**
+     * Adjust label position relative to item.
+     */
     public void positionItemLabel() {
         labelContainer.setLayoutX(item.getNode().getBoundsInParent().getCenterX()-52);
         labelContainer.setLayoutY(500);
