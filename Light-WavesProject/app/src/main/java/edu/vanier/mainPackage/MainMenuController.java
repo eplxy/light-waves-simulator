@@ -30,6 +30,9 @@ public class MainMenuController {
     Stage primaryStage;
 
     @FXML
+    Button btnSettings;
+
+    @FXML
     Button btnDoubleSlit;
 
     @FXML
@@ -91,6 +94,7 @@ public class MainMenuController {
             handleBtnSettings();
             
         });
+
     }
     
     private void handleBtnSettings(){

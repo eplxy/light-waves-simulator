@@ -2,6 +2,7 @@ package edu.vanier.mainPackage;
 
 import java.io.File;
 import java.io.IOException;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.css.Style;
@@ -22,6 +23,7 @@ import javafx.stage.Stage;
 public class GeneralSettingsController {
 
     @FXML
+
     BorderPane generalSettingsPane;
     
     @FXML
@@ -39,11 +41,13 @@ public class GeneralSettingsController {
     private static String selectedTheme;
 
 
+
     public GeneralSettingsController(Stage primaryStage) {
         this.primaryStage = primaryStage;
     }
 
     public void initialize() throws IOException {
+
         ToggleGroup themeTG = new ToggleGroup();
         radioBtnLight.setToggleGroup(themeTG);
         radioBtnDark.setToggleGroup(themeTG);
@@ -57,6 +61,7 @@ public class GeneralSettingsController {
             }
         });
         radioBtnLight.setSelected(true);
+
         final DirectoryChooser directoryChooser = new DirectoryChooser();
         labelCurrentPath.setText(currentImageFolderPath);
         btnSearch.setOnAction(e->{
@@ -75,6 +80,7 @@ public class GeneralSettingsController {
                 System.err.println(ex.toString());
             }
         });
+
     }
     
     public void changeTheme(String selectedView) {
@@ -84,6 +90,7 @@ public class GeneralSettingsController {
             
         }
     }
+
 
 
 

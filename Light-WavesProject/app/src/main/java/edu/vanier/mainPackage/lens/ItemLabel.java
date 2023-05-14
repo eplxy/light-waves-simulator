@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.vanier.mainPackage.lens;
 
 import java.text.DecimalFormat;
@@ -14,9 +10,8 @@ import lombok.Data;
 
 /**
  *
- * @author Io si nu Vic
+ * @author Steven
  */
-
 @Data
 public class ItemLabel {
 
@@ -24,7 +19,8 @@ public class ItemLabel {
     private static DecimalFormat df = new DecimalFormat("######.##");
 
     //properties
-    private static boolean visible;
+    public static boolean allVisible = true;
+    
     private static LensMenuController lmc;
     private FlowPane labelContainer;
     private Label labAbsPos, labRelPos, labSize, labMagnification, labFocalLength, labInversion, labImgType;
@@ -40,12 +36,15 @@ public class ItemLabel {
         this.itemType = item.getItemType();
         activeLabelList = new ArrayList<Label>();
         activeLabelList.add(labAbsPos);
-        activeLabelList.add(labRelPos);
+
         if (this.itemType.equals(Item.ITEMTYPE_SOURCE)) {
+            activeLabelList.add(labRelPos);
             activeLabelList.add(labSize);
+
         } else if (this.itemType.equals(Item.ITEMTYPE_LENS)) {
             activeLabelList.add(labFocalLength);
         } else if (this.itemType.equals(Item.ITEMTYPE_IMAGE)) {
+            activeLabelList.add(labRelPos);
             activeLabelList.add(labSize);
             activeLabelList.add(labMagnification);
             activeLabelList.add(labInversion);
@@ -71,10 +70,10 @@ public class ItemLabel {
         labImgType = new Label();
     }
 
-    public static void toggleLabelVisibility() {
-        visible = !visible;
+    public static void toggleAllLabelVisibility() {
+        allVisible=!allVisible;
         for (ItemLabel itmLab : itemLabelList) {
-            itmLab.getLabelContainer().setVisible(visible);
+            itmLab.getLabelContainer().setVisible(allVisible);
         }
 
     }
@@ -115,7 +114,7 @@ public class ItemLabel {
     }
 
     public void positionItemLabel() {
-        labelContainer.setLayoutX(item.getNode().getLayoutX() - 25);
+        labelContainer.setLayoutX(item.getNode().getBoundsInParent().getCenterX()-52);
         labelContainer.setLayoutY(500);
     }
 
@@ -123,5 +122,6 @@ public class ItemLabel {
     public static void setLmc(LensMenuController lmc) {
         ItemLabel.lmc = lmc;
     }
+    
 
 }

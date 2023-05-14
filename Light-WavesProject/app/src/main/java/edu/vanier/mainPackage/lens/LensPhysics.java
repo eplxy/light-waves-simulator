@@ -7,6 +7,21 @@ package edu.vanier.mainPackage.lens;
  */
 
 public class LensPhysics {
+    
+    public static double sourceAbsPosFromImageRelPos(double q){
+        Lens lens = LensPhysics.lensSearch();
+        return lens.absPos-(1 / ((1 / lens.getFocalLength()) - (1 / q)));
+    }
+    
+    public static double lensMakerToFocalLength(Lens lens){
+        return 1/((2/lens.getRadius())*(lens.getRefractionIndex()-1));
+    }
+    public static double lensMakerToRadius(Lens lens){
+        return 2*lens.getFocalLength()*(lens.getRefractionIndex()-1);
+    }
+    public static double lensMakerToIndex(Lens lens){
+        return (lens.getRadius()/(2*lens.getFocalLength()))+1;
+    }
 
     public static Lens lensSearch() {
         for (int i = 1; i < Item.getItemList().size(); i++) {
@@ -26,6 +41,11 @@ public class LensPhysics {
         return null;
     }
     
+    /***
+     * 
+     * @param source
+     * @return object position, image position
+     */
     public static double[] computeRelPos(Item source) {
 
         Lens lens = lensSearch();

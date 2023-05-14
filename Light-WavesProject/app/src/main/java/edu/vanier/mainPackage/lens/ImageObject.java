@@ -1,10 +1,10 @@
 package edu.vanier.mainPackage.lens;
 
-import javafx.scene.image.Image;
+import java.io.IOException;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseButton;
 import lombok.Getter;
 import lombok.Setter;
-
 
 /**
  *
@@ -25,13 +25,25 @@ public class ImageObject extends Item {
     public ImageObject(SourceObject source) {
         this.itemType = Item.ITEMTYPE_IMAGE;
         this.source = source;
-        this.node = new ImageView(new Image(getClass().getResource("/images/lens/candle.png").toString()));
+        this.node = new ImageView(ResourceManager.retrieveCandleImage());
         this.node.setOpacity(0.5);
         this.label = new ItemLabel(this);
-
+        setMouseListeners();
     }
 
     //methods
+    private void setMouseListeners() {
+        node.setOnMousePressed((mouseEvent) -> {
+            if (mouseEvent.getButton().equals(MouseButton.SECONDARY)) {
+                try {
+                    LensMenuController.currentLMC.createParametersPane(this);
+                } catch (IOException e) {
+                }
+
+            }
+        });
+    }
+
     public void update() {
         updateSize();
         updatePosition();
@@ -40,6 +52,7 @@ public class ImageObject extends Item {
 
     public void updatePosition() {
         this.move(LensPhysics.computeImageAbsPos(source));
+        this.setRelPos(LensPhysics.computeRelPos(source)[1]);
     }
 
     private void updateSize() {
@@ -52,12 +65,12 @@ public class ImageObject extends Item {
         if (this.absPos > LensPhysics.lensSearch().getAbsPos()) {
             this.imgType = "real";
         }
-        if (this.absPos < LensPhysics.lensSearch().getAbsPos()){
+        if (this.absPos < LensPhysics.lensSearch().getAbsPos()) {
             this.imgType = "virtual";
         }
     }
 
-    private void scaleNodeToSize() {
+    public void scaleNodeToSize() {
         this.node.setScaleX(this.size / 40);
         this.node.setScaleY(this.size / 40);
     }
