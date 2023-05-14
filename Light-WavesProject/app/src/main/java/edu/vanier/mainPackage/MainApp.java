@@ -22,13 +22,7 @@ public class MainApp extends Application {
         loader.setController(menuController);
         //MainMenuController menuController = new MainMenuController(stage);
         BorderPane root = loader.load();
-        
-        
-       
-       
-        
         Scene scene = new Scene(root);
-        //stage.initStyle(StageStyle.UTILITY);
         stage.setScene(scene);
         stage.show();
     }
