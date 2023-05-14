@@ -1,10 +1,6 @@
 package edu.vanier.mainPackage.lens;
 
 import edu.vanier.mainPackage.MainApp;
-import edu.vanier.mainPackage.lens.propertyPanes.PPController;
-import edu.vanier.mainPackage.lens.propertyPanes.PPImageController;
-import edu.vanier.mainPackage.lens.propertyPanes.PPLensController;
-import edu.vanier.mainPackage.lens.propertyPanes.PPSourceController;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;

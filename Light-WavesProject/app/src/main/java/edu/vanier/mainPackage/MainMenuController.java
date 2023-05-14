@@ -4,9 +4,9 @@
  */
 package edu.vanier.mainPackage;
 
-import DoubleSlit.UI.DoubleSlitMain;
-import DoubleSlit.UI.DoubleSlitMenuController;
-import DoubleSlit.UI.GraphController;
+import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMain;
+import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
+import edu.vanier.mainPackage.DoubleSlit.UI.GraphController;
 import edu.vanier.mainPackage.lens.LensMain;
 import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMain;
 import edu.vanier.mainPackage.refraction.Refraction;

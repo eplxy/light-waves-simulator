@@ -1,6 +1,6 @@
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
-import DoubleSlit.Simulation.Parameters;
+import edu.vanier.mainPackage.DoubleSlit.Simulation.Parameters;
 import java.util.function.Function;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

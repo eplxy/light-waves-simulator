@@ -1,6 +1,6 @@
-package DoubleSlit.Simulation;
+package edu.vanier.mainPackage.DoubleSlit.Simulation;
 
-import DoubleSlit.UI.AnimationController;
+import edu.vanier.mainPackage.DoubleSlit.UI.AnimationController;
 import java.util.ArrayList;
 import java.util.ConcurrentModificationException;
 import java.util.List;

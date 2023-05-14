@@ -1,4 +1,4 @@
-package DoubleSlit.Simulation;
+package edu.vanier.mainPackage.DoubleSlit.Simulation;
 
 import lombok.Getter;
 import lombok.Setter;

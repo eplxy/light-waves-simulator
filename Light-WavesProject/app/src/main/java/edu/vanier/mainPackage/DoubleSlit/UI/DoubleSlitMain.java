@@ -1,4 +1,4 @@
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

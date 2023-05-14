@@ -1,6 +1,6 @@
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
-import DoubleSlit.Simulation.Parameters;
+import edu.vanier.mainPackage.DoubleSlit.Simulation.Parameters;
 import edu.vanier.mainPackage.MainApp;
 import java.io.IOException;
 import java.text.DecimalFormat;

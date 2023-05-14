@@ -1,7 +1,7 @@
-package DoubleSlit.UI;
+package edu.vanier.mainPackage.DoubleSlit.UI;
 
-import DoubleSlit.Simulation.RaysManager;
-import DoubleSlit.Simulation.Parameters;
+import edu.vanier.mainPackage.DoubleSlit.Simulation.RaysManager;
+import edu.vanier.mainPackage.DoubleSlit.Simulation.Parameters;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

@@ -1,4 +1,4 @@
-package edu.vanier.mainPackage.lens.propertyPanes;
+package edu.vanier.mainPackage.lens;
 
 /**
  *
