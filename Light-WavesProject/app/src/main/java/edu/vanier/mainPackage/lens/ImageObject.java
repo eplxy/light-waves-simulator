@@ -50,7 +50,6 @@ public class ImageObject extends Item {
         updateImgType();
     }
 
-    
     public void updatePosition() {
         this.move(LensPhysics.computeImageAbsPos(source));
         this.setRelPos(LensPhysics.computeRelPos(source)[1]);

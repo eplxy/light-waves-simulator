@@ -1,6 +1,5 @@
 package edu.vanier.mainPackage.lens;
 
-import com.sun.marlin.Renderer;
 import edu.vanier.mainPackage.MainApp;
 import edu.vanier.mainPackage.lens.propertyPanes.PPController;
 import edu.vanier.mainPackage.lens.propertyPanes.PPImageController;
@@ -17,19 +16,21 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.ColorPicker;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.BlurType;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.stage.Stage;
@@ -58,7 +59,7 @@ public class LensMenuController {
     Pane animationPane, controlPane, itemPane, propertyPane, colorPickerPane;
     @FXML
     ColorPicker bgColorPicker;
-    
+
     @FXML
     HBox itemBox;
     @FXML
@@ -90,6 +91,7 @@ public class LensMenuController {
         this.ctrlPaneOpenBtnSetup();
         this.homeIconSetup();
         this.closeCtrlIconSetup();
+        this.colorPickSetup();
 
         ctrlPaneOpenBtn = new Button();
 
@@ -125,8 +127,7 @@ public class LensMenuController {
     }
 
     private void lensLineSetup() {
-        
-        
+
         btnToggleLensLine.setOnAction(e -> {
             if (verticalLensLine.isVisible()) {
                 btnToggleLensLine.setText("Show Lens Line");
@@ -219,7 +220,7 @@ public class LensMenuController {
         });
     }
 
-    private void colorPickSetup(){
+    private void colorPickSetup() {
         bgColorIcon.setOpacity(0.7);
         bgColorIcon.setOnMouseEntered(e -> {
             bgColorIcon.setOpacity(1);
@@ -230,15 +231,15 @@ public class LensMenuController {
         });
         bgColorIcon.setOnMouseClicked(e -> {
             colorPickerPane.setVisible(!colorPickerPane.isVisible());
-            
+
         });
-        
-        
-        bgColorPicker.setOnAction(e ->{
+
+        bgColorPicker.setOnAction(e -> {
+            borderPane.setBackground(new Background(new BackgroundFill(bgColorPicker.getValue(), new CornerRadii(0), Insets.EMPTY)));
+
         });
     }
-    
-    
+
     private void homeIconSetup() {
         homeIcon.setOpacity(0.7);
         homeIcon.setOnMouseEntered(e -> {
