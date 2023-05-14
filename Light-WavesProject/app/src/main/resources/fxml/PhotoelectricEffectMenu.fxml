@@ -39,7 +39,7 @@
                 <MenuItem fx:id="magnesiumMenuItem" mnemonicParsing="false" text="Magnesium" />
               </items>
             </MenuButton>
-            <Button fx:id="btnPlay" layoutX="407.0" layoutY="722.0" mnemonicParsing="false" text="Play" />
+            <Button fx:id="btnPlay" layoutX="519.0" layoutY="726.0" mnemonicParsing="false" text="Play" />
             <AnchorPane fx:id="pane" layoutX="120.0" layoutY="109.0" prefHeight="595.0" prefWidth="906.0" scaleZ="50.0">
                <children>
                   <Cylinder height="400.0" layoutX="421.0" layoutY="150.0" radius="100.0" rotate="90.0" />
@@ -109,7 +109,7 @@
             <Text layoutX="1203.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Photon Energy" />
             <Circle fill="#fcffce" layoutX="537.0" layoutY="65.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
             <Polyline fill="#6b6b6b" layoutX="532.0" layoutY="26.0" points="32.0, -8.000001907348633, 61.5999755859375, 46.400001525878906, -49.4000244140625, 46.400001525878906, -20.79998779296875, -8.000001907348633" strokeType="INSIDE" />
-            <Button fx:id="btnHelp" layoutX="1196.0" layoutY="644.0" mnemonicParsing="false" text="Help" />
+            <Button fx:id="btnHelp" layoutX="1249.0" layoutY="625.0" mnemonicParsing="false" text="Help" />
             <Button fx:id="btnMainMenu" layoutY="2.0" mnemonicParsing="false" text="Go Back to Main Menu" />
          </children>
       </Pane>
