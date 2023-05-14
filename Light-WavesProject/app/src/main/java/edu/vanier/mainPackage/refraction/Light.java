@@ -45,7 +45,7 @@ public class Light {
     public void colorLines(Line incidentLine, Line refractedLine, Line totalRefractedLine, double value) {
 
         //Changes the range of the value, from 300 to 700, to the colorHexList length. 
-        int newValue = (int) ((((value - 300) * 40) / 400) + 0);
+        int newValue = (int) ((((value - 300) * colorHexList.size()) / 400) + 0);
 
         try {
             Stop[] stops = new Stop[]{new Stop(0, Color.TRANSPARENT), new Stop(1, Color.web(colorHexList.get(newValue)))};
