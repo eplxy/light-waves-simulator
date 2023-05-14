@@ -4,11 +4,15 @@
  */
 package edu.vanier.mainPackage;
 
-import edu.vanier.mainPackage.DoubleSlit.UI.DoubleSlitMenuController;
+import DoubleSlit.UI.DoubleSlitMain;
+import DoubleSlit.UI.DoubleSlitMenuController;
+import DoubleSlit.UI.GraphController;
 import edu.vanier.mainPackage.lens.LensMain;
 import edu.vanier.mainPackage.photoelectriceffect.PhotoelectricMain;
 import edu.vanier.mainPackage.refraction.Refraction;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,6 +43,9 @@ public class MainMenuController {
 
     @FXML
     Button btnPhotoelectric;
+    
+    @FXML
+    Button btnSettings;
 
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
@@ -76,46 +83,30 @@ public class MainMenuController {
 
         });
         btnDoubleSlit.setOnAction((event) -> {
-            handleDoubleSlit(event, this.primaryStage);
+            DoubleSlitMain doubleSlitMain = new DoubleSlitMain();
+                try {
+                    doubleSlitMain.start(primaryStage);
+                } catch (Exception ex) {
+                    System.err.println(ex.toString());
+                }
+        });
+        btnSettings.setOnAction((event) -> {
+            handleBtnSettings();
+            
         });
 
-        btnSettings.setOnAction((e) -> {
-            handleSettings(primaryStage);
-        });
     }
-
-    private void handleSettings(Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/generalSettings.fxml"));
-            loader.setController(new GeneralSettingsController(primaryStage));
-            BorderPane root = loader.load();
-
-            primaryStage.close();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.show();
-
-        } catch (IOException e) {
-
-        }
+    
+    private void handleBtnSettings(){
+        FXMLLoader loader = new FXMLLoader(
+                        getClass().getResource("/fxml/generalSettings.fxml"));
+                GeneralSettingsController settingsController = new GeneralSettingsController(primaryStage);
+                loader.setController(settingsController);
+            try {
+                BorderPane root = loader.load();
+                Scene scene = new Scene(root);
+                primaryStage.setScene(scene);
+                primaryStage.show();
+            } catch (IOException ex) {System.out.println(ex);}
     }
-
-    public void handleDoubleSlit(ActionEvent event, Stage primaryStage) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/DoubleSlitMenu.fxml"));
-            DoubleSlitMenuController doubleSlitMenuController = new DoubleSlitMenuController(primaryStage);
-            loader.setController(doubleSlitMenuController);
-            BorderPane root = loader.load();
-
-            primaryStage.close();
-            Scene scene = new Scene(root);
-            primaryStage.setScene(scene);
-            primaryStage.setMaximized(true);
-            primaryStage.show();
-
-        } catch (IOException e) {
-            System.out.println(e);
-        }
-    }
-
 }
