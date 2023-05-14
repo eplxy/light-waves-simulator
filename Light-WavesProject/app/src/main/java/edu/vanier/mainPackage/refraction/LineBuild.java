@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import lombok.Getter;
 import lombok.Setter;
 
+
 /**
  * This abstract class provides the necessary methods for creating lines and arcs 
  * for the simulation of the refraction of light.
@@ -18,8 +19,10 @@ import lombok.Setter;
  * @author Matthew Hantar
  */
 @lombok.Data
+
 @Getter
 @Setter
+
 public abstract class LineBuild implements LineAndRay{
     
     protected Line incidentRay;
@@ -56,8 +59,8 @@ public abstract class LineBuild implements LineAndRay{
         arcRefractedRay = new Arc();
 
         labelTotalInternalReflection = new Label("Total internal reflection");
-        labelAngleIncident = new Label("Incident angle: " + String.format("%.2f", angle1) + "°");
-        labelAngleRefracted = new Label("Refracted angle: " + String.format("%.2f", angle2) + "°");
+        labelAngleIncident = new Label("Incident angle: " + String.format("%.2f", angle1) + "Â°");
+        labelAngleRefracted = new Label("Refracted angle: " + String.format("%.2f", angle2) + "Â°");
 
         incidentObj(incidentRay, arcIncidentRay);
         refractedObj(refractedRay, arcIncidentRay);
