@@ -11,6 +11,8 @@ import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.Slider;
 import javafx.scene.control.ToggleButton;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
@@ -196,6 +198,12 @@ public class PhotoelectricMenuController{
      */
     @FXML 
     private Button btnHelp = new Button();
+    
+    /**
+     * The Button for stoping the simulation.
+     */
+    @FXML
+    private Button btnStop = new Button();
 
     /**
      * The Button for returning to the main menu.
@@ -315,6 +323,11 @@ public class PhotoelectricMenuController{
      */
     Electron electron = new Electron();
     
+    Image play = new Image("/images/play.png");
+    Image stop = new Image("/images/pause.png");
+    Image blackStop = new Image("/images/blackpause.png"); 
+    Image whitePlay = new Image("/images/whiteplay.png"); 
+    
     //initialize
     public void initialize(){
         /**
@@ -359,6 +372,32 @@ public class PhotoelectricMenuController{
             Scene helpScene = new Scene(helpLayout, 300, 200);
             helpStage.setScene(helpScene);
             helpStage.show();
+        });
+        
+        ImageView playView = new ImageView(play);
+        playView.setFitWidth(25);
+        playView.setFitHeight(25);
+        
+        ImageView stopView = new ImageView(stop);
+        stopView.setFitWidth(25);
+        stopView.setFitHeight(25);
+        
+        ImageView blackStopView = new ImageView(blackStop);
+        blackStopView.setFitWidth(25);
+        blackStopView.setFitHeight(25);
+        
+        ImageView whitePlayView = new ImageView(whitePlay);
+        whitePlayView.setFitWidth(25);
+        whitePlayView.setFitHeight(25);
+        
+        
+        
+        btnPlay.setGraphic(playView);
+        btnStop.setGraphic(blackStopView);
+        
+        btnStop.setOnAction(e ->{
+            anchorpane.getChildren().removeIf(node -> node instanceof Circle);
+            circlesGenerated = false;
         });
         
         btnPlay.setOnAction(e ->{
@@ -461,9 +500,9 @@ public class PhotoelectricMenuController{
                 
         darkModeToggle.setOnAction(event -> {
             if (darkModeToggle.isSelected()) {
-                setBlackAndWhite(true);
+                setBlackAndWhite(true, blackStopView, stopView, playView, whitePlayView);
             } else {
-                setBlackAndWhite(false);
+                setBlackAndWhite(false, blackStopView, stopView, playView, whitePlayView);
             }
         });
     }
@@ -475,7 +514,7 @@ public class PhotoelectricMenuController{
     *@param isBlackAndWhite a boolean flag indicating whether the black and white
     * 
     */
-    private void setBlackAndWhite(boolean isBlackAndWhite) {
+    private void setBlackAndWhite(boolean isBlackAndWhite, ImageView blackpause, ImageView whitepause, ImageView blackpay, ImageView whiteplay) {
         if (isBlackAndWhite) {
             intensityLabel.setStyle("-fx-text-fill: white;");
             wavelengthLabel.setStyle("-fx-text-fill: white;");
@@ -484,7 +523,6 @@ public class PhotoelectricMenuController{
             minimumEnergyLabel.setStyle("-fx-text-fill: white;");
             displayBatteryVoltageLabel.setStyle("-fx-text-fill: white;");
             
-            btnPlay.setStyle("-fx-background-color: black; -fx-text-fill: white;");
             btnHelp.setStyle("-fx-background-color: black; -fx-text-fill: white;");
             btnMainMenu.setStyle("-fx-background-color: black; -fx-text-fill: white;");
             metalMenuButton.setStyle("-fx-background-color: black; -fx-text-fill: white;");
@@ -519,6 +557,9 @@ public class PhotoelectricMenuController{
             
             borderpane.setStyle("-fx-background-color: #333333;");
             
+            btnPlay.setGraphic(blackpay);
+            btnStop.setGraphic(blackpause);
+            
         } else {
             intensityLabel.setStyle("");
             wavelengthLabel.setStyle("");
@@ -527,7 +568,6 @@ public class PhotoelectricMenuController{
             minimumEnergyLabel.setStyle("");
             displayBatteryVoltageLabel.setStyle("");
             
-            btnPlay.setStyle("");
             btnHelp.setStyle("");
             btnMainMenu.setStyle("");
             metalMenuButton.setStyle("");
@@ -538,11 +578,12 @@ public class PhotoelectricMenuController{
             batteryVoltageBox.setStyle("");
             workFunctionBox.setStyle("");
             minimumEnergyBox.setStyle("");
-            intensityText.setStyle("");
+            displayBatteryVoltageBox.setStyle("");
             
             intensityText.setStyle("");
             wavelengthText.setStyle("");
             minimumEnergyText.setStyle("");
+            batteryVoltageText.setStyle("");
             
             line1.setStyle("");
             line2.setStyle("");
@@ -560,6 +601,9 @@ public class PhotoelectricMenuController{
             plate.setStyle("");
             
             borderpane.setStyle("");
+            
+            btnPlay.setGraphic(whiteplay);
+            btnStop.setGraphic(whitepause);
         }
     }
     
