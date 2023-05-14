@@ -23,15 +23,15 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane fx:id="borderpane" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
+   <bottom>
       <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
-            <Slider fx:id="sliderWavelength" layoutX="1152.0" layoutY="146.0" max="700.0" min="200.0" />
-            <Slider fx:id="sliderBatteryVoltage" layoutX="1152.0" layoutY="211.0" max="10.0" />
-            <Text fx:id="intensityText" layoutX="1152.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
-            <Text fx:id="wavelengthText" layoutX="1152.0" layoutY="128.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wavelength" />
-            <Text fx:id="batteryVoltageText" layoutX="1152.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battery Voltage" />
-            <MenuButton fx:id="metalMenuButton" layoutX="1237.0" layoutY="262.0" mnemonicParsing="false" text="Metal ">
+            <Slider fx:id="sliderWavelength" layoutX="1057.0" layoutY="147.0" max="700.0" min="200.0" />
+            <Slider fx:id="sliderBatteryVoltage" layoutX="1057.0" layoutY="212.0" max="10.0" />
+            <Text fx:id="intensityText" layoutX="1057.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Intensity" />
+            <Text fx:id="wavelengthText" layoutX="1057.0" layoutY="138.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wavelength" />
+            <Text fx:id="batteryVoltageText" layoutX="1057.0" layoutY="198.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Battery Voltage" />
+            <MenuButton fx:id="metalMenuButton" layoutX="1087.0" layoutY="274.0" mnemonicParsing="false" text="Metal ">
               <items>
                 <MenuItem fx:id="aluminiumMenuItem" mnemonicParsing="false" text="Aluminium" />
                   <MenuItem fx:id="calciumMenuItem" mnemonicParsing="false" text="Calcium" />
@@ -40,7 +40,7 @@
                 <MenuItem fx:id="magnesiumMenuItem" mnemonicParsing="false" text="Magnesium" />
               </items>
             </MenuButton>
-            <Button fx:id="btnPlay" layoutX="519.0" layoutY="726.0" mnemonicParsing="false" text="Play" />
+            <Button fx:id="btnPlay" layoutX="483.0" layoutY="725.0" mnemonicParsing="false" text="Play" />
             <AnchorPane fx:id="anchorpane" layoutX="120.0" layoutY="109.0" prefHeight="595.0" prefWidth="906.0" scaleZ="50.0">
                <children>
                   <Cylinder fx:id="cylinder" height="400.0" layoutX="421.0" layoutY="150.0" radius="100.0" rotate="90.0" />
@@ -98,24 +98,29 @@
                   <Point3D />
                </rotationAxis>
             </AnchorPane>
-            <Slider fx:id="sliderIntensity" layoutX="1152.0" layoutY="77.0" />
-            <Rectangle fx:id="intensityBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="66.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-            <Label fx:id="intensityLabel" layoutX="1309.0" layoutY="70.0" prefHeight="35.0" prefWidth="70.0" />
-            <Rectangle fx:id="wavelengthBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="125.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-            <Rectangle fx:id="batteryVoltageBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1303.0" layoutY="190.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-            <Label fx:id="wavelengthLabel" layoutX="1309.0" layoutY="128.0" prefHeight="35.0" prefWidth="70.0" />
-            <Label fx:id="batteryVoltageLabel" layoutX="1309.0" layoutY="194.0" prefHeight="35.0" prefWidth="70.0" />
-            <Rectangle fx:id="workFunctionBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1229.0" layoutY="310.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-            <Label fx:id="workFunctionLabel" layoutX="1235.0" layoutY="314.0" prefHeight="35.0" prefWidth="70.0" />
-            <Rectangle fx:id="minimumEnergyBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1229.0" layoutY="428.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
-            <Label fx:id="minimumEnergyLabel" layoutX="1235.0" layoutY="432.0" prefHeight="35.0" prefWidth="70.0" />
-            <Text fx:id="minimumEnergyText" layoutX="1203.0" layoutY="405.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Photon Energy" />
+            <Slider fx:id="sliderIntensity" layoutX="1057.0" layoutY="88.0" />
+            <Rectangle fx:id="intensityBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1222.0" layoutY="74.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="intensityLabel" layoutX="1228.0" layoutY="78.0" prefHeight="35.0" prefWidth="70.0" />
+            <Rectangle fx:id="wavelengthBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1222.0" layoutY="133.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Rectangle fx:id="batteryVoltageBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1222.0" layoutY="191.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="wavelengthLabel" layoutX="1228.0" layoutY="137.0" prefHeight="35.0" prefWidth="70.0" />
+            <Label fx:id="batteryVoltageLabel" layoutX="1228.0" layoutY="195.0" prefHeight="35.0" prefWidth="70.0" />
+            <Rectangle fx:id="workFunctionBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1187.0" layoutY="265.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="workFunctionLabel" layoutX="1193.0" layoutY="269.0" prefHeight="35.0" prefWidth="70.0" />
+            <Rectangle fx:id="minimumEnergyBox" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="43.0" layoutX="1146.0" layoutY="364.0" stroke="BLACK" strokeType="INSIDE" width="82.0" />
+            <Label fx:id="minimumEnergyLabel" layoutX="1152.0" layoutY="368.0" prefHeight="35.0" prefWidth="70.0" />
+            <Text fx:id="minimumEnergyText" layoutX="1121.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimum Photon Energy" />
             <Circle fill="#fcffce" layoutX="537.0" layoutY="65.0" radius="19.0" stroke="BLACK" strokeType="INSIDE" />
             <Polyline fill="#6b6b6b" layoutX="532.0" layoutY="26.0" points="32.0, -8.000001907348633, 61.5999755859375, 46.400001525878906, -49.4000244140625, 46.400001525878906, -20.79998779296875, -8.000001907348633" strokeType="INSIDE" />
-            <Button fx:id="btnHelp" layoutX="1249.0" layoutY="625.0" mnemonicParsing="false" text="Help" />
-            <Button fx:id="btnMainMenu" layoutY="2.0" mnemonicParsing="false" text="Go Back to Main Menu" />
-            <ToggleButton fx:id="darkModeToggle" layoutX="1232.0" layoutY="539.0" mnemonicParsing="false" text="Dark Mode" />
+            <ToggleButton fx:id="darkModeToggle" layoutX="1149.0" layoutY="440.0" mnemonicParsing="false" text="Dark Mode" />
+            <Button fx:id="btnStop" layoutX="537.0" layoutY="725.0" mnemonicParsing="false" text="Stop" />
+            <MenuButton fx:id="settingMenu" layoutY="2.0" mnemonicParsing="false" text="Setting">
+              <items>
+                <MenuItem fx:id="mainMenu" mnemonicParsing="false" text="Main Menu" />
+                <MenuItem fx:id="help" mnemonicParsing="false" text="Help" />
+              </items>
+            </MenuButton>
          </children>
       </Pane>
-   </top>
+   </bottom>
 </BorderPane>
