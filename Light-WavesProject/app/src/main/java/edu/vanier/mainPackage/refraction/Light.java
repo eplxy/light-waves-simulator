@@ -20,11 +20,17 @@ public class Light {
     /**
     The list of color hex codes for the light.
     */
-    ArrayList<String> colorHexList = new ArrayList<>(Arrays.asList("#800000", "#8B0000", "#A52A2A", "#B22222", "#DC143C",
-            "#FF0000", "#FF6347", "#CD5C5C", "#FA8072", "#FFA07A", "#FF8C00", "#FFA500", "#FFD700", "#B8860B", "#DAA520",
-            "#BDB76B", "#808000", "#9ACD32", "#7CFC00", "#7FFF00", "#008000", "#006400", "#228B22", "#00FF00", "#90EE90",
-            "#00FA9A", "#00FF7F", "#20B2AA", "#4682B4", "#6495ED", "#1E90FF", "#0000FF", "#00008B", "#000080", "#4169E1",
-            "#483D8B", "#6A5ACD", "#9370DB", "#8B008B", "#800080"));
+    ArrayList<String> colorHexList = new ArrayList<>(Arrays.asList("#0000ff" ,"#0029ff" ,
+    "#003cff" ,"#004aff" ,"#0056ff" ,"#0061ff" ,"#006aff" ,"#0073ff" ,"#007bff" ,"#0082ff" ,
+    "#0089ff" ,"#008fff" ,"#0095ff" ,"#009bff" ,"#00a0ff" ,"#00a5ff" ,"#00aaff" ,"#00afff" ,
+    "#00b3ff" ,"#00b8ff" ,"#00bcff" ,"#00c1ff" ,"#00c5ff" ,"#00c9fe" ,"#00cdf2" ,"#00d1e5" ,
+    "#00d5d8" ,"#00d9cb" ,"#00ddbe" ,"#00e1b0" ,"#00e4a3" ,"#00e895" ,"#00eb87" ,"#00ef79" ,
+    "#00f26b" ,"#00f55c" ,"#00f84d" ,"#00fa3c" ,"#00fd28" ,"#06ff00" , "#38fb00" ,"#4ef700" ,
+    "#5ff300" ,"#6cef00" ,"#77eb00" ,"#82e600" ,"#8be200" ,"#93de00" ,"#9bd900" ,"#a2d500" ,
+    "#a9d000" ,"#b0cc00" ,"#b6c700" ,"#bcc200" ,"#c1bd00" ,"#c6b800" ,"#cbb300" ,"#d0ae00" ,
+    "#d5a900" ,"#d9a400" ,"#dd9e00" ,"#e19900" ,"#e49300" ,"#e88e00" ,"#eb8800" ,"#ee8200" ,
+    "#f07c00" ,"#f37500" ,"#f56f00" ,"#f76800" ,"#f96100" ,"#fa5a00" ,"#fc5200" ,"#fd4a00" ,
+    "#fe4100" ,"#fe3700" ,"#ff2b00" ,"#ff1c00" ,"#ff0000"));
     
     /**
     Changes the color of the given lines to a color based on a given value.
