@@ -43,9 +43,6 @@ public class MainMenuController {
 
     @FXML
     Button btnPhotoelectric;
-    
-    @FXML
-    Button btnSettings;
 
     public MainMenuController(Stage primaryStage) {
         this.primaryStage = primaryStage;
