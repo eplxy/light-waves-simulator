@@ -8,6 +8,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
+
 
 /**
  * This abstract class provides the necessary methods for creating lines and arcs 
@@ -16,6 +19,10 @@ import javafx.stage.Stage;
  * @author Matthew Hantar
  */
 @lombok.Data
+
+@Getter
+@Setter
+
 public abstract class LineBuild implements LineAndRay{
     
     protected Line incidentRay;
@@ -52,8 +59,8 @@ public abstract class LineBuild implements LineAndRay{
         arcRefractedRay = new Arc();
 
         labelTotalInternalReflection = new Label("Total internal reflection");
-        labelAngleIncident = new Label("Incident angle: " + String.format("%.2f", angle1) + "°");
-        labelAngleRefracted = new Label("Refracted angle: " + String.format("%.2f", angle2) + "°");
+        labelAngleIncident = new Label("Incident angle: " + String.format("%.2f", angle1) + "Â°");
+        labelAngleRefracted = new Label("Refracted angle: " + String.format("%.2f", angle2) + "Â°");
 
         incidentObj(incidentRay, arcIncidentRay);
         refractedObj(refractedRay, arcIncidentRay);

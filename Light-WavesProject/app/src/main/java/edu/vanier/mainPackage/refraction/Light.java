@@ -19,7 +19,7 @@ public class Light {
     
     /**
     The list of color hex codes for the light.
-    */
+
     ArrayList<String> colorHexList = new ArrayList<>(Arrays.asList("#0000ff" ,"#0029ff" ,
     "#003cff" ,"#004aff" ,"#0056ff" ,"#0061ff" ,"#006aff" ,"#0073ff" ,"#007bff" ,"#0082ff" ,
     "#0089ff" ,"#008fff" ,"#0095ff" ,"#009bff" ,"#00a0ff" ,"#00a5ff" ,"#00aaff" ,"#00afff" ,
@@ -31,6 +31,7 @@ public class Light {
     "#d5a900" ,"#d9a400" ,"#dd9e00" ,"#e19900" ,"#e49300" ,"#e88e00" ,"#eb8800" ,"#ee8200" ,
     "#f07c00" ,"#f37500" ,"#f56f00" ,"#f76800" ,"#f96100" ,"#fa5a00" ,"#fc5200" ,"#fd4a00" ,
     "#fe4100" ,"#fe3700" ,"#ff2b00" ,"#ff1c00" ,"#ff0000"));
+
     
     /**
     Changes the color of the given lines to a color based on a given value.

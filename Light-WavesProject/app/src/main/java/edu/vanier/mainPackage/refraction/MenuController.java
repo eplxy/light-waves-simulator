@@ -12,6 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The MenuController class is the controller for the main menu FXML file.
@@ -21,6 +23,8 @@ import javafx.stage.Stage;
  * @author Matthew Hantar
  */
 @lombok.Data
+@Getter
+@Setter
 public class MenuController {
     /**
      * The main menu button that returns the user to the main menu.

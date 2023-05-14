@@ -9,5 +9,7 @@ Side Characters
 * Duc Vinh Lam, 2186084 ***Coordinator***
 * Maésha Mahmud, 2143806
 
+*Token: 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 
+
 **Trello Link:**
 https://trello.com/invite/b/11PigrOu/ATTI9c3a271d029462321807e9ac8addedf9AA5368FD/vanier-side-characters

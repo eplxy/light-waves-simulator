@@ -9,10 +9,9 @@
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.text.Font?>
 
-
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" style="-fx-background-color: darkgray;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" stylesheets="@moderna_dark.css" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
    <top>
-      <HBox alignment="CENTER" prefHeight="126.0" prefWidth="1400.0" style="-fx-background-color: #A0A0A0;" BorderPane.alignment="CENTER">
+      <HBox alignment="CENTER" prefHeight="126.0" prefWidth="1400.0" BorderPane.alignment="CENTER">
          <children>
             <Label text="Light Waves Simulator">
                <font>
@@ -35,7 +34,7 @@
                   <Font size="30.0" />
                </font>
             </Button>
-            <Button fx:id="btnDoubleslit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Double Slit">
+            <Button fx:id="btnDoubleSlit" mnemonicParsing="false" prefHeight="140.0" prefWidth="284.0" text="Double Slit">
                <font>
                   <Font size="30.0" />
                </font>
@@ -54,7 +53,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Pane layoutX="25.0" layoutY="18.0" prefHeight="483.0" prefWidth="1038.0" style="-fx-background-color: lightgray;">
+            <Pane layoutX="25.0" layoutY="18.0" prefHeight="483.0" prefWidth="1038.0" style="-fx-background-color: darkgrey;">
                <children>
                   <Label layoutX="400.0" layoutY="222.0" text="[insert image here]">
                      <font>
@@ -65,7 +64,7 @@
             </Pane>
             <HBox layoutX="25.0" layoutY="528.0" prefHeight="126.0" prefWidth="1038.0" spacing="15.0">
                <children>
-                  <Pane prefHeight="126.0" prefWidth="678.0" style="-fx-background-color: lightgray;">
+                  <Pane prefHeight="126.0" prefWidth="678.0" style="-fx-background-color: darkgrey;">
                      <children>
                         <Label layoutX="183.0" layoutY="42.0" text="[insert description here]">
                            <font>
@@ -74,16 +73,16 @@
                         </Label>
                      </children>
                   </Pane>
-                  <Pane prefHeight="126.0" prefWidth="129.0" style="-fx-background-color: lightgray;">
+                  <Pane prefHeight="126.0" prefWidth="129.0" style="-fx-background-color: darkgrey;">
                      <children>
-                        <Button layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="117.0" text="settings">
+                        <Button fx:id="btnSettings" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="117.0" text="settings">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Button>
                      </children>
                   </Pane>
-                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: lightgray;">
+                  <Pane prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: darkgrey;">
                      <children>
                         <Button layoutX="6.0" layoutY="6.0" mnemonicParsing="false" prefHeight="115.0" prefWidth="188.0" text="Start">
                            <font>

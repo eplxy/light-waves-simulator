@@ -7,8 +7,10 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
+
 import lombok.Getter;
 import lombok.Setter;
+
 
 /**
  * This class represents a ray of light and provides methods to update the ray 
@@ -19,8 +21,10 @@ import lombok.Setter;
  *
  * @author Matthew Hantar
  */
+
 @Getter
 @Setter
+
 public class Ray extends LineBuild{
     
     @Override
@@ -34,7 +38,7 @@ public class Ray extends LineBuild{
         arcIncidentRay.setLength(-angle);
 
         angle2 = Vector.CalculateAngle(index1, index2, angle);
-        labelAngleIncident.setText("Incident angle: " + String.format("%.2f", angle) + "°");
+        labelAngleIncident.setText("Incident angle: " + String.format("%.2f", angle) + "Â°");
 
         //This happens if it is a total internal reflection
         if (Double.isNaN(angle2)) {
@@ -100,7 +104,7 @@ public class Ray extends LineBuild{
         newRotate2.setAngle(90 - angle2);
 
         arcRefractedRay.setLength(-(90 - angle2));
-        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", 90 - angle2) + "°");
+        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", 90 - angle2) + "Â°");
         
         refractedRay.getTransforms().setAll(newRotate2);
     }
@@ -120,6 +124,6 @@ public class Ray extends LineBuild{
 
         arcRefractedRay.setLength(90 - angle);
 
-        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", (90 - angle)) + "°");
+        labelAngleRefracted.setText("Refracted angle: " + String.format("%.2f", (90 - angle)) + "Â°");
     }
 }
