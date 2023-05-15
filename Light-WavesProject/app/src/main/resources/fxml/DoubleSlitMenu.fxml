@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <right>
       <VBox fx:id="parametersVBox" alignment="CENTER" maxHeight="-Infinity" prefHeight="396.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -27,7 +27,7 @@
             </Label>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Wavelength">
+                  <Label text="Wavelength (nm)">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -46,7 +46,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label text="Slit Width">
+                  <Label text="Slit Width (µm)">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -65,7 +65,7 @@
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>
-                  <Label fx:id="sliderSlitspacing" text="Slit Spacing">
+                  <Label fx:id="sliderSlitspacing" text="Slit Spacing (µm)">
                      <font>
                         <Font size="16.0" />
                      </font>

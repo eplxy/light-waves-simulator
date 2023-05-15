@@ -32,12 +32,19 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media' ]
 }
 application {    
-   // Define the main class for the application.
-   // TODO: specify the fully qualified name of the class 
-   //       that contains the main method your would like to run.
-
    mainClass = 'edu.vanier.mainPackage.MainApp'
+}
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'edu.vanier.mainPackage.MainApp'
+    }
+
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
 }
 
 test {

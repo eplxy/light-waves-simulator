@@ -8,6 +8,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.TilePane?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1400.0" stylesheets="@moderna_dark.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
@@ -56,7 +59,7 @@
          <children>
             <Pane layoutX="25.0" layoutY="18.0" prefHeight="483.0" prefWidth="1038.0" style="-fx-background-color: darkgrey;">
                <children>
-                  <Label layoutX="400.0" layoutY="222.0" text="Select an option" textFill="#303030">
+                  <Label layoutX="400.0" layoutY="222.0" text="Select an option">
                      <font>
                         <Font size="30.0" />
                      </font>
@@ -77,7 +80,7 @@
                   </Pane>
                   <Pane prefHeight="126.0" prefWidth="129.0" style="-fx-background-color: darkgrey;">
                      <children>
-                        <Button fx:id="btnSettings" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="117.0" text="settings">
+                        <Button fx:id="btnSettings" layoutX="6.0" layoutY="5.0" mnemonicParsing="false" prefHeight="117.0" prefWidth="117.0" text="Settings">
                            <font>
                               <Font size="24.0" />
                            </font>
@@ -90,6 +93,32 @@
                            <font>
                               <Font size="24.0" />
                            </font>
+                           <textFill>
+                              <LinearGradient endX="1.0" endY="1.0">
+                                 <stops>
+                                    <Stop>
+                                       <color>
+                                          <Color red="0.9803921580314636" green="0.8039215803146362" blue="0.019607843831181526" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="0.006729475100942127">
+                                       <color>
+                                          <Color red="0.2823529541492462" green="0.9686274528503418" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="0.5092144568821192">
+                                       <color>
+                                          <Color red="0.2493567317724228" green="0.6315789222717285" blue="0.09824561327695847" />
+                                       </color>
+                                    </Stop>
+                                    <Stop offset="1.0">
+                                       <color>
+                                          <Color red="0.2823529541492462" green="0.9686274528503418" />
+                                       </color>
+                                    </Stop>
+                                 </stops>
+                              </LinearGradient>
+                           </textFill>
                         </Button>
                      </children>
                   </Pane>
