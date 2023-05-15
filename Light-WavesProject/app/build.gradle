@@ -5,6 +5,7 @@ plugins {
     id 'org.openjfx.javafxplugin' version '0.0.13'
     id("io.freefair.lombok") version "6.6.3" 
 
+
 }
 repositories {
     // Use Maven Central for resolving dependencies.
@@ -19,6 +20,7 @@ dependencies {
     compileOnly  "org.openjfx:javafx-controls:18.0.2:sources"
     compileOnly  "org.openjfx:javafx-fxml:18.0.2:sources"
     compileOnly  "org.openjfx:javafx-graphics:18.0.2:sources"
+
     
     // Load the Javadoc for the specified JavaFX modules.
     compileOnly  "org.openjfx:javafx-base:18.0.2:javadoc"
@@ -32,12 +34,12 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media' ]
 }
 application {    
-   mainClass = 'edu.vanier.mainPackage.MainApp'
+   mainClass = 'edu.vanier.mainPackage.BridgeMain'
 }
 
 jar {
     manifest {
-        attributes 'Main-Class': 'edu.vanier.mainPackage.MainApp'
+        attributes "Main-Class": "edu.vanier.mainPackage.BridgeMain"
     }
 
     duplicatesStrategy = DuplicatesStrategy.EXCLUDE
@@ -46,7 +48,6 @@ jar {
         configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
-
 test {
     exclude '**/*'
 }
